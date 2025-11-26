@@ -21,7 +21,7 @@ void menu_banner() {
     printf("|_|  \\_\\__._|\\__._|_|\\___\\___||___/    |_|\\___/ \\___/|_|_|\\_\\_|\\__|\n\n");
 }
 
-// CONVERT DECIMAL TO RADICES
+// DECIMAL TO RADICES CONVERTER
 void decimal_to_radices() {
 
     clear();
@@ -43,27 +43,64 @@ void decimal_to_radices() {
         }
     }
 
-    printf("Not yet though!\n");
-    printf("Program ending...\n");
+    printf("Coming soon! Program ending...\n");
 }
 
-// CONVERT RADICES TO DECIMAL
+// RADICES TO DECIMAL CONVERTER
 void radix_to_decimal() {
     clear();
     menu_banner();
     printf("RADICES TO DECIMAL CONVERTER\n");
     printf("Convert radices from binary to hexadecimal to decimal!\n\n");
 
-    printf("Coming soon...\n");
+    bool persist = true;
+    while (persist) {
+        int radix;
+        printf("Choose Radix: ");
+        scanf("%d", &radix);
+
+        int radix_num;
+        printf("Enter number in base %d: ", radix);
+        scanf("%d", &radix_num);
+        if (radix_num > 0) {
+            persist = false;
+        } else {
+            persist = false;
+        }
+    }
+
+    printf("Coming soon! Program ending...\n");
 }
 
+// RADICES CALCULATOR
 void radices_calculator() {
     clear();
     menu_banner();
     printf("RADICES CALCULATOR\n");
     printf("Add, Subtract or Multiply radices from binary to hexadecimal!\n\n");
 
-    printf("Coming soon...\n");
+    bool persist = true;
+    while (persist) {
+        int radix;
+        printf("Choose your radix: ");
+        scanf("%d", &radix);
+
+        int radix_num1;
+        printf("Enter your first number in base %d: ", radix);
+        scanf("%d", &radix_num1);
+
+        char op;
+        printf("Enter your operator (*, + or -): ");
+        scanf(" %c", &op);
+
+        int radix_num2;
+        printf("Enter your second number in base %d: ", radix);
+        scanf("%d", &radix_num2);
+
+        persist = false;
+    }
+
+    printf("Thank you, calculator coming soon...\n");
 }
 
 // MAIN FUNCTION FOR MAIN MENU
@@ -81,17 +118,28 @@ int main() {
     printf("3. Radices Calculator\n\n");
 
     // menu functionality
-    int num;
-    printf("Choose your option: ");
-    scanf("%d", &num);
-    if (num == 1) {
-        decimal_to_radices();
-    } else if (num == 2) {
-        radix_to_decimal();
-    } else if (num == 3) {
-        radices_calculator();
-    } else {
-        printf("Your number is: %d\n", num);
+    bool menu_persist = true;
+    while (menu_persist) {
+        int num;
+        printf("Choose your option: ");
+        scanf("%d", &num);
+        if (num == 1) {
+            decimal_to_radices();
+            menu_persist = false;
+        } else if (num == 2) {
+            radix_to_decimal();
+            menu_persist = false;
+        } else if (num == 3) {
+            radices_calculator();
+            menu_persist = false;
+        } else {
+            clear();
+            menu_banner();
+            printf("1. Decimal to Radices Converter\n");
+            printf("2. Radices to Decimal Converter\n");
+            printf("3. Radices Calculator\n\n");
+            printf("Please choose a listed option!\n");
+        }
     }
 
     return EXIT_SUCCESS;
