@@ -48,7 +48,7 @@ int return_int(char ch) {
 }
 
 // DECIMAL TO RADICES CONVERTER
-void decimal_to_radices() {
+void decimal_to_radix() {
 
     clear();
     menu_banner();
@@ -59,29 +59,44 @@ void decimal_to_radices() {
 
     while(persist) {
         char decimal[10];
-        char radix[2];
+        int radix;
 
         printf("Enter your number: ");
         scanf("%9s", decimal);
 
         printf("Enter your radix: ");
-        scanf("%1s", radix);
+        scanf("%d", &radix);
 
+        /*
         int len = 0;
         for (int i = 0; decimal[i] != '\0'; i++) {
             len += 1;
         }
-
-        printf("len: %d\n", len);
 
         int int_arr[len];
         for (int i = 0; decimal[i] != '\0'; i++) {
             int_arr[i] = return_int(decimal[i]);
         }
 
+        int final_arr[len];
+        int position = len-1;
+        int ans = 0;
         for (int i = 0; i < len; i++) {
-            printf("%d\n", int_arr[i]);
+            if (int_arr[i] >= radix) {
+                printf("Invalid digit in base %d: %d\n", radix, int_arr[i]);
+                break;
+            } else {
+                if (position > 0) {
+                    if (position == 1) {
+                        ans += int_arr[i] * radix
+                    }
+                    ans += int_arr[i] * ();
+                } else {
+                    ans += int_arr[i] * 1;
+                }
+            }
         }
+        */
 
         persist = false;
     }
@@ -97,22 +112,59 @@ void radix_to_decimal() {
     printf("Convert radices (binary - hexadecimal) to decimal!\n\n");
 
     bool persist = true;
-    while (persist) {
+
+    while(persist) {
+        char number[10];
         int radix;
-        printf("Choose Radix: ");
+
+        printf("Enter your radix: ");
         scanf("%d", &radix);
 
-        int radix_num;
-        printf("Enter number in base %d: ", radix);
-        scanf("%d", &radix_num);
-        if (radix_num > 0) {
-            persist = false;
-        } else {
-            persist = false;
+        printf("Enter your base %d number: ", radix);
+        scanf("%9s", number);
+ 
+        int len = 0;
+        for (int i = 0; number[i] != '\0'; i++) {
+            len += 1;
         }
-    }
 
-    printf("Coming soon! Program ending...\n");
+        int int_arr[len];
+        for (int i = 0; number[i] != '\0'; i++) {
+            if (number[i] == 'A') {
+                int_arr[i] = 10;
+            } else {
+                int_arr[i] = return_int(number[i]);
+            }
+        }
+
+        int ans = 0;
+
+        int final_arr[len];
+        int position = len-1;
+        int position_radix = radix;
+        for (int i = 0; i < len; i++) {
+            if (int_arr[i] >= radix) {
+                //TODO: add checks for integers larger than radix
+                break;
+            } else {
+                if (position == 0) {
+                    ans += int_arr[i] * 1;
+                } else if (position == 1) {
+                    ans += int_arr[i] * radix;
+                } else {
+                    for (int i = 0; i < position-1; i++) {
+                        position_radix = position_radix * radix;
+                    }
+                    ans += int_arr[i] * position_radix;
+                    position_radix = radix;
+                }
+            }
+            position -= 1;
+        }
+
+        printf("Your number in decimal: %d\n", ans);
+        persist = false;
+    }
 }
 
 // RADICES CALCULATOR
@@ -167,7 +219,7 @@ int main() {
         printf("Choose your tool (1-3): ");
         scanf("%15s", choice);
         if (strcmp(choice, "1") == 0) {
-            decimal_to_radices();
+            decimal_to_radix();
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
             radix_to_decimal();
