@@ -5,7 +5,6 @@
 #include <ctype.h>
 
 // TODO: Add functionality for numbers with fractionals
-// TODO: Add functionality for negative numbers
 // TODO: Don't end program after calculation finishes or invalid digit entered
 
 // CLEAR TERMINAL
@@ -47,39 +46,61 @@ int arr_len(char *arr) {
 // CONVERT CHARACTER TO INTEGER
 int return_int(char ch) {
     int n = 0;
+    int counter = 10;
 
     if (ch >= '0' && ch <= '9') {
         n = ch - '0';
-    } else if (tolower(ch) == 'a') {
-        n = 10;
-    } else if (tolower(ch) == 'b') {
-        n = 11;
-    } else if (tolower(ch) == 'c') {
-        n = 12;
-    } else if (tolower(ch) == 'd') {
-        n = 13;
-    } else if (tolower(ch) == 'e') {
-        n = 14;
-    } else if (tolower(ch) == 'f') {
-        n = 15;
     } else {
-        n = -1;
+        for (int i = 97; i < 123; i++) {
+            if (tolower(ch) == i) {
+                n = counter;
+                return n;
+            } else {
+                counter++;
+            }
+        }
+    }
+    return -1;
+}
+
+// TODO: CONVERT INTEGER TO CHARACTER
+char return_char(int num) {
+    char ch;
+    int int_counter = 0;
+
+    for (int i = 48; i < 58; i++) {
+        if (num == int_counter) {
+            ch = i;
+            return ch;
+        } else {
+            int_counter++;
+        }
     }
 
-    return n;
+    int_counter = 10;
+    for (int i = 65; i < 91; i++) {
+        if (num == int_counter) {
+            ch = i;
+            return ch;
+        } else {
+            int_counter++;
+        }
+    }
+    // return -1;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void decimal_to_radix() {
-
     clear();
     menu_banner();
     printf("DECIMAL TO RADICES CONVERTER\n");
     printf("Convert decimal numbers to radices (binary - hexadecimal)!\n\n");
 
     bool persist = true;
+    bool neg_num = false;
+    bool zer_num = false;
 
     while(persist) {
         int decimal;
@@ -91,6 +112,23 @@ void decimal_to_radix() {
         printf("Enter your radix: ");
         scanf("%d", &radix);
 
+        if (radix > 36 || radix < 2) {
+            printf("Please choose a radix 2 and 36!\n");
+            break;
+        }
+
+        if (decimal < 0) {
+            decimal = decimal - decimal - decimal;
+            neg_num = true;
+        } else if (decimal == 0) {
+            printf("Your number is 0 -_-\n");
+            zer_num = true;
+        }
+
+        if (zer_num == true) {
+            break;
+        }
+
         int exponent_count = 1;
         int num_length = 0;
         for (int i = 0; decimal >= exponent_count; i++) {
@@ -101,22 +139,25 @@ void decimal_to_radix() {
         }
 
         // calculates decimal to radix
-        int ans[num_length];
+        char ans[num_length];
 
         int dividend = decimal;
         int divisor = radix;
         int temp_decimal = 0;
         int index = 1;
         for (int i = 0; dividend > (radix-1); i++) {
-            ans[num_length-index] = dividend % radix;
+            ans[num_length-index] = return_char((dividend % radix));
             dividend = dividend / radix;
             index++;
         }
 
-        ans[num_length-index] = dividend;
+        ans[num_length-index] = return_char(dividend);
 
+        if (neg_num == true) {
+            printf("-");
+        }
         for (int i = 0; i < num_length; i++) {
-            printf("%d", ans[i]);
+            printf("%c", ans[i]);
         }
         printf("\n");
         persist = false;
@@ -134,12 +175,18 @@ void radix_to_decimal() {
 
     bool persist = true;
 
+    // TODO: Add functionality for negative numbers
     while(persist) {
         char number[10];
         int radix;
 
         printf("Enter your radix: ");
         scanf("%d", &radix);
+
+        if (radix > 36 || radix < 2) {
+            printf("Please choose a radix 2 and 36!\n");
+            break;
+        }
 
         printf("Enter your base %d number: ", radix);
         scanf("%9s", number);
