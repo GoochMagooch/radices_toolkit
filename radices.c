@@ -192,8 +192,7 @@ void radix_to_decimal() {
     bool persist = true;
 
     while(persist) {
-        char number[11];
-        char temp[256];
+        char number[256];
         int radix;
 
         printf("Enter your radix: ");
@@ -205,16 +204,8 @@ void radix_to_decimal() {
         }
  
         printf("Enter your base %d number: ", radix);
-        scanf("%255s", temp);
-        int length = arr_len(temp);
-
-        // checks length of user input
-        if (length > 10) {
-            printf("Please enter a number with 10 digits or less!\n");
-            break;
-        } else {
-            strcpy(number, temp);
-        }
+        scanf("%255s", number);
+        int length = arr_len(number);
 
         // checks for invalid digit symbols, adds to array if valid
         int int_arr[length];
