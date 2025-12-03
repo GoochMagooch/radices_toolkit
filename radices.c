@@ -260,8 +260,18 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
     int mini_sum;
     bool carry_over = false;
     char final_arr[256];
+    bool overflow = false;
 
     for (int i = (iterator-1); i >= 0; i--) {
+        if (num1[i] >= r) {
+            overflow = true;
+            printf("Digit %c invalid in base %d\n", return_char(num1[i]), r);
+            break;
+        } else if (num2[i] >= r) {
+            overflow = true;
+            printf("Digit %c invalid in base %d\n", return_char(num2[i]), r);
+            break;
+        }
         mini_sum = (num1[i] + num2[i]);
         if (carry_over == true) {
             mini_sum += 1;
@@ -281,11 +291,25 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
         }
     }
 
-    if (carry_over == true) {
-        printf("1");
-    }
-    for (int i = 0; final_arr[i] != '\0'; i++) {
-        printf("%c", final_arr[i]);
+    if (overflow == true) {
+        // TODO: future code to persist loop
+    } else {
+        for (int i = 0; i < iterator; i++) {
+            printf("%d", num1[i]);
+        }
+        printf(" + ");
+        for (int i = 0; i < iterator; i++) {
+            printf("%d", num2[i]);
+        }
+        printf(" = ");
+        if (carry_over == true) {
+            printf("1");
+        }
+        for (int i = 0; final_arr[i] != '\0'; i++) {
+            printf("%c", final_arr[i]);
+        }
+        printf(" (base %d)\n", r);
+
     }
 }
 
@@ -361,19 +385,8 @@ void radices_calculator() {
 
         // outputs calculations depending on operator
         if (op == '+') {
-
-            for (int i = 0; i < num1_len; i++) {
-                printf("%c", num1[i]);
-            }
-            printf(" + ");
-            for (int i = 0; i < num2_len; i++) {
-                printf("%c", num2[i]);
-            }
-            printf(" = ");
             calc_add(num1_integers, num2_integers, num1_integers_len, radix);
-            printf(" (base %d)\n", radix);
         }
- 
         persist = false;
     }
 }
