@@ -63,6 +63,7 @@ int return_int(char ch) {
     return -1;
 }
 
+// CONVERT INTEGER TO ASCII CHARACTER
 char return_char(int num) {
     char ch;
     int int_counter = 0;
@@ -87,6 +88,7 @@ char return_char(int num) {
     }
 }
 
+// PRINTS RADIX NAME IF APPLICABLE
 void radices_name(int num) {
     if (num == 2) {
         printf("Your number in Binary: ");
@@ -252,11 +254,38 @@ void radix_to_decimal() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
 
-void calc_add(int *num1, int *num2, int iterator) {
-    int ans;
-    for (int i = 0; i < iterator; i++) {
-        ans = (num1[i] + num2[i]);
-        printf("%d", ans);
+// ADD USER NUMBERS IN CHOSEN RADIX
+// FIX: right here bro
+void calc_add(int *num1, int *num2, int iterator, int r) {
+    int mini_sum;
+    bool carry_over = false;
+    char final_arr[256];
+
+    for (int i = (iterator-1); i >= 0; i--) {
+        mini_sum = (num1[i] + num2[i]);
+        if (carry_over == true) {
+            mini_sum += 1;
+            if (mini_sum > (r-1)) {
+                final_arr[i] = return_char(mini_sum-r);
+            } else {
+                final_arr[i] = return_char(mini_sum);
+                carry_over = false;
+            }
+        } else {
+            if (mini_sum > (r-1)) {
+                final_arr[i] = return_char(mini_sum-r);
+                carry_over = true;
+            } else {
+                final_arr[i] = return_char(mini_sum);
+            }
+        }
+    }
+
+    if (carry_over == true) {
+        printf("1");
+    }
+    for (int i = 0; final_arr[i] != '\0'; i++) {
+        printf("%c", final_arr[i]);
     }
 }
 
@@ -266,17 +295,15 @@ void radices_calculator() {
     printf("RADICES CALCULATOR\n");
     printf("Add, Subtract or Multiply radices from binary to hexadecimal!\n\n");
 
-    // TODO:
-    // 1. Populate char arrays with user numbers
-    // 2. Add necessary leading/trailing 0s to each array
-    // 3. Use return_int() function to turn each individual char to int
-    // 4. Send each individual int to new int arrays
-
     bool persist = true;
     while (persist) {
         int radix;
         printf("Choose a radix from 2 - 36: ");
         scanf("%d", &radix);
+        if (radix < 2 || radix > 36) {
+            printf("Please enter a radix between 2 and 36!\n");
+            break;
+        }
 
         char num1[256];
         printf("Enter your first number in base %d: ", radix);
@@ -321,11 +348,20 @@ void radices_calculator() {
                 num1_integers[i] = return_int(num1[i]);
             }
         } else {
-            // TODO: populate arrays if num2_len > num_len
-            printf("num2_len > num1_len len_diff: %d", len_diff);
+            for (int i = 0; i < len_diff; i++) {
+                num1_integers[i] = 0;
+            }
+            for (int i = len_diff; i < num1_integers_len; i++) {
+                num1_integers[i] = return_int(num1[(i-len_diff)]);
+            }
+            for (int i = 0; i < num2_integers_len; i++) {
+                num2_integers[i] = return_int(num2[i]);
+            }
         }
 
+        // outputs calculations depending on operator
         if (op == '+') {
+
             for (int i = 0; i < num1_len; i++) {
                 printf("%c", num1[i]);
             }
@@ -334,8 +370,8 @@ void radices_calculator() {
                 printf("%c", num2[i]);
             }
             printf(" = ");
-            calc_add(num1_integers, num2_integers, num1_integers_len);
-            printf("\n");
+            calc_add(num1_integers, num2_integers, num1_integers_len, radix);
+            printf(" (base %d)\n", radix);
         }
  
         persist = false;
