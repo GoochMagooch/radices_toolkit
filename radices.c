@@ -255,13 +255,13 @@ void radix_to_decimal() {
 // ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
 
 // ADD USER NUMBERS IN CHOSEN RADIX
-// FIX: right here bro
 void calc_add(int *num1, int *num2, int iterator, int r) {
     int mini_sum;
     bool carry_over = false;
     char final_arr[256];
     bool overflow = false;
 
+    // calculate sum
     for (int i = (iterator-1); i >= 0; i--) {
         if (num1[i] >= r) {
             overflow = true;
@@ -291,15 +291,18 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
         }
     }
 
+    clear();
+    menu_banner();
+    // output sum
     if (overflow == true) {
         // TODO: future code to persist loop
     } else {
         for (int i = 0; i < iterator; i++) {
-            printf("%d", num1[i]);
+            printf("%c", return_char(num1[i]));
         }
         printf(" + ");
         for (int i = 0; i < iterator; i++) {
-            printf("%d", num2[i]);
+            printf("%c", return_char(num2[i]));
         }
         printf(" = ");
         if (carry_over == true) {
@@ -308,9 +311,29 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
         for (int i = 0; final_arr[i] != '\0'; i++) {
             printf("%c", final_arr[i]);
         }
-        printf(" (base %d)\n", r);
-
+        if (r == 2) {
+            printf(" (Binary)\n");
+        } else if (r == 8) {
+            printf(" (Octal)\n");
+        } else if (r == 10) {
+            printf(" (Decimal)\n");
+        } else if (r == 16) {
+            printf(" (Hexadecimal)\n");
+        } else {
+            printf(" (base %d)\n", r);
+        }
     }
+}
+
+void calc_sub(int *num1, int *num2, int iterator, int r) {
+    // TODO: convert subtrahend and minuend to binary
+    // TODO: find 2s complement of subtrahend
+    // TODO: add both together
+    // TODO: if no carry over digit find 2's complement of sum
+    // TODO: convert back to original base and add '-'
+    // TODO: if carry over digit, convert sum to original base
+
+    printf("Subtraction function coming soon...\n");
 }
 
 void radices_calculator() {
@@ -330,7 +353,17 @@ void radices_calculator() {
         }
 
         char num1[256];
-        printf("Enter your first number in base %d: ", radix);
+        if (radix == 2) {
+            printf("Enter your first Binary number: ");
+        } else if (radix == 8) {
+            printf("Enter your first Octal number: ");
+        } else if (radix == 10) {
+            printf("Enter your first Decimal number: ");
+        } else if (radix == 16) {
+            printf("Enter your first Hexadecimal number: ");
+        } else {
+            printf("Enter your first number in base %d: ", radix);
+        }
         scanf("%255s", num1);
 
         char op;
@@ -338,7 +371,17 @@ void radices_calculator() {
         scanf(" %c", &op);
 
         char num2[256];
-        printf("Enter your second number in base %d: ", radix);
+        if (radix == 2) {
+            printf("Enter your second Binary number: ");
+        } else if (radix == 8) {
+            printf("Enter your second Octal number: ");
+        } else if (radix == 10) {
+            printf("Enter your second Decimal number: ");
+        } else if (radix == 16) {
+            printf("Enter your second Hexadecimal number: ");
+        } else {
+            printf("Enter your second number in base %d: ", radix);
+        }
         scanf("%255s", num2);
 
         // add leading 0s, if applicable
@@ -386,6 +429,14 @@ void radices_calculator() {
         // outputs calculations depending on operator
         if (op == '+') {
             calc_add(num1_integers, num2_integers, num1_integers_len, radix);
+        } else if (op == '-') {
+            calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
+        } else if (op == '*') {
+            printf("Multiplication function coming soon...");
+        } else if (op == '/') {
+            printf("Division function coming soon...");
+        } else {
+            printf("Please choose a valid operator...");
         }
         persist = false;
     }
