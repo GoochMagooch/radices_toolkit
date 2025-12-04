@@ -255,7 +255,7 @@ void radix_to_decimal() {
 // ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
 
 // ADD USER NUMBERS IN CHOSEN RADIX
-void calc_add(int *num1, int *num2, int iterator, int r) {
+void calc_add(int *num1, int *num2, int iterator, int r, bool sub) {
     int mini_sum;
     bool carry_over = false;
     char final_arr[256];
@@ -305,7 +305,7 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
             printf("%c", return_char(num2[i]));
         }
         printf(" = ");
-        if (carry_over == true) {
+        if (carry_over == true && sub == false) {
             printf("1");
         }
         for (int i = 0; final_arr[i] != '\0'; i++) {
@@ -326,14 +326,147 @@ void calc_add(int *num1, int *num2, int iterator, int r) {
 }
 
 void calc_sub(int *num1, int *num2, int iterator, int r) {
-    // TODO: convert subtrahend and minuend to binary
     // TODO: find 2s complement of subtrahend
     // TODO: add both together
     // TODO: if no carry over digit find 2's complement of sum
     // TODO: convert back to original base and add '-'
     // TODO: if carry over digit, convert sum to original base
 
-    printf("Subtraction function coming soon...\n");
+    // convert num1 to decimal (array of integers)
+    int dec1 = 0;
+    int position = iterator-1;
+    int position_radix = r;
+    for (int i = 0; i < iterator; i++) {
+        if (position == 0) {
+            dec1 += num1[i] * 1;
+        } else if (position == 1) {
+            dec1 += num1[i] * r;
+        } else {
+            for (int i = 0; i < position-1; i++) {
+                position_radix = position_radix * r;
+            }
+            dec1 += num1[i] * position_radix;
+            position_radix = r;
+        }
+        position -= 1;
+    }
+
+    // convert dec1 to binary (array of integers)
+    int exponent_count = 1;
+    int bin1_length = 1;
+    for (int i = 0; dec1 >= exponent_count; i++) {
+        if (dec1 >= exponent_count) {
+            exponent_count = exponent_count * 2;
+            bin1_length += 1;
+        }
+    }
+    // printf("bin1_length: %d\n", bin1_length);
+
+    char ans_arr1[bin1_length];
+    int dividend = dec1;
+    int divisor = 2;
+    int index = 2;
+    for (int i = 0; dividend > (divisor-1); i++) {
+        ans_arr1[bin1_length-index] = return_char((dividend % divisor));
+        dividend = dividend / divisor;
+        index++;
+    }
+
+    ans_arr1[bin1_length-index] = return_char(dividend);
+    ans_arr1[bin1_length-1] = '\0';
+    int ans_arr1_length = arr_len(ans_arr1);
+
+    // convert num2 to decimal (array of integers)
+    int dec2 = 0;
+    position = iterator-1;
+    position_radix = r;
+    for (int i = 0; i < iterator; i++) {
+        if (position == 0) {
+            dec2 += num2[i] * 1;
+        } else if (position == 1) {
+            dec2 += num2[i] * r;
+        } else {
+            for (int i = 0; i < position-1; i++) {
+                position_radix = position_radix * r;
+            }
+            dec2 += num2[i] * position_radix;
+            position_radix = r;
+        }
+        position -= 1;
+    }
+
+    // convert dec2 to binary (array of integers)
+    exponent_count = 1;
+    int bin2_length = 1;
+    for (int i = 0; dec2 >= exponent_count; i++) {
+        if (dec2 >= exponent_count) {
+            exponent_count = exponent_count * 2;
+            bin2_length += 1;
+        }
+    }
+    // printf("bin2_length: %d\n", bin2_length);
+
+    char ans_arr2[bin2_length];
+    dividend = dec2;
+    index = 2;
+    for (int i = 0; dividend > (divisor-1); i++) {
+        ans_arr2[bin2_length-index] = return_char((dividend % divisor));
+        dividend = dividend / divisor;
+        index++;
+    }
+
+    ans_arr2[bin2_length-index] = return_char(dividend);
+    ans_arr2[bin2_length-1] = '\0';
+    int ans_arr2_length = arr_len(ans_arr2);
+
+    // populate arrays of binary integers for num1 and num2
+    int diff = 0;
+    int minuend[256];
+    int subtrahend[256];
+    if (ans_arr1_length > ans_arr2_length) {
+        diff = ans_arr1_length - ans_arr2_length;
+        for (int i = 0; i < diff; i++) {
+            subtrahend[i] = 0;
+        }
+        for (int i = diff; i < ans_arr1_length; i++) {
+            subtrahend[i] = return_int(ans_arr2[i-diff]);
+        }
+        for (int i = 0; i < ans_arr1_length; i++) {
+            minuend[i] = return_int(ans_arr1[i]);
+        }
+    } else {
+        // everything above but opposite
+    }
+
+    // TODO: create 2s complement of subtrahend array
+    int two_complement_min[ans_arr1_length];
+    int two_complement_sub[ans_arr1_length];
+    for (int i = 0; i < ans_arr1_length; i++) {
+        if (subtrahend[i] == 0) {
+            two_complement_min[i] = 1;
+        } else {
+            two_complement_min[i] = 0;
+        }
+    }
+    for (int i = 0; i < ans_arr1_length; i++) {
+        if (i == (ans_arr1_length-1)) {
+            two_complement_sub[i] = 1;
+        } else {
+            two_complement_sub[i] = 0;
+        }
+    }
+    // print statements for testing
+    printf("\n");
+    for (int i = 0; i < ans_arr1_length; i++) {
+        printf("%d", two_complement_min[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < ans_arr1_length; i++) {
+        printf("%d", two_complement_sub[i]);
+    }
+    printf("\n");
+
+    // calc_add(minuend, subtrahend, ans_arr1_length, 2, true);
 }
 
 void radices_calculator() {
@@ -428,7 +561,7 @@ void radices_calculator() {
 
         // outputs calculations depending on operator
         if (op == '+') {
-            calc_add(num1_integers, num2_integers, num1_integers_len, radix);
+            calc_add(num1_integers, num2_integers, num1_integers_len, radix, false);
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
