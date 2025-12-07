@@ -255,20 +255,20 @@ void radix_to_decimal() {
 // ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
 
 // ADD USER NUMBERS IN CHOSEN RADIX
-void calc_add(int *num1, int *num2, int iterator, int r, bool sub) {
+void calc_add(int *num1, int *num2, int iterator, int r, bool sub, int *sub_comp, int *carry) {
     int mini_sum;
     bool carry_over = false;
     char final_arr[256];
-    bool overflow = false;
+    bool invalid_int = false;
 
     // calculate sum
     for (int i = (iterator-1); i >= 0; i--) {
         if (num1[i] >= r) {
-            overflow = true;
+            invalid_int = true;
             printf("Digit %c invalid in base %d\n", return_char(num1[i]), r);
             break;
         } else if (num2[i] >= r) {
-            overflow = true;
+            invalid_int = true;
             printf("Digit %c invalid in base %d\n", return_char(num2[i]), r);
             break;
         }
@@ -291,11 +291,23 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool sub) {
         }
     }
 
+    /*
     clear();
     menu_banner();
+    */
     // output sum
-    if (overflow == true) {
+    if (invalid_int == true) {
         // TODO: future code to persist loop
+    } else if (sub == true) {
+        // fill empty in array with 2s complement
+        for (int i = 0; i < iterator; i++) {
+            sub_comp[i] = return_int(final_arr[i]);
+        }
+        if (carry_over == true) {
+            *carry = 1;
+        } else {
+            *carry = 0;
+        }
     } else {
         for (int i = 0; i < iterator; i++) {
             printf("%c", return_char(num1[i]));
@@ -326,10 +338,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool sub) {
 }
 
 void calc_sub(int *num1, int *num2, int iterator, int r) {
-    // TODO: find 2s complement of subtrahend
-    // TODO: add both together
-    // TODO: if no carry over digit find 2's complement of sum
-    // TODO: convert back to original base and add '-'
     // TODO: if carry over digit, convert sum to original base
 
     // convert num1 to decimal (array of integers)
@@ -421,8 +429,13 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 
     // populate arrays of binary integers for num1 and num2
     int diff = 0;
-    int minuend[256];
-    int subtrahend[256];
+    if (ans_arr1_length > ans_arr2_length) {
+        index = ans_arr1_length;
+    } else {
+        index = ans_arr2_length;
+    }
+    int minuend[index];
+    int subtrahend[index];
     if (ans_arr1_length > ans_arr2_length) {
         diff = ans_arr1_length - ans_arr2_length;
         for (int i = 0; i < diff; i++) {
@@ -438,35 +451,131 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
         // everything above but opposite
     }
 
-    // TODO: create 2s complement of subtrahend array
-    int two_complement_min[ans_arr1_length];
-    int two_complement_sub[ans_arr1_length];
-    for (int i = 0; i < ans_arr1_length; i++) {
+    int two_complement_sub[index];
+
+    for (int i = 0; i < index; i++) {
         if (subtrahend[i] == 0) {
-            two_complement_min[i] = 1;
+            subtrahend[i] = 1;
         } else {
-            two_complement_min[i] = 0;
+            subtrahend[i] = 0;
         }
     }
-    for (int i = 0; i < ans_arr1_length; i++) {
-        if (i == (ans_arr1_length-1)) {
+    for (int i = 0; i < index; i++) {
+        if (i == (index-1)) {
             two_complement_sub[i] = 1;
         } else {
             two_complement_sub[i] = 0;
         }
     }
-    // print statements for testing
-    printf("\n");
-    for (int i = 0; i < ans_arr1_length; i++) {
-        printf("%d", two_complement_min[i]);
-    }
-    printf("\n");
-    for (int i = 0; i < ans_arr1_length; i++) {
-        printf("%d", two_complement_sub[i]);
-    }
-    printf("\n");
+    clear();
+    menu_banner();
+    int final_two_complement[index];
 
-    // calc_add(minuend, subtrahend, ans_arr1_length, 2, true);
+    int carry_padding;
+    calc_add(subtrahend, two_complement_sub, ans_arr1_length, 2, true, final_two_complement, &carry_padding);
+
+    int min_plus_2comp[index];
+    int carry_over;
+    calc_add(minuend, final_two_complement, index, 2, true, min_plus_2comp, &carry_over);
+    // everything above here works as intended after testing
+    // properly finds the 2s complement of the subtrahend and adds it to the minuend
+
+    // FIX:
+    // checks for the presence of a carry over digit (the check works, the proceeding logic does not)
+    if (carry_over == 1) {
+        // FIX: right here bro
+        int pos_carry_num[index+1];
+        for (int i = 0; i < index+1; i++) {
+            if (i == 0) {
+                pos_carry_num[i] = 1;
+            } else {
+                pos_carry_num[i] = min_plus_2comp[i-1];
+            }
+        }
+        // convert min_plus_2comp (plus carry over digit) to decimal
+        int pos_ans = 0;
+        int pos_position = index-1;
+        int pos_position_r = 2;
+        for (int i = 0; i < index; i++) {
+            if (pos_position == 0) {
+                pos_ans += pos_carry_num[i] * 1;
+            } else if (pos_position == 1) {
+                pos_ans += pos_carry_num[i] * 2;
+            } else {
+                for (int i = 0; i < pos_position-1; i++) {
+                    pos_position_r = pos_position_r * 2;
+                }
+                pos_ans += pos_carry_num[i] * pos_position_r;
+                pos_position_r = 2;
+            }
+            pos_position -= 1;
+        }
+        // convert pos_ans to original radix
+        int new_index = index+1;
+        char pos_ans_arr[new_index];
+
+        int pos_dividend = pos_ans;
+        int pos_index = 1;
+        for (int i = 0; pos_dividend > (r-1); i++) {
+            pos_ans_arr[new_index-pos_index] = return_char((pos_dividend % r));
+            pos_dividend = pos_dividend / r;
+            pos_index++;
+        }
+
+        pos_ans_arr[new_index-pos_index] = return_char(pos_dividend);
+        for (int i = 0; i < index; i++) {
+           printf("%c", pos_ans_arr[i]);
+        }
+
+    } else {
+        // FIX: and here too
+        int bit_flip[index];
+        for (int i = 0; i < index; i++) {
+            if (min_plus_2comp[i] == 0) {
+                bit_flip[i] == 1;
+            } else {
+                bit_flip[i] == 0;
+            }
+        }
+
+        int final_ans[index];
+        calc_add(bit_flip, two_complement_sub, index, 2, true, final_ans, &carry_over);
+        // calculates decimal version of final_ans
+        int neg_ans = 0;
+        int neg_position = index-1;
+        int neg_position_r = 2;
+        for (int i = 0; i < index; i++) {
+            if (neg_position == 0) {
+                neg_ans += final_ans[i] * 1;
+            } else if (neg_position == 1) {
+                neg_ans += final_ans[i] * 2;
+            } else {
+                for (int i = 0; i < neg_position-1; i++) {
+                    neg_position_r = neg_position_r * 2;
+                }
+                neg_ans += final_ans[i] * neg_position_r;
+                neg_position_r = 2;
+            }
+            neg_position -= 1;
+        }
+        // convert decimal back to original radix
+        char neg_ans_arr[index];
+
+        int neg_dividend = neg_ans;
+        int neg_index = 1;
+        for (int i = 0; neg_dividend > (r-1); i++) {
+            neg_ans_arr[index-neg_index] = return_char((neg_dividend % r));
+            neg_dividend = neg_dividend / r;
+            neg_index++;
+        }
+
+        neg_ans_arr[index-neg_index] = return_char(neg_dividend);
+        printf("-");
+        for (int i = 0; i < index; i++) {
+           printf("%c", neg_ans_arr[i]);
+        }
+    }
+    printf("\n");
 }
 
 void radices_calculator() {
@@ -558,10 +667,11 @@ void radices_calculator() {
                 num2_integers[i] = return_int(num2[i]);
             }
         }
+        int carry_over;
 
         // outputs calculations depending on operator
         if (op == '+') {
-            calc_add(num1_integers, num2_integers, num1_integers_len, radix, false);
+            calc_add(num1_integers, num2_integers, num1_integers_len, radix, false, num1_integers, &carry_over);
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
