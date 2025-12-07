@@ -426,28 +426,36 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     int diff = 0;
     if (ans_arr1_length > ans_arr2_length) {
         index = ans_arr1_length;
+        diff = ans_arr1_length - ans_arr2_length;
     } else {
         index = ans_arr2_length;
+        diff = ans_arr2_length - ans_arr1_length;
     }
     int minuend[index];
     int subtrahend[index];
     if (ans_arr1_length > ans_arr2_length) {
-        diff = ans_arr1_length - ans_arr2_length;
         for (int i = 0; i < diff; i++) {
             subtrahend[i] = 0;
         }
-        for (int i = diff; i < ans_arr1_length; i++) {
+        for (int i = diff; i < index; i++) {
             subtrahend[i] = return_int(ans_arr2[i-diff]);
         }
-        for (int i = 0; i < ans_arr1_length; i++) {
+        for (int i = 0; i < index; i++) {
             minuend[i] = return_int(ans_arr1[i]);
         }
     } else {
-        // everything above but opposite
+        for (int i = 0; i < diff; i++) {
+            minuend[i] = 0;
+        }
+        for (int i = diff; i < index; i++) {
+            minuend[i] = return_int(ans_arr1[i-diff]);
+        }
+        for (int i = 0; i < index; i++) {
+            subtrahend[i] = return_int(ans_arr2[i]);
+        }
     }
 
     int two_complement_sub[index];
-
     for (int i = 0; i < index; i++) {
         if (subtrahend[i] == 0) {
             subtrahend[i] = 1;
@@ -462,8 +470,10 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
             two_complement_sub[i] = 0;
         }
     }
+    /*
     clear();
     menu_banner();
+    */
     int final_two_complement[index];
 
     int carry_padding;
