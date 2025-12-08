@@ -470,22 +470,23 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
             two_complement_sub[i] = 0;
         }
     }
-    /*
+
     clear();
     menu_banner();
-    */
+
     int final_two_complement[index];
 
     int carry_padding;
-    calc_add(subtrahend, two_complement_sub, ans_arr1_length, 2, true, final_two_complement, &carry_padding);
+    calc_add(subtrahend, two_complement_sub, index, 2, true, final_two_complement, &carry_padding);
 
     int min_plus_2comp[index];
     int carry_over;
     calc_add(minuend, final_two_complement, index, 2, true, min_plus_2comp, &carry_over);
 
+
     // checks for the presence of a carry over digit
     if (carry_over == 1) {
-        // convert min_plus_2comp to decimal works after testing
+        // calculate subtraction - minuend > subtrahend
         int pos_ans = 0;
         int pos_position = index-1;
         int pos_position_r = 2;
@@ -528,19 +529,19 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
         }
 
     } else {
-        // FIX: else statement
+        // calculate subtraction - subtrahend > minuend
         int bit_flip[index];
         for (int i = 0; i < index; i++) {
             if (min_plus_2comp[i] == 0) {
-                bit_flip[i] == 1;
+                bit_flip[i] = 1;
             } else {
-                bit_flip[i] == 0;
+                bit_flip[i] = 0;
             }
         }
 
         int final_ans[index];
         calc_add(bit_flip, two_complement_sub, index, 2, true, final_ans, &carry_over);
-        // calculates decimal version of final_ans
+
         int neg_ans = 0;
         int neg_position = index-1;
         int neg_position_r = 2;
@@ -559,19 +560,27 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
             neg_position -= 1;
         }
         // convert decimal back to original radix
-        char neg_ans_arr[index];
-
-        int neg_dividend = neg_ans;
-        int neg_index = 1;
-        for (int i = 0; neg_dividend > (r-1); i++) {
-            neg_ans_arr[index-neg_index] = return_char((neg_dividend % r));
-            neg_dividend = neg_dividend / r;
-            neg_index++;
+        int exponent_count = 1;
+        int num_length = 0;
+        for (int i = 0; neg_ans >= exponent_count; i++) {
+            if (neg_ans >= exponent_count) {
+                exponent_count = exponent_count * r;
+                num_length += 1;
+            }
         }
 
-        neg_ans_arr[index-neg_index] = return_char(neg_dividend);
+        char neg_ans_arr[num_length];
+        int neg_dividend = neg_ans;
+        index = 1;
+        for (int i = 0; neg_dividend > (r-1); i++) {
+            neg_ans_arr[num_length-index] = return_char((neg_dividend % r));
+            neg_dividend = neg_dividend / r;
+            index++;
+        }
+
+        neg_ans_arr[num_length-index] = return_char(neg_dividend);
         printf("-");
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < num_length; i++) {
            printf("%c", neg_ans_arr[i]);
         }
     }
