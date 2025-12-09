@@ -587,6 +587,66 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     printf("\n");
 }
 
+int calc_mul(int *num1, int *num2, int iterator, int r) {
+    clear();
+    menu_banner();
+    int final_product = 0;
+    int ans_place_counter = 1;
+    printf("final_product before calculation: %d\n", final_product);
+
+    // FIX: 12 * 3 = 9 instead of 36
+    for (int i = iterator-1; i >= 0; i--) {
+        int temp_ans = 0;
+        int temp_product = 0;
+        int temp_quotient = 0;
+        int minuend_place_counter = 1;
+        for (int j = iterator-1; j >= 0; j--) {
+            temp_product = num2[i] * num1[j];
+            if (temp_quotient > 0) {
+                temp_product += temp_quotient;
+            }
+            // temp_product properly assigned on each iteration
+            // printf("temp_product on iteration [%d][%d]: %d\n", i, j, temp_product);
+            temp_quotient = 0;
+            if (temp_product > r) {
+                if (j < (iterator-1)) {
+                    if (j == 0) {
+                        // printf("temp_ans: %d\n", temp_ans);
+                        temp_ans += temp_product * minuend_place_counter;
+                        // printf("temp_product: %d\n", temp_product);
+                        // printf("minuend_place_counter: %d\n", minuend_place_counter);
+                    } else {
+                        temp_quotient = temp_product / r;
+                        temp_ans += (temp_product - (r * temp_quotient)) * minuend_place_counter;
+                    }
+                } else {
+                    temp_quotient = temp_product / r;
+                    temp_ans += temp_product - (r * temp_quotient);
+                }
+            } else {
+                temp_ans += temp_product;
+            }
+            minuend_place_counter *= r;
+            printf("temp_ans on iteration [%d][%d]: %d\n", i, j, temp_ans);
+        }
+        if (i < (iterator-1)) {
+            temp_ans *= ans_place_counter;
+        }
+        printf("temp_ans on iteration %d: %d\n", i, temp_ans);
+        printf("final_product on iteration %d: %d\n", i, final_product);
+        final_product += temp_ans;
+        printf("final_product on iteration %d: %d\n", i, final_product);
+        ans_place_counter *= r;
+    }
+    return final_product;
+}
+
+void calc_div(int *num1, int *num2) {
+    clear();
+    menu_banner();
+    printf("Division coming soon...\n");
+}
+
 void radices_calculator() {
     clear();
     menu_banner();
@@ -684,9 +744,10 @@ void radices_calculator() {
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
-            printf("Multiplication function coming soon...");
+            int calc_mul_ans = calc_mul(num1_integers, num2_integers, num1_integers_len, radix);
+            printf("%d\n", calc_mul_ans);
         } else if (op == '/') {
-            printf("Division function coming soon...");
+            calc_div(num1_integers, num2_integers);
         } else {
             printf("Please choose a valid operator...");
         }
