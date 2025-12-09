@@ -103,27 +103,21 @@ void radices_name(int num) {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~
-void decimal_to_radix() {
+int decimal_to_radix(int decimal, int radix) {
     // TODO: Add functionality for numbers with fractionals
+    // FIX: WORKING ON THIS FUNCTION ~~~~~~~~~~~~~~~~~~~~~~
 
-    clear();
-    menu_banner();
+    /*
     printf("DECIMAL TO RADICES CONVERTER\n");
     printf("Convert decimal numbers to radices (binary - hexadecimal)!\n\n");
+    */
 
     bool persist = true;
     bool neg_num = false;
     bool zer_num = false;
+    int test_ans = 0;
 
     while(persist) {
-        int decimal;
-        int radix;
-
-        printf("Enter your number: ");
-        scanf("%d", &decimal);
-
-        printf("Enter your radix: ");
-        scanf("%d", &radix);
 
         if (radix > 36 || radix < 2) {
             printf("Please choose a radix 2 and 36!\n");
@@ -134,7 +128,7 @@ void decimal_to_radix() {
             decimal = decimal - decimal - decimal;
             neg_num = true;
         } else if (decimal == 0) {
-            printf("Your number is 0 -_-\n");
+            return 0;
             zer_num = true;
         }
 
@@ -170,12 +164,15 @@ void decimal_to_radix() {
         if (neg_num == true) {
             printf("-");
         }
-        for (int i = 0; i < num_length; i++) {
-            printf("%c", ans[i]);
+        int multiplyer = 1;
+        for (int i = num_length-1; i >= 0; i--) {
+            test_ans += return_int(ans[i]) * multiplyer;
+            multiplyer *= 10;
         }
         printf("\n");
         persist = false;
     }
+    return test_ans;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,6 +187,7 @@ void radix_to_decimal() {
     printf("Convert radices (binary - hexadecimal) to decimal!\n\n");
 
     bool persist = true;
+    int ans = 0;
 
     while(persist) {
         char number[256];
@@ -225,7 +223,6 @@ void radix_to_decimal() {
         }
 
         // calculates decimal version of radix
-        int ans = 0;
         // int final_arr[length];
         int position = length-1;
         int position_radix = radix;
@@ -252,7 +249,7 @@ void radix_to_decimal() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
 
-// ADD USER NUMBERS IN CHOSEN RADIX
+// CALCULATES SUM OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_add(int *num1, int *num2, int iterator, int r, bool sub, int *sub_comp, int *carry) {
     int mini_sum;
     bool carry_over = false;
@@ -335,6 +332,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool sub, int *sub_comp
     }
 }
 
+// CALCULATES DIFFERENCE OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_sub(int *num1, int *num2, int iterator, int r) {
 
     // convert num1 to decimal (array of integers)
@@ -587,9 +585,26 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     printf("\n");
 }
 
+// CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 int calc_mul(int *num1, int *num2, int iterator, int r) {
     clear();
     menu_banner();
+    int multiplyer_one = 0;
+    int multiplyer_two = 0;
+    int multiplicand;
+
+    for (int i = 0; i < iterator; i++) {
+        multiplyer_one += num1[i];
+    }
+    for (int i = 0; i < iterator; i++) {
+        multiplyer_two += num2[i];
+    }
+    if (multiplyer_one > multiplyer_two) {
+        multiplicand = 1;
+    } else {
+        multiplicand = 0;
+    }
+
     for (int i = 0; i < iterator; i++) {
         printf("%d ", num1[i]);
     }
@@ -598,54 +613,51 @@ int calc_mul(int *num1, int *num2, int iterator, int r) {
         printf("%d ", num2[i]);
     }
     printf("\n");
+    printf("multiplyer_one: %d\n", multiplyer_one);
+    printf("multiplyer_two: %d\n", multiplyer_two);
+    printf("multiplicand: %d\n", multiplicand);
+
     int final_product = 0;
     int ans_place_counter = 1;
 
-    // FIX:
-    // 23 * 3 (base4) = 33 instead of 201
-    // incrementation in decimal not viable,
-    // maybe need to use calc_add() for incrementation
+    // FIX: 3 * 23 (base4) = 33 instead of 201
     for (int i = iterator-1; i >= 0; i--) {
         int temp_ans = 0;
         int temp_product = 0;
         int temp_quotient = 0;
         int minuend_place_counter = 1;
         for (int j = iterator-1; j >= 0; j--) {
-            temp_product = 0;
-            temp_product = num2[i] * num1[j];
+            if (multiplicand == 1) {
+                temp_product = num2[i] * num1[j];
+            } else {
+                temp_product = num1[i] * num2[j];
+            }
             if (temp_quotient > 0) {
                 temp_product += temp_quotient;
             }
-            printf("temp_product on iteration [%d][%d]: %d\n", i, j, temp_product);
+            temp_product = decimal_to_radix(temp_product, r);
             temp_quotient = 0;
             if (temp_product >= r) {
                 if (j < (iterator-1)) {
                     if (j == 0) {
-                        printf("temp_ans: %d\n", temp_ans);
                         temp_ans += temp_product * minuend_place_counter;
-                        printf("temp_product: %d\n", temp_product);
-                        printf("minuend_place_counter: %d\n", minuend_place_counter);
                     } else {
-                        temp_quotient = temp_product / r;
-                        temp_ans += (temp_product - (r * temp_quotient)) * minuend_place_counter;
+                        temp_quotient = temp_product / 10;
+                        temp_ans += (temp_product - (10 * temp_quotient)) * minuend_place_counter;
                     }
                 } else {
-                    temp_quotient = temp_product / r;
-                    temp_ans += temp_product - (r * temp_quotient);
+                    temp_quotient = temp_product / 10;
+                    temp_ans += temp_product - (10 * temp_quotient);
                 }
             } else {
                 temp_ans += temp_product * minuend_place_counter;
             }
-            minuend_place_counter *= r;
-            printf("temp_ans on iteration [%d][%d]: %d\n", i, j, temp_ans);
+            minuend_place_counter *= 10;
         }
         if (i < (iterator-1)) {
             temp_ans *= ans_place_counter;
         }
-        printf("temp_ans on iteration %d: %d\n", i, temp_ans);
-        printf("final_product on iteration %d: %d\n", i, final_product);
         final_product += temp_ans;
-        printf("final_product on iteration %d: %d\n", i, final_product);
         ans_place_counter *= r;
     }
     return final_product;
@@ -787,7 +799,16 @@ int main() {
         printf("Choose your tool (1-3): ");
         scanf("%15s", choice);
         if (strcmp(choice, "1") == 0) {
-            decimal_to_radix();
+            clear();
+            menu_banner();
+            int dec;
+            printf("Enter your number: ");
+            scanf("%d", &dec);
+            int r;
+            printf("Enter your radix: ");
+            scanf("%d", &r);
+            int ans = decimal_to_radix(dec, r);
+            printf("Your number in base %d: %d\n", r, ans);
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
             radix_to_decimal();
