@@ -661,15 +661,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_product += temp_quotient;
                 temp_quotient = 0;
             }
-            // FIX: FA * 2 should be 1F4 not 54
-            //      decimal_to_radix() returning incorrect integer (I think)
             printf("temp_product on iteration [i: %d][j: %d]: %d\n", i, j, temp_product);
             printf("decimal_to_radix(temp_product, r, false): ");
             decimal_to_radix(temp_product, r, false);
             printf("\n");
             if (temp_product >= r) {
-                // FIX: find a way to increment a counter to determine
-                //      how to divide temp_conversion to get temp_quotient
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion on iteration %d: %d\n", j, temp_conversion);
                 if (temp_conversion > 99) {
