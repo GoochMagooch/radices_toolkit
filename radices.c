@@ -105,8 +105,9 @@ void radices_name(int num) {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~
-int decimal_to_radix(int decimal, int radix) {
+int decimal_to_radix(int decimal, int radix, bool int_return) {
     // TODO: Add functionality for numbers with fractionals
+    // TODO: Return a digit when prompted, print final array when prompted
 
     /*
     printf("DECIMAL TO RADICES CONVERTER\n");
@@ -164,8 +165,21 @@ int decimal_to_radix(int decimal, int radix) {
             printf("-");
         }
 
-        for (int i = 0; i < num_length; i++) {
-            printf("%c", ans[i]);
+        int returned_int = 0;
+        // FIX: NOT RETURNING CORRECT INTEGER
+        if (int_return == true) {
+            for (int i = 0; i < num_length; i++) {
+                if (i == 0) {
+                    returned_int += return_int(ans[i]) * 10;
+                } else {
+                    returned_int += return_int(ans[i]);
+                }
+            }
+            return returned_int;
+        } else {
+            for (int i = 0; i < num_length; i++) {
+                printf("%c", ans[i]);
+            }
         }
         printf("\n");
         persist = false;
@@ -585,7 +599,8 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
-    clear();    menu_banner();
+    clear();
+    menu_banner();
     int multiplyer_one = 0;
     int multiplyer_two = 0;
     int multiplicand;
@@ -614,8 +629,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
     printf("\n");
 
-
-    // TODO: if muls == 1, only outer_array populated and printed w/ return_char()
+    // TODO: Account for extra spaces in outer_array, for digits if muls == 1
     // TODO: if muls == 2, outer_array & inner_array populated
     //       calc_add() used for sum of both arrays
     //       sum of arrays sent to array_sum and printed w/ return_char()
@@ -625,19 +639,19 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //       the process repeats until array_sum is printed with return_char()
     // TODO: ** account for added 0s for every multiplier > 1
 
-    int index = 1;
+    int index = iterator;
     int *outer_array = malloc(index * sizeof *outer_array);
     int *array_sum = malloc(index * sizeof *array_sum);
 
-    int ans_place_counter = 1;
+    // int ans_place_counter = 1;
 
     // Currently will only interate as many times as there are multipliers
     for (int i = iterator-1; i >= (iterator-muls); i--) {
-        int temp_ans = 0;
-        int temp_product = 0;
+        int temp_product;
         int temp_quotient = 0;
-        int multiplicand_place_counter = 1;
+        // int multiplicand_place_counter = 1;
         int *inner_array = malloc(index * sizeof *inner_array);
+        int temp_conversion;
         for (int j = iterator-1; j >= 0; j--) {
             if (multiplicand == 1) {
                 temp_product = num2[i] * num1[j];
@@ -646,32 +660,28 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             if (temp_quotient > 0) {
                 temp_product += temp_quotient;
+                temp_quotient = 0;
             }
-            temp_product = decimal_to_radix(temp_product, r);
-            temp_quotient = 0;
+            printf("temp_product on iteration [i: %d][j: %d]: %d\n", i, j, temp_product);
             if (temp_product >= r) {
-                if (j < (iterator-1)) {
-                    if (j == 0) {
-                        temp_ans += temp_product * multiplicand_place_counter;
-                    } else {
-                        temp_quotient = temp_product / 10;
-                        temp_ans += (temp_product - (10 * temp_quotient)) * multiplicand_place_counter;
-                    }
-                } else {
-                    temp_quotient = temp_product / 10;
-                    temp_ans += temp_product - (10 * temp_quotient);
-                }
+                temp_conversion = decimal_to_radix(temp_product, r, true);
+                printf("temp_conversion on iteration %d: %d\n", j, temp_conversion);
+                temp_quotient = temp_conversion / 10;
+                printf("temp_quotient on iteration %d: %d\n", j, temp_quotient);
+                temp_product = temp_conversion - (temp_quotient * 10);
+                printf("temp_product: %d\n", temp_product);
+                outer_array[j] = temp_product;
             } else {
-                temp_ans += temp_product * multiplicand_place_counter;
+                outer_array[j] = temp_product;
             }
-            multiplicand_place_counter *= 10;
         }
-        if (i < (iterator-1)) {
-            temp_ans *= ans_place_counter;
-        }
-        // final_product += temp_ans;
-        ans_place_counter *= 10;
+        printf("\n");
     }
+    printf("Product: ");
+    for (int i = 0; i < index; i++) {
+        printf("%c", return_char(outer_array[i]));
+    }
+    printf("\n");
 }
 
 void calc_div(int *num1, int *num2) {
@@ -819,7 +829,7 @@ int main() {
             printf("Enter your radix: ");
             scanf("%d", &r);
             radices_name(r);
-            decimal_to_radix(dec, r);
+            decimal_to_radix(dec, r, false);
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
             radix_to_decimal();
