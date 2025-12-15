@@ -650,8 +650,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int counter = 0;
     int temp_quotient = 0;
     int zero_count;
+    bool array_w_quotient = false;
     for (int i = iterator-1; i >= (iterator-muls); i--) {
         inner_array = realloc(inner_array, index * sizeof *inner_array);
+        temp_quotient = 0;
         /*
         if (index > iterator) {
             // TODO: populate outer_array_one
@@ -709,15 +711,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 if (muls == 1) {
                     outer_array_one[j] = temp_product;
                 } else if (muls == 2) {
-                    if (i == 1) {
+                    // FIX: 255 * 11, 12, 13 correct, 255 * 14 and above incorrect
+                    if (i == (iterator-1)) {
                         outer_array_one[j] = temp_product;
                     } else {
-                        inner_array = realloc(inner_array, index * sizeof *inner_array);
-                        if (j != index-1) {
-                            inner_array[j] = temp_product;
-                        } else {
-                            inner_array[j] = 0;
-                        }
+                        inner_array[j] = temp_product;
                     }
                 } else {
                     // TODO: muls > 2
@@ -743,6 +741,20 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             index++;
         }
         increment_count--;
+        if (temp_quotient > 0) {
+            // index++;
+            printf("test\n");
+            outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
+            for (int i = 0; i < index; i++) {
+                if (i != 0) {
+                    outer_array_two[i] = outer_array_one[i-1];
+                } else {
+                    outer_array_two[i] = 1;
+                }
+            }
+            array_w_quotient = true;
+            // index--;
+        }
     }
     if (muls == 1) {
         printf("Product: ");
@@ -755,16 +767,24 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
     } else if (muls == 2) {
         // FIX: ALSO WORKING HERE
-        //      Add feature to include carry over digit from calc_add()
-        outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
-        printf("index: %d\n", index);
-        for (int i = 0; i < index; i++) {
-            if (i == 0) {
-                outer_array_two[i] = 0;
-            } else {
-                outer_array_two[i] = outer_array_one[i-1];
+        if (array_w_quotient == true) {
+            printf("outer_array_two with temp_quotient: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d ", outer_array_two[i]);
+            }
+            printf("\n");
+        } else {
+            outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
+            printf("index: %d\n", index);
+            for (int i = 0; i < index; i++) {
+                if (i == 0) {
+                    outer_array_two[i] = 0;
+                } else {
+                    outer_array_two[i] = outer_array_one[i-1];
+                }
             }
         }
+        /*
         printf("outer_array_one (should be 2 5 5): ");
         for (int i = 0; i < index; i++) {
             printf("%d ", outer_array_one[i]);
@@ -777,16 +797,27 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         for (int i = 0; i < index; i++) {
             printf("%d ", inner_array[i]);
         }
-        printf("\nFinal Product: ");
-        int carry;
+        */
+        int carry = 2;
         int final_product_arr[index];
         calc_add(outer_array_two, inner_array, index, r, true, final_product_arr, &carry);
-        for (int i = 0; i < index; i++) {
-            printf("%d", final_product_arr[i]);
+        if (carry == 1) {
+            // FIX: INCLUDE CARRY OVER
+            printf("\nProduct with carry: ");
+            int final_product_arr_carry[index];
+            calc_add(outer_array_two, inner_array, index, r, true, final_product_arr_carry, &carry);
+            for (int i = 0; i < index; i++) {
+                printf("%d", final_product_arr_carry[i]);
+            }
+            printf("\n");
+        } else {
+            printf("\nProduct with no carry: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d", final_product_arr[i]);
+            }
+            printf("\n");
         }
-        printf("\n");
     }
-    temp_quotient = 0;
 }
 
 void calc_div(int *num1, int *num2) {
