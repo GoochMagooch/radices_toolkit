@@ -745,18 +745,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } // END OF INNER LOOP
-        // TODO: check this feature
-        printf("temp_product_arr after inner loop: ");
+        temp_product_count = 0; // reinitializes temp_product_count to 0
+        // FIX: This is supposed to reallocate elements from outer_array_one to temp_product_arr, in reverse order
+        printf("index before outer_array_two allocation: %d\n", index);
         for (int i = 0; i < index; i++) {
-            printf("%d ", temp_product_arr[i]);
+            outer_array_two[index-i-1] = outer_array_one[i];
         }
-        printf("\n");
+        printf("TESTING outer_array_two POPULATION: ");
         for (int i = 0; i < index; i++) {
-            outer_array_one[index-i-1] = temp_product_arr[i];
-        }
-        printf("TESTING outer_array_one POPULATION: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", outer_array_one[i]);
+            printf("%d ", outer_array_two[i]);
         }
         printf("\nindex: %d\n", index);
         printf("inner_array: ");
@@ -776,7 +773,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             //      First multiplier calculations don't need a trailing 0, but this condition is triggered anyway
             //      This is happening because temp_quotient is retaining value after first inner loop.
             //      It only needs to trigger upon the second inner loop iteration, if temp_quotient > 0
-            printf("adding trailing 0s to outer_array_one...\n");
+            printf("adding trailing 0s to outer_array_two...\n");
             outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
             for (int i = 0; i < index; i++) {
                 if (i != 0) {
@@ -785,7 +782,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     outer_array_two[i] = 1;
                 }
             }
-            printf("outer_array_one: ");
+            printf("outer_array_one inside of problem condition: ");
             for (int i = 0; i < index; i++) {
                 printf("%d", outer_array_one[i]);
             }
