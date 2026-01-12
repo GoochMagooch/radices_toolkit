@@ -746,7 +746,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // END OF INNER LOOP
         temp_product_count = 0; // reinitializes temp_product_count to 0
-        // FIX: This is supposed to reallocate elements from outer_array_one to temp_product_arr, in reverse order
+        // FIX: Successfully reallocated outer_array_one elements to outer_array_two, in reverse order
+        //      Figure out the logic to add a leading 0, if the calculations from the second multiplier 
+        //      digit results in a number of digits larger than the first set of calculations; arr2 > arr1 for calc_add()
+        //      This almost happens automatically now, since on the second outer loop index is incremented by 1, which 
+        //      basically adds a 0 to the beginning of outer_array_two and repeats the process of reallocating elements,
+        //      which ultimately results in 0 2 2 9 5 for 255 * 99
+        //      So for now, just figure out how to properly allocate elements to the second array that will be used 
+        //      in calc_add()
         printf("index before outer_array_two allocation: %d\n", index);
         for (int i = 0; i < index; i++) {
             outer_array_two[index-i-1] = outer_array_one[i];
