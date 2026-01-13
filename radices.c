@@ -710,6 +710,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                                 outer_array_one[temp_product_count] = 0;
                             }
 
+                            // TODO: index is incremented once at this point, resulting in a newly allocated array size of 5
+                            //       this will interfere with turning 5 9 2 2 into 2 2 9 5 0, since at this point the array 
+                            //       becomes 5 9 2 2 0
+                            printf("index first loop: %d\n", index);
                             for (int i = 0; i < index; i++) {
                                 printf("outer_array_one at index %d: %d\n", i, outer_array_one[i]);
                             }
@@ -718,12 +722,34 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             // adds temp_product to all spaces, except outer_array_one[-1]
                             outer_array_one[temp_product_count] = temp_product;
                             temp_product_count++;
+                            printf("testestestestestestest\n");
                             printf("outer_array_one[%d]: %d\n", j, outer_array_one[j]);
                         }
                     } else {
                         // TODO: work on logic to properly allocate digits to inner_array
                         // FIX: inner_array ending up as 29500 instead of 22950
-                        inner_array[j] = temp_product;
+                        //      only 3 digits are being added to inner_array, instead of 5 (255 * 99)
+                        //      when only allocating `1` to inner_array, 1 1 1 0 0 is returned
+                        if (j == 0) {
+                            inner_array[temp_product_count] = temp_product;
+                            temp_product_count++;
+                            if (temp_quotient > 0) {
+                                inner_array[temp_product_count] = temp_quotient;
+                            } else {
+                                inner_array[temp_product_count] = 0;
+                            }
+
+                            printf("index second loop: %d\n", index);
+                            for (int i = 0; i < index; i++) {
+                                printf("inner_array at index %d: %d\n", i, inner_array[i]);
+                            }
+                            printf("\n");
+                        } else {
+                            inner_array[temp_product_count] = temp_product;
+                            temp_product_count++;
+                            printf("testestestestestestest\n");
+                            printf("inner_array[%d]: %d\n", j, inner_array[j]);
+                        }
                     }
                 } else {
                     // TODO: muls > 2
@@ -764,7 +790,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\nindex: %d\n", index);
 
-        // FIX: inner_array being incorrectly populated
+        // FIX: inner_array being incorrectly populated - fix on line 
         printf("inner_array: ");
         for (int i = 0; i < index; i++) {
             printf("%d ", inner_array[i]);
