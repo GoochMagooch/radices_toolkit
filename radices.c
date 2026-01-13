@@ -754,7 +754,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //      which ultimately results in 0 2 2 9 5 for 255 * 99
         //      So for now, just figure out how to properly allocate elements to the second array that will be used 
         //      in calc_add()
-        printf("index before outer_array_two allocation: %d\n", index);
+        printf("index before outer_array_two allocation: %d\n\n", index);
         for (int i = 0; i < index; i++) {
             outer_array_two[index-i-1] = outer_array_one[i];
         }
@@ -763,6 +763,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("%d ", outer_array_two[i]);
         }
         printf("\nindex: %d\n", index);
+
+        // FIX: inner_array being incorrectly populated
         printf("inner_array: ");
         for (int i = 0; i < index; i++) {
             printf("%d ", inner_array[i]);
