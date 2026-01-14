@@ -719,6 +719,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             }
                             printf("\n");
                         } else {
+                            // lock in Ed >:[
                             // adds temp_product to all spaces, except outer_array_one[-1]
                             outer_array_one[temp_product_count] = temp_product;
                             temp_product_count++;
