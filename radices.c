@@ -695,7 +695,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
                 if (muls == 1) {
                     outer_array_one[j] = temp_product;
-                } else if (muls == 2) {
+                } else if (muls == 2) { // condition runs when 2 digit multiplier is entered
                     if (i == (iterator-1)) {
                         if (j == 0) {
                             // TODO: Properly add trailing 0 when applicable
@@ -710,9 +710,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                                 outer_array_one[temp_product_count] = 0;
                             }
 
-                            // TODO: index is incremented once at this point, resulting in a newly allocated array size of 5
-                            //       this will interfere with turning 5 9 2 2 into 2 2 9 5 0, since at this point the array 
-                            //       becomes 5 9 2 2 0
                             printf("index first loop: %d\n", index);
                             for (int i = 0; i < index; i++) {
                                 printf("outer_array_one at index %d: %d\n", i, outer_array_one[i]);
@@ -727,7 +724,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             printf("outer_array_one[%d]: %d\n", j, outer_array_one[j]);
                         }
                     } else {
-                        // TODO: work on logic to properly allocate digits to inner_array
+                        // TODO: index is incremented once at this point (Ln 801), resulting in a newly allocated array 
+                        // size of 5 (255 * 99). This will interfere with turning 5 9 2 2 into 2 2 9 5 0, since at this 
+                        // point the array becomes 5 9 2 2 0
+
                         // FIX: inner_array ending up as 29500 instead of 22950
                         //      only 3 digits are being added to inner_array, instead of 5 (255 * 99)
                         //      when only allocating `1` to inner_array, 1 1 1 0 0 is returned
@@ -798,7 +798,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
+        // FIX: index is incremented here
         if (muls > 1 && increment_count > 1) {
+            // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
+            //       or in other words, for every multiplier digit
             index++;
         }
         increment_count--;
@@ -837,6 +840,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
     } // END OF OUTER LOOP
 
+    printf("outer_array_two after all loops: \n");
+    for (int i = 0; i < index; i++) {
+        printf("%d ", outer_array_two[i]);
+    }
+    printf("\ninner_array after all loops: \n");
+    for (int i = 0; i < index; i++){
+        printf("%d ", inner_array[i]);
+    }
+    printf("\n");
 
     if (muls == 1) {
         printf("Product: ");
@@ -848,6 +860,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
     } else if (muls == 2) {
+        // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
+        //      inner_array with a 0 at the beginning, if they are different sizes. 
+        //      Currently both sizes = 2 (should be 5 and 4)
+        int outer_array_two_size = sizeof(outer_array_two) / sizeof(outer_array_two[0]);
+        int inner_array_size = sizeof(inner_array) / sizeof(inner_array[0]);
+        printf("outer_array_two_size: %d\n", outer_array_two_size);
+        printf("inner_array_size: %d\n", inner_array_size);
         // FIX: STILL NEED A WAY TO INCLUDE CARRY DIGIT FROM calc_add()
         //      255 * 99 not triggering array_w_quotient the way 255 * 14 does
         if (array_w_quotient == true) {
