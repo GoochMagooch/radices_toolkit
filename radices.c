@@ -798,7 +798,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
-        // FIX: index is incremented here
+        // FIX: next problem area to work on
         if (muls > 1 && increment_count > 1) {
             // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
             //       or in other words, for every multiplier digit
