@@ -793,7 +793,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\nindex: %d\n", index);
 
-        // FIX: inner_array being incorrectly populated - fix on line 
+        // FIX: inner_array being incorrectly populated - fix on line 801
         printf("inner_array: ");
         for (int i = 0; i < index; i++) {
             printf("%d ", inner_array[i]);
