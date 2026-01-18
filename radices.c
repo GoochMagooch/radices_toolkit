@@ -802,6 +802,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // FIX: next problem area to work on
         if (muls > 1 && increment_count > 1) {
+            // TODO: Analyze radices calculator js file and determine how it is able 
+            //       to work with > 2 multipliers
+
+            // TODO: possibly create an array of arrays to work with, regardless of how many multiplier digits
+
             // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
             //       or in other words, for every multiplier digit
             index++;
