@@ -805,12 +805,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             // TODO: Analyze radices calculator js file and determine how it is able 
             //       to work with > 2 multipliers
 
-            // TODO: It looks like C doesn't allow for whole arrays to be inserted into arrays. What I can 
-            //       do is I can copy the contents of an array and assign them to parts of my original array.
-            //       Perhaps I can set a matrix that acts as prodArr and copy all necessary to that matrix.
-            //       Reallocating elements inside of arrays, within a single array can take care of the trailing 
-            //       0 problem, but not the leading 0 problem. It also could lead to memory issues, realloc and malloc 
-            //       are best used here.
+            // TODO: continue practicing malloc and realloc in array_testing.c
 
             // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
             //       or in other words, for every multiplier digit
