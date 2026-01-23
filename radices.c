@@ -632,7 +632,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     printf("\n");
 
     // TODO: Allocate all outer array calculations to master_product_array
-    //       rows will be iterator and columns will dynamically allocated
+    //       rows will be the same number of multiplier digits
+    //       columns will be dynamically allocated.
     int **master_product_array;
 
     int index = iterator+1;
