@@ -649,6 +649,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     printf("iterator: %d\n", iterator);
     printf("muls: %d\n", muls);
     for (int i = iterator-1; i >= (iterator-muls); i--) {
+        // TODO: inner_array may be the temporary array to send to master_product_array
         inner_array = realloc(inner_array, index * sizeof *inner_array);
         temp_quotient = 0;
         int temp_product;
