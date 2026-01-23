@@ -632,6 +632,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     printf("\n");
 
     // TODO: Allocate all outer array calculations to master_product_array
+    //       What would create the rows and columns?
     int **master_product_array;
 
     int index = iterator+1;
