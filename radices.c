@@ -631,12 +631,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
     printf("\n");
 
-    // TODO: sum of arrays sent to array_sum and printed w/ return_char()
-    // TODO: if muls > 2, same process as above
-    //       once the 3rd multiplier is calculated the contents of array_sum is sent to outer_array
-    //       array_sum is emptied and the sum of outer_array and inner_array are sent to array_sum
-    //       the process repeats until array_sum is printed with return_char()
-    // TODO: ** account for added 0s for every multiplier > 1
+    // TODO: Allocate all outer array calculations to master_product_array
+    int **master_product_array;
 
     int index = iterator+1;
     int *outer_array_one = malloc(index * sizeof *outer_array_one);
@@ -802,9 +798,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // FIX: next problem area to work on
         if (muls > 1 && increment_count > 1) {
-            // TODO: Analyze radices calculator js file and determine how it is able 
-            //       to work with > 2 multipliers
-
             // TODO: continue practicing malloc and realloc in array_testing.c
 
             // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
