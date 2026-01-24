@@ -600,7 +600,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     clear();
     menu_banner();
 
-    // checks which array is larger for later calculations
+    // NOTE: each array is populated in the correct order: 255 is entered into num1 as {2, 5, 5}.
+
+    // TODO: FIGURE OUT WHAT THIS DAMN SHIT IS DOING
     int multiplyer_one = 0;
     int multiplyer_two = 0;
     int multiplicand;
@@ -644,7 +646,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int *array_sum = malloc(index * sizeof *array_sum);
     int increment_count = muls;
 
-    // Currently will only interate as many times as there are multipliers
+
+    // TODO: Review complete calc_mul() to see how to apply new plan with master_product_array
     int counter = 0;
     int temp_quotient = 0;
     int zero_count;
@@ -652,7 +655,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     printf("iterator: %d\n", iterator);
     printf("muls: %d\n", muls);
     for (int i = iterator-1; i >= (iterator-muls); i--) {
-        // TODO: inner_array may be the temporary array to send to master_product_array
         inner_array = realloc(inner_array, index * sizeof *inner_array);
         temp_quotient = 0;
         int temp_product;
@@ -660,7 +662,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_conversion;
         // FIX: j needs to iterate according to index, not iterator all 
         // arrays after first iteration will be improperly populated (maybe)
-        // TODO: POSSIBLE FIX 2 ARRAYS
+        // NOTE: POSSIBLE FIX 2 ARRAYS
         int temp_product_arr[index];
         int temp_product_count = 0;
 
@@ -724,7 +726,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             printf("outer_array_one[%d]: %d\n", j, outer_array_one[j]);
                         }
                     } else {
-                        // TODO: index is incremented once at this point (Ln 801), resulting in a newly allocated array 
+                        // NOTE: index is incremented once at this point (Ln 801), resulting in a newly allocated array 
                         // size of 5 (255 * 99). This will interfere with turning 5 9 2 2 into 2 2 9 5 0, since at this 
                         // point the array becomes 5 9 2 2 0
 
