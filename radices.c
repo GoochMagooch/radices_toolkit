@@ -623,41 +623,35 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // TODO: Send all multipler digit * multiplicand digit calculations to inner_array
+    // TODO: Send all (multipler digit * multiplicand digit) calculations to inner_array
     //       Send all digits in inner_array to master_product_array on each outter loop
     //       rows will be the same number of multiplier digits
     //       columns will be dynamically allocated.
     int **master_product_array;
+    master_product_array = malloc(iterator * sizeof *master_product_array);
 
-    int index = iterator+1;
+    int index = iterator;
     int *outer_array_one = malloc(index * sizeof *outer_array_one);
     int *outer_array_two = malloc(index * sizeof *outer_array_two);
     int *inner_array = malloc(index * sizeof *inner_array);
     int *array_sum = malloc(index * sizeof *array_sum);
     int increment_count = muls;
 
-
-    // TODO: Review complete calc_mul() to see how to apply new plan with master_product_array
     int counter = 0;
     int temp_quotient = 0;
     int zero_count;
     bool array_w_quotient = false;
-    printf("iterator: %d\n", iterator);
-    printf("muls: %d\n", muls);
     for (int i = iterator-1; i >= (iterator-muls); i--) {
-        inner_array = realloc(inner_array, index * sizeof *inner_array);
+        // FIX: inner_array must be the size of the number of digits that it will be populated with
+        inner_array[0];
         temp_quotient = 0;
         int temp_product;
-        // int multiplicand_place_counter = 1;
         int temp_conversion;
-        // FIX: j needs to iterate according to index, not iterator all 
-        // arrays after first iteration will be improperly populated (maybe)
         // NOTE: POSSIBLE FIX 2 ARRAYS
         int temp_product_arr[index];
         int temp_product_count = 0;
 
-        for (int j = iterator-1; j >= 0; j--) { 
-            // outer_array_one = realloc(outer_array_one, index * sizeof *outer_array_one);
+        for (int j = iterator-1; j >= 0; j--) {
             if (multiplicand == 1) {
                 temp_product = num2[i] * num1[j];
             } else {
@@ -668,8 +662,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_quotient = 0;
             }
             printf("\ntemp_product on iteration [i: %d][j: %d]: %d\n", i, j, temp_product);
-            // printf("decimal_to_radix(temp_product, r, false): ");
-            // decimal_to_radix(temp_product, r, false);
             if (temp_product >= r) {
                 printf("temp_product >= r\n");
                 temp_conversion = decimal_to_radix(temp_product, r, true);
