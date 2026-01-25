@@ -602,7 +602,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     // NOTE: each array is populated in the correct order: 255 is entered into num1 as {2, 5, 5}.
 
-    // TODO: FIGURE OUT WHAT THIS DAMN SHIT IS DOING
+    // Determines if the top or bottom numbers are the multiplicand vs multiplier
     int multiplyer_one = 0;
     int multiplyer_two = 0;
     int multiplicand;
@@ -622,6 +622,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } else {
         multiplicand = 0;
     }
+
+    printf("\nmultiplyer_one: %d\n", multiplyer_one);
+    printf("multiplyer_two: %d\n", multiplyer_two);
+    printf("multiplicand: %d\n", multiplicand);
 
     // prints contents of num1 and num2
     for (int i = 0; i < iterator; i++) {
