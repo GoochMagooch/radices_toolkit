@@ -626,7 +626,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(iterator * sizeof *master_product_array); // Assigns array a size of iterator
 
-    int index = iterator;
+    int index = iterator+1;
     int *outer_array_one = malloc(index * sizeof *outer_array_one);
     int *outer_array_two = malloc(index * sizeof *outer_array_two);
     int *inner_array = malloc(index * sizeof *inner_array);
@@ -637,17 +637,18 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int temp_quotient = 0;
     int zero_count;
     bool array_w_quotient = false;
-    for (int i = iterator-1; i >= (iterator-muls); i--) {
-        // FIX: inner_array must be the size of the number of digits that it will be populated with
-        inner_array[0];
+
+    for (int i = iterator-1; i >= (iterator-muls); i--) { // XXX: START OF OUTER LOOP
+        inner_array[index]; // NOTE: allocated with (index+1) to ensure enough space
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
-        // NOTE: POSSIBLE FIX 2 ARRAYS
+
+        // NOTE: these will be removed
         int temp_product_arr[index];
         int temp_product_count = 0;
 
-        for (int j = iterator-1; j >= 0; j--) {
+        for (int j = iterator-1; j >= 0; j--) { // XXX: START OF INNER LOOP
             if (multiplicand == 1) {
                 temp_product = num2[i] * num1[j];
             } else {
@@ -751,7 +752,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("Feature coming soon...");
                 }
             }
-        } // END OF INNER LOOP
+        } // XXX: END OF INNER LOOP
         temp_product_count = 0; // reinitializes temp_product_count to 0
         // FIX: Successfully reallocated outer_array_one elements to outer_array_two, in reverse order
         //      Figure out the logic to add a leading 0, if the calculations from the second multiplier 
@@ -822,7 +823,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("%d ", outer_array_one[i]);
         }
         printf("\n");
-    } // END OF OUTER LOOP
+    } // XXX: END OF OUTER LOOP
 
     printf("outer_array_two after all loops: \n");
     for (int i = 0; i < index; i++) {
