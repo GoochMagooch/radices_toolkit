@@ -623,12 +623,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // TODO: Send all (multipler digit * multiplicand digit) calculations to inner_array
-    //       Send all digits in inner_array to master_product_array on each outter loop
-    //       rows will be the same number of multiplier digits
-    //       columns will be dynamically allocated.
-    int **master_product_array;
-    master_product_array = malloc(iterator * sizeof *master_product_array);
+    int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
+    master_product_array = malloc(iterator * sizeof *master_product_array); // Assigns array a size of iterator
 
     int index = iterator;
     int *outer_array_one = malloc(index * sizeof *outer_array_one);
