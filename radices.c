@@ -638,23 +638,27 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int zero_count;
     bool array_w_quotient = false;
 
-    for (int i = iterator-1; i >= (iterator-muls); i--) { // XXX: START OF OUTER LOOP
+    // XXX: START OF OUTER LOOP
+    for (int i = iterator-1; i >= (iterator-muls); i--) {
         inner_array[index]; // initialized with (iterator+1)
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
 
-        // NOTE: these will be removed
+        // NOTE: these will probably be removed
         int temp_product_arr[index];
         int temp_product_count = 0;
 
-        for (int j = iterator-1; j >= 0; j--) { // XXX: START OF INNER LOOP
-            // NOTE: Multiplies proper multiplicand digit with proper multiplier digit
-            if (multiplicand == 1) {
+        // XXX: START OF INNER LOOP
+        for (int j = iterator-1; j >= 0; j--) {
+            // (multiplier digit * multiplicand digit)
+            if (multiplicand == 1) { // bottom number is the multiplicand
                 temp_product = num2[i] * num1[j];
-            } else {
+            } else { // top number is the multiplicand
                 temp_product = num1[i] * num2[j];
             }
+
+            // Adds quotient to temp_product
             if (temp_quotient > 0) {
                 temp_product += temp_quotient;
                 temp_quotient = 0;
@@ -666,7 +670,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion on iteration %d: %d\n", j, temp_conversion);
 
-                // NOTE: Separates product from quotient
+                // Separates product from quotient
                 if (temp_conversion > 99) {
                     temp_quotient = temp_conversion / 100;
                     temp_product = temp_conversion - 100;
@@ -681,8 +685,20 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
 
                 if (muls == 1) {
-                    // FIX: Change to include master_product_array
+                    // FIX: begin testing for a single multiplier digit
                     outer_array_one[j] = temp_product;
+                    for (int i = 0; i < 0; i++) {
+                        for (int j = 0; j < index; j++) {
+                            master_product_array[i][j] = inner_array[j];
+                        }
+                    }
+                    printf("\n");
+                    for (int i = 0; i < 0; i++) {
+                        for (int j = 0; j < index; j++) {
+                            printf("%d ", master_product_array[i][j]);
+                        }
+                    }
+                    printf("\n");
                 } else if (muls == 2) { // condition runs when 2 digit multiplier is entered
                     if (i == (iterator-1)) {
                         if (j == 0) {
