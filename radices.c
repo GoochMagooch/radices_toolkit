@@ -624,13 +624,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
-    master_product_array = malloc(iterator * sizeof *master_product_array); // Assigns array a size of iterator
+    master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
 
     int index = iterator+1;
     int *outer_array_one = malloc(index * sizeof *outer_array_one);
     int *outer_array_two = malloc(index * sizeof *outer_array_two);
-    int *inner_array = malloc(index * sizeof *inner_array);
     int *array_sum = malloc(index * sizeof *array_sum);
+    int *inner_array = malloc(index * sizeof *inner_array);
     int increment_count = muls;
 
     int counter = 0;
@@ -644,6 +644,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
+
+        // NOTE: Dynamically sizes each row of master_product_array, according to 
+        master_product_array[i] = malloc(index * sizeof *master_product_array[i]);
+
 
         // NOTE: these will probably be removed
         int temp_product_arr[index];
@@ -686,19 +690,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 if (muls == 1) {
                     // FIX: begin testing for a single multiplier digit
-                    outer_array_one[j] = temp_product;
-                    for (int i = 0; i < 0; i++) {
-                        for (int j = 0; j < index; j++) {
-                            master_product_array[i][j] = inner_array[j];
-                        }
-                    }
-                    printf("\n");
-                    for (int i = 0; i < 0; i++) {
-                        for (int j = 0; j < index; j++) {
-                            printf("%d ", master_product_array[i][j]);
-                        }
-                    }
-                    printf("\n");
+                    temp_product_arr[j] = temp_product;
                 } else if (muls == 2) { // condition runs when 2 digit multiplier is entered
                     if (i == (iterator-1)) {
                         if (j == 0) {
@@ -846,19 +838,31 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("%d ", outer_array_one[i]);
         }
         printf("\n");
+
+        // NOTE: adding elements to master_product_array
+        // FIX: no elements being added to master_product_array
+        for (int k = 0; k < index; k++) {
+            master_product_array[i][k] = temp_product_arr[k];
+        }
+        printf("Test print of master_product_array: ");
+        for (int i = 0; i < 0; i++) {
+            for (int j = 0; j < index; j++) {
+                printf("%d ", master_product_array[i][j]);
+            }
+        }
+        printf("\n");
+
     } // XXX: END OF OUTER LOOP
 
-    printf("outer_array_two after all loops: \n");
-    for (int i = 0; i < index; i++) {
-        printf("%d ", outer_array_two[i]);
-    }
-    printf("\ninner_array after all loops: \n");
-    for (int i = 0; i < index; i++){
-        printf("%d ", inner_array[i]);
-    }
-    printf("\n");
-
     if (muls == 1) {
+        printf("\nmaster_product_array: ");
+        for (int i = 0; i < 0; i++) {
+            for (int j = 0; j < index; j++) {
+                printf("%d ", master_product_array[i][j]);
+            }
+        }
+        printf("\n");
+
         printf("Product: ");
         if (temp_quotient > 0) {
             printf("%d", temp_quotient);
@@ -871,10 +875,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
         //      inner_array with a 0 at the beginning, if they are different sizes. 
         //      Currently both sizes = 2 (should be 5 and 4)
-        int outer_array_two_size = sizeof(outer_array_two) / sizeof(outer_array_two[0]);
-        int inner_array_size = sizeof(inner_array) / sizeof(inner_array[0]);
-        printf("outer_array_two_size: %d\n", outer_array_two_size);
-        printf("inner_array_size: %d\n", inner_array_size);
+
         // FIX: STILL NEED A WAY TO INCLUDE CARRY DIGIT FROM calc_add()
         //      255 * 99 not triggering array_w_quotient the way 255 * 14 does
         if (array_w_quotient == true) {
@@ -895,18 +896,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         }
-        printf("outer_array_one: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", outer_array_one[i]);
-        }
-        printf("\nouter_array_two: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", outer_array_two[i]);
-        }
-        printf("\ninner_array: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", inner_array[i]);
-        }
+
         int carry = 2;
         int final_product_arr[index];
         calc_add(outer_array_two, inner_array, index, r, true, final_product_arr, &carry);
