@@ -623,6 +623,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
+    // NOTE: master_product_array
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
 
@@ -690,7 +691,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 if (muls == 1) {
                     // FIX: begin testing for a single multiplier digit
-                    temp_product_arr[j] = temp_product;
+                    temp_product_arr[j] = 0; // temp_product;
                 } else if (muls == 2) { // condition runs when 2 digit multiplier is entered
                     if (i == (iterator-1)) {
                         if (j == 0) {
@@ -755,7 +756,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             } else {
                 printf("!temp_product >= r\n");
                 if (muls == 1) {
-                    outer_array_one[j] = temp_product;
+                    temp_product_arr[j] = 1; // temp_product;
                 } else if (muls == 2) {
                     if (i == (iterator-1)) {
                         outer_array_one[j] = temp_product;
@@ -845,7 +846,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             master_product_array[i][k] = temp_product_arr[k];
         }
         printf("Test print of master_product_array: ");
-        for (int i = 0; i < 0; i++) {
+        for (int i = 0; i < 1; i++) {
             for (int j = 0; j < index; j++) {
                 printf("%d ", master_product_array[i][j]);
             }
