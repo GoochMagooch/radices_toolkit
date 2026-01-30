@@ -843,8 +843,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
 
         // NOTE: adding elements to master_product_array
-        // FIX: no elements being added to master_product_array
-        printf("INDEX: %d\n", index);
+        // FIX: for (255 * 9) master_product_array ending up with: 0 0 0 random integer
+        
+        printf("\ntemp_product_arr test print ");
+        for (int i = 0; i < index; i++) {
+            printf("%d ", temp_product_arr[i]);
+        }
+
+        printf("\nINDEX: %d\n", index);
         for (int k = 0; k < index; k++) {
             master_product_array[array_index][k] = temp_product_arr[k];
         }
