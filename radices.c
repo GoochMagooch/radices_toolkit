@@ -645,16 +645,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
+        int array_index = 0;
 
         // NOTE: Dynamically sizes each row of master_product_array, according to 
         // NOTE: for (255 * 9) master_product_array[i] is technically master_product_array[2]
         //       This is causing my segmentation fault
-        master_product_array[i] = malloc(index * sizeof *master_product_array[i]);
-
+        master_product_array[array_index] = malloc(index * sizeof *master_product_array[i]);
+        array_index++;
 
         // NOTE: these will probably be removed
         int temp_product_arr[index];
-        int temp_product_count = 0;
 
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
@@ -701,12 +701,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             // if inner_array contains a number of digits > outer_array_one then outer_array_one will
                             // need a leading 0 to uphold array sizes for calc_add()
 
-                            outer_array_one[temp_product_count] = temp_product;
-                            temp_product_count++;
+                            outer_array_one[array_index] = temp_product;
+                            array_index++;
                             if (temp_quotient > 0) {
-                                outer_array_one[temp_product_count] = temp_quotient;
+                                outer_array_one[array_index] = temp_quotient;
                             } else {
-                                outer_array_one[temp_product_count] = 0;
+                                outer_array_one[array_index] = 0;
                             }
 
                             printf("index first loop: %d\n", index);
@@ -717,8 +717,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         } else {
                             // lock in Ed >:[
                             // adds temp_product to all spaces, except outer_array_one[-1]
-                            outer_array_one[temp_product_count] = temp_product;
-                            temp_product_count++;
+                            outer_array_one[array_index] = temp_product;
+                            array_index++;
                             printf("testestestestestestest\n");
                             printf("outer_array_one[%d]: %d\n", j, outer_array_one[j]);
                         }
@@ -731,12 +731,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      only 3 digits are being added to inner_array, instead of 5 (255 * 99)
                         //      when only allocating `1` to inner_array, 1 1 1 0 0 is returned
                         if (j == 0) {
-                            inner_array[temp_product_count] = temp_product;
-                            temp_product_count++;
+                            inner_array[array_index] = temp_product;
+                            array_index++;
                             if (temp_quotient > 0) {
-                                inner_array[temp_product_count] = temp_quotient;
+                                inner_array[array_index] = temp_quotient;
                             } else {
-                                inner_array[temp_product_count] = 0;
+                                inner_array[array_index] = 0;
                             }
 
                             printf("index second loop: %d\n", index);
@@ -745,8 +745,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             }
                             printf("\n");
                         } else {
-                            inner_array[temp_product_count] = temp_product;
-                            temp_product_count++;
+                            inner_array[array_index] = temp_product;
+                            array_index++;
                             printf("testestestestestestest\n");
                             printf("inner_array[%d]: %d\n", j, inner_array[j]);
                         }
@@ -771,7 +771,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } // XXX: END OF INNER LOOP
-        temp_product_count = 0; // reinitializes temp_product_count to 0
+        array_index = 0; // reinitializes temp_product_count to 0
         // FIX: Successfully reallocated outer_array_one elements to outer_array_two, in reverse order
         //      Figure out the logic to add a leading 0, if the calculations from the second multiplier 
         //      digit results in a number of digits larger than the first set of calculations; arr2 > arr1 for calc_add()
@@ -846,11 +846,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // FIX: no elements being added to master_product_array
         printf("INDEX: %d\n", index);
         for (int k = 0; k < index; k++) {
-            master_product_array[i][k] = temp_product_arr[k];
+            master_product_array[array_index][k] = temp_product_arr[k];
         }
         printf("INDEX: %d\n", index);
         printf("Test print of master_product_array: ");
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < muls; i++) {
             for (int j = 0; j < index; j++) {
                 printf("%d ", master_product_array[i][j]);
             }
