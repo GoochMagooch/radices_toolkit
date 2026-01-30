@@ -647,7 +647,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_conversion;
         int array_index = 0;
 
-        // NOTE: Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
+        // Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
         master_product_array[array_index] = malloc(index * sizeof *master_product_array[i]);
 
         // Temporary array whose elements are eventually added to master_product_array on each outer loop
@@ -690,7 +690,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 if (muls == 1) {
                     temp_product_arr[j+1] = temp_product;
-                } else if (muls == 2) {
+                } else if (muls == 2) { // NOTE: WORKING HERE
                     if (i == (iterator-1)) {
                         if (j == 0) {
                             // TODO: Properly add trailing 0 when applicable
@@ -752,9 +752,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("Feature coming soon...");
                 }
             } else {
-                if (muls == 1) { // NOTE: working here
+                if (muls == 1) {
                     temp_product_arr[j+1] = temp_product;
-                } else if (muls == 2) {
+                } else if (muls == 2) { // NOTE: WORKING HERE
                     if (i == (iterator-1)) {
                         outer_array_one[j] = temp_product;
                     } else {
@@ -767,7 +767,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        printf("INDEX: %d\n", array_index);
         if (temp_quotient > 0) {
             temp_product_arr[0] = temp_quotient;
         }
@@ -799,6 +798,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
+        // NOTE: MAY BE REMOVED
         // FIX: next problem area to work on
         if (muls > 1 && increment_count > 1) {
             // TODO: continue practicing malloc and realloc in array_testing.c
@@ -808,7 +808,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             index++;
         }
         increment_count--;
-        if (temp_quotient > 0 && muls == 2) {
+        if (temp_quotient > 0 && muls == 2) { // NOTE: WORKING HERE
             // add trailing 0s, according to number of multipliers
             // TODO: reallocate arrays to include all digits, plus trailing 0's
             // FIX: PROBLEM AREA 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -859,10 +859,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\nProduct: ");
         for (int i = 0; i < muls; i++) {
             for (int j = 0; j < index; j++) {
-                printf("%d ", master_product_array[i][j]);
+                printf("%d", master_product_array[i][j]);
             }
         }
-    } else if (muls == 2) {
+        printf("\n");
+    } else if (muls == 2) { // NOTE: WORKING HERE
         // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
         //      inner_array with a 0 at the beginning, if they are different sizes. 
         //      Currently both sizes = 2 (should be 5 and 4)
