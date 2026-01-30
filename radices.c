@@ -689,8 +689,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
 
                 if (muls == 1) {
-                    // NOTE: BEGIN TESTING THE VALUE OF temp_product ON EACH ITERATION
-                    // At this point j = 2, so temp_product_arr[2] is recieving temp_product, instead of temp_product_arr[-1]
                     temp_product_arr[j+1] = temp_product;
                 } else if (muls == 2) {
                     if (i == (iterator-1)) {
@@ -858,22 +856,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } // XXX: END OF OUTER LOOP
 
     if (muls == 1) {
-        printf("\nmaster_product_array: ");
-        for (int i = 0; i < 0; i++) {
+        printf("\nProduct: ");
+        for (int i = 0; i < muls; i++) {
             for (int j = 0; j < index; j++) {
                 printf("%d ", master_product_array[i][j]);
             }
         }
-        printf("\n");
-
-        printf("Product: ");
-        if (temp_quotient > 0) {
-            printf("%d", temp_quotient);
-        }
-        for (int i = 0; i < index; i++) {
-            printf("%c", return_char(outer_array_one[i]));
-        }
-        printf("\n");
     } else if (muls == 2) {
         // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
         //      inner_array with a 0 at the beginning, if they are different sizes. 
