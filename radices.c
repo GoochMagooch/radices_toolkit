@@ -647,6 +647,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_conversion;
 
         // NOTE: Dynamically sizes each row of master_product_array, according to 
+        // NOTE: for (255 * 9) master_product_array[i] is technically master_product_array[2]
+        //       This is causing my segmentation fault
         master_product_array[i] = malloc(index * sizeof *master_product_array[i]);
 
 
@@ -842,9 +844,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: adding elements to master_product_array
         // FIX: no elements being added to master_product_array
+        printf("INDEX: %d\n", index);
         for (int k = 0; k < index; k++) {
             master_product_array[i][k] = temp_product_arr[k];
         }
+        printf("INDEX: %d\n", index);
         printf("Test print of master_product_array: ");
         for (int i = 0; i < 1; i++) {
             for (int j = 0; j < index; j++) {
