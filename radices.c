@@ -649,7 +649,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
         master_product_array[array_index] = malloc(index * sizeof *master_product_array[i]);
-        array_index++;
 
         // Temporary array whose elements are eventually added to master_product_array on each outer loop
         int temp_product_arr[index];
@@ -689,9 +688,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
 
 
-                if (muls == 1) { // NOTE: working here
+                if (muls == 1) {
                     // NOTE: BEGIN TESTING THE VALUE OF temp_product ON EACH ITERATION
-                    temp_product_arr[j] = temp_product;
+                    // At this point j = 2, so temp_product_arr[2] is recieving temp_product, instead of temp_product_arr[-1]
+                    temp_product_arr[j+1] = temp_product;
                 } else if (muls == 2) {
                     if (i == (iterator-1)) {
                         if (j == 0) {
@@ -755,7 +755,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             } else {
                 if (muls == 1) { // NOTE: working here
-                    temp_product_arr[j] = temp_product;
+                    temp_product_arr[j+1] = temp_product;
                 } else if (muls == 2) {
                     if (i == (iterator-1)) {
                         outer_array_one[j] = temp_product;
@@ -768,7 +768,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } // XXX: END OF INNER LOOP
-        array_index = 0; // reinitializes temp_product_count to 0
+
+        printf("INDEX: %d\n", array_index);
+        if (temp_quotient > 0) {
+            temp_product_arr[0] = temp_quotient;
+        }
+
         // FIX: Successfully reallocated outer_array_one elements to outer_array_two, in reverse order
         //      Figure out the logic to add a leading 0, if the calculations from the second multiplier 
         //      digit results in a number of digits larger than the first set of calculations; arr2 > arr1 for calc_add()
@@ -834,6 +839,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
 
         // NOTE: adding elements to master_product_array
+        printf("\nINDEX: %d\n", array_index);
         for (int k = 0; k < index; k++) {
             master_product_array[array_index][k] = temp_product_arr[k];
         }
@@ -846,6 +852,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         }
         printf("\n");
+
+        array_index++;
 
     } // XXX: END OF OUTER LOOP
 
