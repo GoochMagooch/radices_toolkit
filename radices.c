@@ -693,7 +693,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 if (muls == 1) {
                     // FIX: begin testing for a single multiplier digit
-                    temp_product_arr[j] = 0; // temp_product;
+                    temp_product_arr[j] = temp_product;
                 } else if (muls == 2) { // condition runs when 2 digit multiplier is entered
                     if (i == (iterator-1)) {
                         if (j == 0) {
@@ -758,7 +758,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             } else {
                 printf("!temp_product >= r\n");
                 if (muls == 1) {
-                    temp_product_arr[j] = 1; // temp_product;
+                    temp_product_arr[j] = temp_product;
                 } else if (muls == 2) {
                     if (i == (iterator-1)) {
                         outer_array_one[j] = temp_product;
