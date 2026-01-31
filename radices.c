@@ -641,6 +641,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
+        int row_counter = 0;
         inner_array[index]; // initialized with (iterator+1)
         temp_quotient = 0;
         int temp_product;
@@ -769,9 +770,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: final allocation of elements to master_product_array
         if (temp_quotient > 0) {
+            // NOTE: it won't always be temp_product_arr[0], it'll be temp_product_arr[1 index before the last digit added]
             temp_product_arr[0] = temp_quotient;
-            for (int k = 0; k < index; k++) {
-                master_product_array[array_index][k] = temp_product_arr[k];
+            for (int i = 0; i < index; i++) {
+                master_product_array[array_index][i] = temp_product_arr[i];
             }
         } else {
             int iterator_array[iterator];
@@ -780,7 +782,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             for (int i = 0; i < iterator; i++) {
                 iterator_array[i] = temp_product_arr[iterator_counter];
                 iterator_counter++;
-                master_product_array[array_index][i] = iterator_array[i];
+                temp_product_arr[array_index][i] = iterator_array[i];
             }
         }
         printf("\n");
@@ -824,7 +826,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
 
         array_index++;
-
+        row_counter++;
     } // XXX: END OF OUTER LOOP
 
     if (muls == 1) {
