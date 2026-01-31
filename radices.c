@@ -767,34 +767,21 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
+        // NOTE: final allocation of elements to master_product_array
         if (temp_quotient > 0) {
             temp_product_arr[0] = temp_quotient;
-        }
-
-        // FIX: Successfully reallocated outer_array_one elements to outer_array_two, in reverse order
-        //      Figure out the logic to add a leading 0, if the calculations from the second multiplier 
-        //      digit results in a number of digits larger than the first set of calculations; arr2 > arr1 for calc_add()
-        //      This almost happens automatically now, since on the second outer loop index is incremented by 1, which 
-        //      basically adds a 0 to the beginning of outer_array_two and repeats the process of reallocating elements,
-        //      which ultimately results in 0 2 2 9 5 for 255 * 99
-        //      So for now, just figure out how to properly allocate elements to the second array that will be used 
-        //      in calc_add()
-        //
-        // FIX: THIS MAY NOT BE ABLE TO WORK BECAUSE OF HOW JAVASCRIPT WORKS, WHILE C IS SO MUCH DIFFERENT AHHHHHHHH!!!!
-        printf("index before outer_array_two allocation: %d\n\n", index);
-        for (int i = 0; i < index; i++) {
-            outer_array_two[index-i-1] = outer_array_one[i];
-        }
-        printf("TESTING outer_array_two POPULATION: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", outer_array_two[i]);
-        }
-        printf("\nindex: %d\n", index);
-
-        // FIX: inner_array being incorrectly populated - fix on line 801
-        printf("inner_array: ");
-        for (int i = 0; i < index; i++) {
-            printf("%d ", inner_array[i]);
+            for (int k = 0; k < index; k++) {
+                master_product_array[array_index][k] = temp_product_arr[k];
+            }
+        } else {
+            int iterator_array[iterator];
+            int iterator_counter = 1;
+            master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
+            for (int i = 0; i < iterator; i++) {
+                iterator_array[i] = temp_product_arr[iterator_counter];
+                iterator_counter++;
+                master_product_array[array_index][i] = iterator_array[i];
+            }
         }
         printf("\n");
 
@@ -836,33 +823,28 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             array_w_quotient = true;
         }
 
-        // NOTE: adding elements to master_product_array
-        printf("\nINDEX: %d\n", array_index);
-        for (int k = 0; k < index; k++) {
-            master_product_array[array_index][k] = temp_product_arr[k];
-        }
-
-        // FIX: should be [2, 2, 9, 5], instead is [2, 9, 5, rndm_int]
-        printf("Test print of master_product_array: ");
-        for (int i = 0; i < muls; i++) {
-            for (int j = 0; j < index; j++) {
-                printf("%d ", master_product_array[i][j]);
-            }
-        }
-        printf("\n");
-
         array_index++;
 
     } // XXX: END OF OUTER LOOP
 
     if (muls == 1) {
-        printf("\nProduct: ");
-        for (int i = 0; i < muls; i++) {
-            for (int j = 0; j < index; j++) {
-                printf("%d", master_product_array[i][j]);
+        if (temp_quotient > 0) {
+            printf("\nProduct: ");
+            for (int i = 0; i < muls; i++) {
+                for (int j = 0; j < index; j++) {
+                    printf("%d ", master_product_array[i][j]);
+                }
             }
+            printf("\n");
+        } else {
+            printf("\nProduct: ");
+            for (int i = 0; i < muls; i++) {
+                for (int j = 0; j < iterator; j++) {
+                   printf("%d ", master_product_array[i][j]);
+                }
+            }
+            printf("\n");
         }
-        printf("\n");
     } else if (muls == 2) { // NOTE: WORKING HERE
         // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
         //      inner_array with a 0 at the beginning, if they are different sizes. 
