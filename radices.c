@@ -632,7 +632,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int *outer_array_two = malloc(index * sizeof *outer_array_two);
     int *array_sum = malloc(index * sizeof *array_sum);
     int *inner_array = malloc(index * sizeof *inner_array);
-    int increment_count = muls;
 
     int counter = 0;
     int temp_quotient = 0;
@@ -641,15 +640,17 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
-        int row_counter = 0;
         inner_array[index]; // initialized with (iterator+1)
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
+
+        // counters for rows and master_product_array index
+        int row_counter = 0;
         int array_index = 0;
 
         // Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
-        master_product_array[array_index] = malloc(index * sizeof *master_product_array[i]);
+        master_product_array[array_index] = malloc((index + row_counter) * sizeof *master_product_array[i]);
 
         // Temporary array whose elements are eventually added to master_product_array on each outer loop
         int temp_product_arr[index];
@@ -669,11 +670,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_quotient = 0;
             }
 
-            printf("\ntemp_product on iteration [i: %d][j: %d]: %d\n", i, j, temp_product);
             if (temp_product >= r) {
-                printf("temp_product >= r\n");
                 temp_conversion = decimal_to_radix(temp_product, r, true);
-                printf("temp_conversion on iteration %d: %d\n", j, temp_conversion);
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
@@ -683,92 +681,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10);
                 }
-                printf("temp_product: %d\n", temp_product);
-                if (temp_quotient > 0) {
-                    printf("temp_quotient: %d\n", temp_quotient);
-                }
 
-
-                if (muls == 1) {
-                    temp_product_arr[j+1] = temp_product;
-                } else if (muls == 2) { // NOTE: WORKING HERE
-                    if (i == (iterator-1)) {
-                        if (j == 0) {
-                            // TODO: Properly add trailing 0 when applicable
-                            // if inner_array contains a number of digits > outer_array_one then outer_array_one will
-                            // need a leading 0 to uphold array sizes for calc_add()
-
-                            outer_array_one[array_index] = temp_product;
-                            array_index++;
-                            if (temp_quotient > 0) {
-                                outer_array_one[array_index] = temp_quotient;
-                            } else {
-                                outer_array_one[array_index] = 0;
-                            }
-
-                            printf("index first loop: %d\n", index);
-                            for (int i = 0; i < index; i++) {
-                                printf("outer_array_one at index %d: %d\n", i, outer_array_one[i]);
-                            }
-                            printf("\n");
-                        } else {
-                            // lock in Ed >:[
-                            // adds temp_product to all spaces, except outer_array_one[-1]
-                            outer_array_one[array_index] = temp_product;
-                            array_index++;
-                            printf("testestestestestestest\n");
-                            printf("outer_array_one[%d]: %d\n", j, outer_array_one[j]);
-                        }
-                    } else {
-                        // NOTE: index is incremented once at this point (Ln 801), resulting in a newly allocated array 
-                        // size of 5 (255 * 99). This will interfere with turning 5 9 2 2 into 2 2 9 5 0, since at this 
-                        // point the array becomes 5 9 2 2 0
-
-                        // FIX: inner_array ending up as 29500 instead of 22950
-                        //      only 3 digits are being added to inner_array, instead of 5 (255 * 99)
-                        //      when only allocating `1` to inner_array, 1 1 1 0 0 is returned
-                        if (j == 0) {
-                            inner_array[array_index] = temp_product;
-                            array_index++;
-                            if (temp_quotient > 0) {
-                                inner_array[array_index] = temp_quotient;
-                            } else {
-                                inner_array[array_index] = 0;
-                            }
-
-                            printf("index second loop: %d\n", index);
-                            for (int i = 0; i < index; i++) {
-                                printf("inner_array at index %d: %d\n", i, inner_array[i]);
-                            }
-                            printf("\n");
-                        } else {
-                            inner_array[array_index] = temp_product;
-                            array_index++;
-                            printf("testestestestestestest\n");
-                            printf("inner_array[%d]: %d\n", j, inner_array[j]);
-                        }
-                    }
-                } else {
-                    // TODO: muls > 2
-                    printf("Feature coming soon...");
-                }
+                temp_product_arr[j+1] = temp_product;
             } else {
-                if (muls == 1) {
-                    temp_product_arr[j+1] = temp_product;
-                } else if (muls == 2) { // NOTE: WORKING HERE
-                    if (i == (iterator-1)) {
-                        outer_array_one[j] = temp_product;
-                    } else {
-                        inner_array[j] = temp_product;
-                    }
-                } else {
-                    // TODO: muls > 2
-                    printf("Feature coming soon...");
-                }
+                temp_product_arr[j+1] = temp_product;
             }
         } // XXX: END OF INNER LOOP
 
-        // NOTE: final allocation of elements to master_product_array
+        // NOTE: for now just add all calculations to master_product_array
+        //       allocation of trailing and leading 0s will be done at Ln 851
         if (temp_quotient > 0) {
             // NOTE: temp_product_arr[0] will eventually be temp_product_arr[1 index before the last digit added]
             temp_product_arr[0] = temp_quotient;
@@ -782,52 +703,24 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             for (int i = 0; i < iterator; i++) {
                 iterator_array[i] = temp_product_arr[iterator_counter];
                 iterator_counter++;
-                temp_product_arr[array_index][i] = iterator_array[i];
+                master_product_array[array_index][i] = iterator_array[i];
             }
         }
         printf("\n");
 
-        // NOTE: MAY BE REMOVED
-        // FIX: next problem area to work on
-        if (muls > 1 && increment_count > 1) {
-            // TODO: continue practicing malloc and realloc in array_testing.c
-
-            // TODO: reallocation of arrays may need to be done in here, on every inner loop, 
-            //       or in other words, for every multiplier digit
-            index++;
-        }
-        increment_count--;
-        if (temp_quotient > 0 && muls == 2) { // NOTE: WORKING HERE
-            // add trailing 0s, according to number of multipliers
-            // TODO: reallocate arrays to include all digits, plus trailing 0's
-            // FIX: PROBLEM AREA 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            //      First multiplier calculations don't need a trailing 0, but this condition is triggered anyway
-            //      This is happening because temp_quotient is retaining value after first inner loop.
-            //      It only needs to trigger upon the second inner loop iteration, if temp_quotient > 0
-            printf("adding trailing 0s to outer_array_two...\n");
-            outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
-            for (int i = 0; i < index; i++) {
-                if (i != 0) {
-                    outer_array_two[i] = outer_array_one[i-1];
-                } else {
-                    outer_array_two[i] = 1;
-                }
-            }
-            printf("outer_array_one inside of problem condition: ");
-            for (int i = 0; i < index; i++) {
-                printf("%d", outer_array_one[i]);
-            }
-            printf("\nouter_array_two after added trailing 0s, iteration[%d]: ", i);
-            for (int i = 0; i < index; i++) {
-                printf("%d", outer_array_two[i]);
-            }
-            printf("\n");
-            array_w_quotient = true;
-        }
-
         array_index++;
         row_counter++;
     } // XXX: END OF OUTER LOOP
+
+    /*
+    // NOTE: printing out all contents of master_product_array
+    for (int i = 0; i < muls; i++) {
+        for (int j = 0; j < (index+muls); j++) {
+            printf("%d ", master_product_array[i][j]);
+        }
+        printf("\n");
+    }
+    */
 
     if (muls == 1) {
         if (temp_quotient > 0) {
