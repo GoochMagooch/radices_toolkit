@@ -770,7 +770,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: final allocation of elements to master_product_array
         if (temp_quotient > 0) {
-            // NOTE: it won't always be temp_product_arr[0], it'll be temp_product_arr[1 index before the last digit added]
+            // NOTE: temp_product_arr[0] will eventually be temp_product_arr[1 index before the last digit added]
             temp_product_arr[0] = temp_quotient;
             for (int i = 0; i < index; i++) {
                 master_product_array[array_index][i] = temp_product_arr[i];
@@ -848,12 +848,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else if (muls == 2) { // NOTE: WORKING HERE
-        // FIX: If I can properly compare the size of outer_array_two and inner_array then I can say to reallocate
-        //      inner_array with a 0 at the beginning, if they are different sizes. 
-        //      Currently both sizes = 2 (should be 5 and 4)
-
-        // FIX: STILL NEED A WAY TO INCLUDE CARRY DIGIT FROM calc_add()
-        //      255 * 99 not triggering array_w_quotient the way 255 * 14 does
+        // NOTE: trailing and leading 0s will need to be added here, 
+        //       after all calculations are done. Allocated dynamically
         if (array_w_quotient == true) {
             printf("outer_array_two with temp_quotient: ");
             for (int i = 0; i < index; i++) {
