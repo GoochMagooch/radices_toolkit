@@ -689,6 +689,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //       Allocation of trailing and leading 0s will be done at Ln 851
         if (temp_quotient > 0) {
             // NOTE: temp_product_arr[0] will eventually be temp_product_arr[1 index before the last digit added]
+            //       no matter what each pointer in master_product_array will be sizeof *iterator, 
+            //       but if temp_quotient > 0 then that pointer needs to be resized.
             temp_product_arr[0] = temp_quotient;
             for (int i = 0; i < index; i++) {
                 master_product_array[array_index][i] = temp_product_arr[i];
