@@ -695,17 +695,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        // NOTE: For now just add all calculations to master_product_array
-        //       Allocation of trailing and leading 0s will be done at Ln 851
+        // NOTE: reallocates elements from temp_product_arr, if necessary
+        // FIX: might have to determine right at the allocation of temp_product_arr whether or not there will be trailing/leading 0s
         if (temp_quotient > 0) {
             printf("temp_quotient: %d\n", temp_quotient);
             printf("\ntemp_product_arr: ");
             for (int i = 0; i < iterator; i++) {
                 printf("%d ", temp_product_arr[i]);
             }
-            // NOTE: temp_product_arr[0] will eventually be temp_product_arr[1 index before the last digit added]
-            //       no matter what each pointer in master_product_array will be sizeof *iterator, 
-            //       but if temp_quotient > 0 then that pointer needs to be resized.
+
             master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
             int iterator_array[index];
             int iterator_counter = 1;
@@ -739,7 +737,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         row_counter++;
     } // XXX: END OF OUTER LOOP
 
-    // NOTE: printing out all contents of master_product_array
+    // printing out all contents of master_product_array
     for (int i = 0; i < muls; i++) {
         printf("test master_product_array print[%d]: ", i);
         for (int j = 0; j < index; j++) {
@@ -767,8 +765,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else if (muls == 2) { // NOTE: WORKING HERE
-        // NOTE: trailing and leading 0s will need to be added here, 
-        //       after all calculations are done. Allocated dynamically
+        // NOTE: trailing and leading 0s will need to be added here
         if (array_w_quotient == true) {
             printf("outer_array_two with temp_quotient: ");
             for (int i = 0; i < index; i++) {
