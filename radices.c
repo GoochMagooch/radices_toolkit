@@ -633,7 +633,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int *array_sum = malloc(index * sizeof *array_sum);
     int *inner_array = malloc(index * sizeof *inner_array);
 
-    int counter = 0;
+    int row_counter = 0;
+    int array_index = 0;
     int temp_quotient = 0;
     int zero_count;
     bool array_w_quotient = false;
@@ -645,12 +646,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_product;
         int temp_conversion;
 
-        // counters for rows and master_product_array index
-        int row_counter = 0;
-        int array_index = 0;
-
         // Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
-        master_product_array[array_index] = malloc((index + row_counter) * sizeof *master_product_array[i]);
+        master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
 
         // Temporary array whose elements are eventually added to master_product_array on each outer loop
         int temp_product_arr[index];
@@ -688,8 +685,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        // NOTE: for now just add all calculations to master_product_array
-        //       allocation of trailing and leading 0s will be done at Ln 851
+        // NOTE: For now just add all calculations to master_product_array
+        //       Allocation of trailing and leading 0s will be done at Ln 851
         if (temp_quotient > 0) {
             // NOTE: temp_product_arr[0] will eventually be temp_product_arr[1 index before the last digit added]
             temp_product_arr[0] = temp_quotient;
@@ -697,6 +694,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 master_product_array[array_index][i] = temp_product_arr[i];
             }
         } else {
+            printf("temp_product_arr test print: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d ", temp_product_arr[i]);
+            }
+            printf("\n");
             int iterator_array[iterator];
             int iterator_counter = 1;
             master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
@@ -712,15 +714,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         row_counter++;
     } // XXX: END OF OUTER LOOP
 
-    /*
     // NOTE: printing out all contents of master_product_array
     for (int i = 0; i < muls; i++) {
-        for (int j = 0; j < (index+muls); j++) {
+        printf("test master_product_array print[%d]: ", i);
+        for (int j = 0; j < iterator; j++) {
             printf("%d ", master_product_array[i][j]);
         }
         printf("\n");
     }
-    */
 
     if (muls == 1) {
         if (temp_quotient > 0) {
