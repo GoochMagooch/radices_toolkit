@@ -663,6 +663,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_product_arr[index];
 
         // XXX: START OF INNER LOOP
+        // NOTE: determine where trailing and leading 0s will end up, within the inner loop
         for (int j = iterator-1; j >= 0; j--) {
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // bottom number is the multiplicand
@@ -696,7 +697,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         } // XXX: END OF INNER LOOP
 
         // NOTE: reallocates elements from temp_product_arr, if necessary
-        // FIX: might have to determine right at the allocation of temp_product_arr whether or not there will be trailing/leading 0s
         if (temp_quotient > 0) {
             printf("temp_quotient: %d\n", temp_quotient);
             printf("\ntemp_product_arr: ");
