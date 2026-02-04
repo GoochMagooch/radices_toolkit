@@ -644,6 +644,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int *inner_array = malloc(index * sizeof *inner_array);
 
     int row_counter = 0;
+
+    int leading_zero = (muls - 1);
+    int trailing_zero = 0;
+    
     int array_index = 0;
     int temp_quotient = 0;
     int zero_count;
@@ -663,7 +667,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int temp_product_arr[index];
 
         // XXX: START OF INNER LOOP
-        // NOTE: determine where trailing and leading 0s will end up, within the inner loop
         for (int j = iterator-1; j >= 0; j--) {
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // bottom number is the multiplicand
@@ -697,6 +700,24 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         } // XXX: END OF INNER LOOP
 
         // NOTE: reallocates elements from temp_product_arr, if necessary
+        // NOTE: might need a condition that reallocates all master_product_array pointers, and adds trailing/leading 0s
+        //
+        // IF 3 multiplier digits AND temp_quotient > 0 AND i == ptr_one {
+        //     4 product digits for 3 multiplier digits and 1 leading 0
+        // } ELSE IF 3 multiplier digits AND temp_quotient !> 0 AND i == ptr_one {
+        //     3 product digits for 3 multiplier digits and 2 leading 0s
+        // }
+        //
+        // before everything, on each inner loop iteration, reallocate each row with row_counter # of trailing 0s
+        // another counter to count leading 0s?
+        // IF temp_quotient > 0 {
+        //     reallocate current ptr with trailing_zero # of trailing 0s
+        //     reallocate current ptr with (leading_zero - 1) # of leading 0s
+        // } ELSE {
+        //     reallocate current ptr with trailing_zero # of trailing 0s
+        //     reallocate current ptr with leading_zero # leading 0s
+        // }
+
         if (temp_quotient > 0) {
             printf("temp_quotient: %d\n", temp_quotient);
             printf("\ntemp_product_arr: ");
@@ -735,6 +756,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         array_index++;
         row_counter++;
+
+        // increments/decrements 0 counters
+        trailing_zero++;
+        leading_zero--;
     } // XXX: END OF OUTER LOOP
 
     // printing out all contents of master_product_array
