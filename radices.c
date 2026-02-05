@@ -645,8 +645,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     int row_counter = 0;
 
-    int leading_zero = (muls - 1);
-    int trailing_zero = 0;
+    int leading_zero = 0;
+    int trailing_zero = (muls - 1);
     
     int array_index = 0;
     int temp_quotient = 0;
@@ -714,10 +714,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //
         // before everything, on each inner loop iteration, reallocate each row with row_counter # of trailing 0s
         // another counter to count leading 0s?
-        // IF temp_quotient > 0 {
+        // if (temp_quotient > 0) {
         //     reallocate current ptr with trailing_zero # of trailing 0s
         //     reallocate current ptr with (leading_zero - 1) # of leading 0s
-        // } ELSE {
+        //     master_product_array[array_index] = malloc((index+trailing_zero) * sizeof *master_product_array[array_index]);
+        // } else {
         //     reallocate current ptr with trailing_zero # of trailing 0s
         //     reallocate current ptr with leading_zero # leading 0s
         // }
@@ -762,8 +763,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         row_counter++;
 
         // increments/decrements 0 counters
-        trailing_zero++;
-        leading_zero--;
+        leading_zero++;
+        trailing_zero--;
     } // XXX: END OF OUTER LOOP
 
     // printing out all contents of master_product_array
