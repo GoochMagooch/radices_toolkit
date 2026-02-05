@@ -702,10 +702,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // NOTE: reallocates elements from temp_product_arr, if necessary
         // NOTE: might need a condition that reallocates all master_product_array pointers, and adds trailing/leading 0s
         //
-        // IF 3 multiplier digits AND temp_quotient > 0 AND i == ptr_one {
-        //     4 product digits for 3 multiplier digits and 1 leading 0
-        // } ELSE IF 3 multiplier digits AND temp_quotient !> 0 AND i == ptr_one {
-        //     3 product digits for 3 multiplier digits and 2 leading 0s
+        //
+        // num1 = [2, 5, 5];
+        // num2 = [0, 9, 1];
+        //
+        // if (temp_quotient > 0) {
+        //     temp_product_arr = [2, 2, 9, 5];
+        // } else {
+        //     temp_product_arr = [0, 2, 5, 5];
         // }
         //
         // before everything, on each inner loop iteration, reallocate each row with row_counter # of trailing 0s
