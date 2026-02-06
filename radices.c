@@ -645,9 +645,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     int row_counter = 0;
 
-    int leading_zero = 0;
-    int trailing_zero = (muls - 1);
-    
+    // leading_zero = (muls - 1) to account for decrementing # of leading 0s
+    // trailing_zero = 0 to account for incrementing # of trailing 0s
+    // ensures first row never has trailing zero
+    // ensures last row never has leading zero
+    int leading_zero = (muls - 1);
+    int trailing_zero = 0;
+
     int array_index = 0;
     int temp_quotient = 0;
     int zero_count;
@@ -704,7 +708,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //
         //
         // num1 = [2, 5, 5];
-        // num2 = [0, 9, 1];
+        // num2 = [9, 9, 9];
+        // leading_zero starts as 2
+        // trailing_zero starts as 0
         //
         // if (temp_quotient > 0) {
         //     temp_product_arr = [2, 2, 9, 5];
@@ -712,16 +718,36 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //     temp_product_arr = [0, 2, 5, 5];
         // }
         //
-        // before everything, on each inner loop iteration, reallocate each row with row_counter # of trailing 0s
-        // another counter to count leading 0s?
-        // if (temp_quotient > 0) {
-        //     reallocate current ptr with trailing_zero # of trailing 0s
-        //     reallocate current ptr with (leading_zero - 1) # of leading 0s
-        //     master_product_array[array_index] = malloc((index+trailing_zero) * sizeof *master_product_array[array_index]);
-        // } else {
-        //     reallocate current ptr with trailing_zero # of trailing 0s
-        //     reallocate current ptr with leading_zero # leading 0s
-        // }
+        // AFTER INNER LOOP:
+        // Reallocate each row with (index+trailing_zero) # of elements
+        // Assign leading_zero # of leading zero_count
+        // Assign trailing_zero # of trailing zeros
+        //
+        if (temp_quotient > 0) {
+            // reallocate current ptr with trailing_zero # of trailing 0s
+            // reallocate current ptr with (leading_zero - 1) # of leading 0s
+            // index = 4;
+            master_product_array[array_index] = malloc((index+trailing_zero+leading_zero) * sizeof *master_product_array[array_index]);
+            int temp_index = leading_zero;
+            for (int i = 0; i < (index+trailing_zero); i++) {
+                if (i < leading_zero) {
+                    master_product_array[array_index][i] = 0;
+                } else if (i > leading_zero && i < trailing_zero) {
+                    master_product_array[array_index][i] = temp_product_arr[temp_index];
+                } else {
+                    master_product_array[array_index][i] = temp_product_arr[temp_index];
+                }
+            // increases the index to assign temp_product_arr[temp_index], beginning at the value of leading_zero
+            temp_index++;
+            }
+        } else {
+            // possibility of extra leading and/or trailing 0s if temp_quotient !> 0
+            // reallocate current ptr with trailing_zero # of trailing 0s
+            // reallocate current ptr with leading_zero # leading 0s
+        }
+        // leading_zero--;
+        // trailing_zero++;
+
 
         if (temp_quotient > 0) {
             printf("temp_quotient: %d\n", temp_quotient);
@@ -763,8 +789,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         row_counter++;
 
         // increments/decrements 0 counters
-        leading_zero++;
-        trailing_zero--;
+        leading_zero--;
+        trailing_zero++;
     } // XXX: END OF OUTER LOOP
 
     // printing out all contents of master_product_array
