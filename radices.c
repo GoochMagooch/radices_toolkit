@@ -703,10 +703,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        // NOTE: reallocates elements from temp_product_arr, if necessary
-        // NOTE: might need a condition that reallocates all master_product_array pointers, and adds trailing/leading 0s
-        //
-
+        // NOTE: NEW CONDITION TO PROPERLY ALLOCATE LEADING/TRALING 0S ALONG WITH ELEMENTS FROM temp_product_arr
         if (temp_quotient > 0) {
             // num1 = [2, 5, 5];
             // num2 = [9, 9, 9];
@@ -748,6 +745,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             // possibility of extra leading and/or trailing 0s if temp_quotient !> 0
             // reallocate current ptr with trailing_zero # of trailing 0s
             // reallocate current ptr with leading_zero # leading 0s
+            temp_index++;
         }
         // leading_zero--;
         // trailing_zero++;
