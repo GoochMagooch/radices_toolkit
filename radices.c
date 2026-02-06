@@ -713,21 +713,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             // leading_zero starts as 2
             // trailing_zero starts as 0
 
-            // if (temp_quotient > 0) {
-            //     temp_product_arr = [2, 2, 9, 5];
-            // } else {
-            //     temp_product_arr = [0, 2, 5, 5];
-            // }
-
-            // AFTER INNER LOOP:
             // Reallocate each row with (index+trailing_zero) # of elements
             // Assign leading_zero # of leading zero_count
             // Assign trailing_zero # of trailing zeros
 
             // index = 4;
+            // reallocated with index
             master_product_array[array_index] = malloc((index+trailing_zero+leading_zero) * sizeof *master_product_array[array_index]);
             int temp_index = leading_zero;
-            for (int i = 0; i < (index+trailing_zero); i++) {
+            for (int i = 0; i < (index+trailing_zero+leading_zero); i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                 } else if (i > leading_zero && i < trailing_zero) {
@@ -739,6 +733,18 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             temp_index++;
             }
         } else {
+            // reallocated with iterator, instead of index
+            master_product_array[array_index] = malloc((iterator+trailing_zero+leading_zero) * sizeof *master_product_array[array_index]);
+            int temp_index = leading_zero;
+            for (int i = 0; i < (iterator+trailing_zero+leading_zero); i++) {
+                if (i < leading_zero) {
+                    master_product_array[array_index][i] = 0;
+                } else if (i > leading_zero && i < trailing_zero) {
+                    master_product_array[array_index][i] = temp_product_arr[temp_index];
+                } else {
+                    master_product_array[array_index][i] = temp_product_arr[temp_index];
+                }
+            }
             // possibility of extra leading and/or trailing 0s if temp_quotient !> 0
             // reallocate current ptr with trailing_zero # of trailing 0s
             // reallocate current ptr with leading_zero # leading 0s
