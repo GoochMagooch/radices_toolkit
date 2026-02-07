@@ -668,7 +668,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
 
         // Temporary array whose elements are eventually added to master_product_array on each outer loop
-        int temp_product_arr[index];
+        int temp_product_arr[iterator];
 
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
@@ -705,16 +705,20 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: NEW CONDITION TO PROPERLY ALLOCATE LEADING/TRALING 0S ALONG WITH ELEMENTS FROM temp_product_arr
         if (temp_quotient > 0) {
-            // num1 = [2, 5, 5];
-            // num2 = [9, 9, 9];
-            // leading_zero starts as 2
-            // trailing_zero starts as 0
-
+            // FIX: look to old condition to fix temp_product_arr allocation of temp_quotient
+            //      There needs to be a new array to add elements to
+            //      temp_product_arr[iterator] -> new_array[index]
+            temp_product_arr[0] = temp_quotient;
             // This will always ensure the correct number of trailing and leading 0s
+            printf("\ntemp_product_arr: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d ", temp_product_arr[i]);
+            }
+            printf("\n");
             master_product_array[array_index] = malloc((index+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
 
             // 
-            int temp_index = leading_zero;
+            int temp_index = 0;
             for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
                 // Adds leading 0s
                 if (i < leading_zero) {
@@ -722,27 +726,67 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // Adds elements from temp_product_arr
                 } else if (i >= leading_zero && i <= (index+leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
+                    temp_index++;
                 // Adds trailing 0s
                 } else {
                     master_product_array[array_index][i] = 0;
                 }
-            // increases the index to assign temp_product_arr[temp_index], beginning at the value of leading_zero
-            temp_index++;
             }
+            printf("\nmaster_product_array[%d]: ", array_index);
+            for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
+                printf("%d ", master_product_array[array_index][i]);
+            }
+            printf("\n");
         } else {
             master_product_array[array_index] = malloc((iterator+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
-            int temp_index = leading_zero;
+            int temp_index = 0;
             for (int i = 0; i < (iterator+leading_zero+trailing_zero); i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                 } else if (i > leading_zero && i < trailing_zero) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
+                    temp_index++;
                 } else {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                 }
             }
-            temp_index++;
         }
+
+        if (temp_quotient > 0) {
+            printf("temp_quotient: %d\n", temp_quotient);
+            printf("temp_product_arr: ");
+            for (int i = 0; i < iterator; i++) {
+                printf("%d ", temp_product_arr[i]);
+            }
+
+            master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
+            int iterator_array[index];
+            int iterator_counter = 1;
+            // assigns 0 index of iterator_array with temp_quotient
+            iterator_array[0] = temp_quotient;
+
+            // allocates elements from temp_product_arr to iterator_array
+            for (int i = 0; i < iterator; i++) {
+                iterator_array[iterator_counter] = temp_product_arr[i];
+                iterator_counter++;
+            }
+            for (int i = 0; i < index; i++) {
+                master_product_array[array_index][i] = iterator_array[i];
+            }
+
+            // prints out iterator_array
+            printf("\niterator_array: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d ", iterator_array[i]);
+            }
+            printf("\n");
+        } else {
+            master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
+            for (int i = 0; i < iterator; i++) {
+                master_product_array[array_index][i] = temp_product_arr[i];
+            }
+        }
+        printf("\n");
         array_index++;
         row_counter++;
 
