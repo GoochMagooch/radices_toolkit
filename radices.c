@@ -705,6 +705,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: NEW CONDITION TO PROPERLY ALLOCATE LEADING/TRALING 0S ALONG WITH ELEMENTS FROM temp_product_arr
         if (temp_quotient > 0) {
+
             int iterator_array[index];
             int iterator_counter = 1;
             // assigns 0 index of iterator_array with temp_quotient
@@ -716,7 +717,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 iterator_counter++;
             }
 
-            temp_product_arr[0] = temp_quotient;
             // This will always ensure the correct number of trailing and leading 0s
             printf("\niterator_array condition one: ");
             for (int i = 0; i < index; i++) {
@@ -725,9 +725,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
             master_product_array[array_index] = malloc((index+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
 
-            // FIX: master_product_array properly allocated with one multiplier digit
-            //      missing leading/trailing zeros with 2 multiplier digits
-            //      improperly allocation all around with > 2 multiplier digits
+            // FIX: (255 * 99) results in:
+            //      master_product_array[0] = [0, 2, 2, 9, 5] - correct
+            //      master_product_array[1] = [2, 2, 9, 5, 2] - incorrect, last '2' should be '0'
             int temp_index = 0;
             for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
                 // Adds leading 0s
@@ -742,12 +742,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = 0;
                 }
             }
-            temp_index = 0;
-            printf("\nmaster_product_array[%d]: ", array_index);
-            for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
-                printf("%d ", master_product_array[array_index][i]);
-            }
-            printf("\n");
         } else {
             master_product_array[array_index] = malloc((iterator+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
             int temp_index = 0;
@@ -770,15 +764,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         trailing_zero++;
     } // XXX: END OF OUTER LOOP
 
-    // printing out all contents of master_product_array
-    for (int i = 0; i < muls; i++) {
-        printf("test master_product_array print[%d]: ", i);
-        for (int j = 0; j < index; j++) {
-            printf("%d ", master_product_array[i][j]);
-        }
-        printf("\n");
-    }
-
     if (muls == 1) {
         if (temp_quotient > 0) {
             printf("\nProduct: ");
@@ -798,25 +783,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else if (muls == 2) { // NOTE: WORKING HERE
-        // NOTE: trailing and leading 0s will need to be added here
-        if (array_w_quotient == true) {
-            printf("outer_array_two with temp_quotient: ");
-            for (int i = 0; i < index; i++) {
-                printf("%d ", outer_array_two[i]);
+        for (int i = 0; i < muls; i++) {
+            printf("master_product_array[%d]: ", i);
+            for (int j = 0; j < (index+leading_zero+trailing_zero); j++) {
+                printf("%d ", master_product_array[i][j]);
             }
             printf("\n");
-        } else {
-            printf("\nadding trailing 0s to outer_array_two...\n");
-            outer_array_two = realloc(outer_array_two, index * sizeof *outer_array_two);
-            printf("index: %d\n", index);
-            for (int i = 0; i < index; i++) {
-                if (i == 0) {
-                    outer_array_two[i] = 0;
-                } else {
-                    outer_array_two[i] = outer_array_one[i-1];
-                }
-            }
         }
+
+        // FIX: Final step is to add both ptrs of master_product_array together
 
         int carry = 2;
         int final_product_arr[index];
