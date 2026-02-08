@@ -150,6 +150,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
 
         // calculates decimal to radix
         char ans[num_length];
+        printf("num_length: %d\n", num_length);
 
         int dividend = decimal;
         int index = 1;
@@ -597,7 +598,6 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
-    // NOTE: each array is populated in the correct order: 255 is entered into num1 as {2, 5, 5}.
 
     clear();
     menu_banner();
@@ -795,11 +795,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         int carry = 2;
         int final_product_arr[index];
-        calc_add(outer_array_two, inner_array, index, r, true, final_product_arr, &carry);
+        calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
         if (carry == 1) {
             printf("\nProduct with carry: ");
             int final_product_arr_carry[index];
-            calc_add(outer_array_two, inner_array, index, r, true, final_product_arr_carry, &carry);
+            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             for (int i = 0; i < index; i++) {
                 printf("%d", final_product_arr_carry[i]);
             }
