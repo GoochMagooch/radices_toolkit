@@ -267,7 +267,14 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     char final_arr[256];
     bool invalid_int = false;
 
+    printf("iterator within calc_add(): %d\n", iterator);
+
     // calculate sum
+    // first part of loop is checking for invalid digits
+    // second part of loop:
+    // initializes mini_sum with num1[i] + num2[i]
+    // carry_over starts off as false because is can only be true once a sum is generated and it is > (r-1)
+    //
     for (int i = (iterator-1); i >= 0; i--) {
         if (num1[i] >= r) {
             invalid_int = true;
@@ -279,6 +286,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             break;
         }
         mini_sum = (num1[i] + num2[i]);
+        printf("mini_sum: %d\n", mini_sum);
         if (carry_over == true) {
             mini_sum += 1;
             if (mini_sum > (r-1)) {
@@ -309,6 +317,11 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         for (int i = 0; i < iterator; i++) {
             ex_arr[i] = return_int(final_arr[i]);
         }
+        printf("final array: ");
+        for (int i = 0; i < iterator; i++) {
+            printf("%d ", ex_arr[i]);
+        }
+        printf("\n");
         if (carry_over == true) {
             *carry = 1;
         } else {
@@ -794,11 +807,30 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // FIX: missing final digit for product
         //      255 * 99 = 2524 - should be 25245
         //      array size needs to be resized in calc_add() ?
+        //      final array inside of calc_add() contains the right digits, 
+        //      which means they're not being printed properly
 
-        int carry = 2;
-        int final_product_arr[index];
-        calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
+        // NOTE: using flat arrays may remove the need for all the bullshit I added to calc_add()
+
+        int carry = 2; // not sure why this integer is 2
+        int final_product_arr[index]; // array to be populated with sum digits from calc_add()
+        // calc_add() arguments: 
+        // takes the first and second pointer of master_product_array to add digits
+        // index is always going to (index+leading_zero+trailing_zero) - 1. It needs to stay the same if trailing_zero > 0
+        // r == radix
+        // true == using an extra array to send sum digits to
+        // final_product_arr is the array that sum digits will be sent to
+        // carry needs to be given an arbitrary value (2) to be reinitialized inside of calc_add() - it is reinitialized with either 1 or 0
+        // which effects the condition below
+
+        // NOTE: carry == 0 with 255 * 99
+        if (trailing_zero > 0) {
+            calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+        } else {
+            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
+        }
         if (carry == 1) {
+            printf("carry: %d\n", carry);
             printf("\nProduct with carry: ");
             int final_product_arr_carry[index];
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
@@ -807,6 +839,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
+            printf("carry: %d\n", carry);
             printf("\nProduct with no carry: ");
             for (int i = 0; i < index; i++) {
                 printf("%d", final_product_arr[i]);
