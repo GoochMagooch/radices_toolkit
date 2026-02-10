@@ -791,7 +791,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
 
-        // TODO: Final step is to add both ptrs of master_product_array together
+        // FIX: missing final digit for product
+        //      255 * 99 = 2524 - should be 25245
+        //      array size needs to be resized in calc_add() ?
 
         int carry = 2;
         int final_product_arr[index];
