@@ -150,7 +150,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
 
         // calculates decimal to radix
         char ans[num_length];
-        printf("num_length: %d\n", num_length);
+        // printf("num_length: %d\n", num_length);
 
         int dividend = decimal;
         int index = 1;
@@ -725,16 +725,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
             master_product_array[array_index] = malloc((index+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
 
-            // FIX: (255 * 99) results in:
-            //      master_product_array[0] = [0, 2, 2, 9, 5] - correct
-            //      master_product_array[1] = [2, 2, 9, 5, 2] - incorrect, last '2' should be '0'
+            printf("iterations: %d\n", (index+leading_zero+trailing_zero));
+            printf("leading_zero: %d\n", leading_zero);
+            printf("trailing_zero: %d\n", trailing_zero);
             int temp_index = 0;
             for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
                 // Adds leading 0s
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                 // Adds elements from temp_product_arr
-                } else if (i >= leading_zero && i <= (index+leading_zero)) {
+                } else if (i >= leading_zero && i < (index+leading_zero)) {
                     master_product_array[array_index][i] = iterator_array[temp_index];
                     temp_index++;
                 // Adds trailing 0s
@@ -791,7 +791,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
 
-        // FIX: Final step is to add both ptrs of master_product_array together
+        // TODO: Final step is to add both ptrs of master_product_array together
 
         int carry = 2;
         int final_product_arr[index];
