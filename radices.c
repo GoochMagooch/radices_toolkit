@@ -824,11 +824,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // which effects the condition below
 
         // NOTE: carry == 0 with 255 * 99
-        if (trailing_zero > 0) {
-            calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
-        } else {
-            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
-        }
+        // NOTE: NEXT STEP: FIGURE OUT WHY carry == 0 AFTER calc_add() CALCULATIONS
+        calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+        printf("carry after calc_add() calculations: %d\n", carry);
         if (carry == 1) {
             printf("carry: %d\n", carry);
             printf("\nProduct with carry: ");
