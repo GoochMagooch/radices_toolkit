@@ -715,6 +715,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_product_arr[j] = temp_product;
             }
         } // XXX: END OF INNER LOOP
+        int product_array_index = (index+leading_zero+trailing_zero);
 
         // NOTE: NEW CONDITION TO PROPERLY ALLOCATE LEADING/TRALING 0S ALONG WITH ELEMENTS FROM temp_product_arr
         if (temp_quotient > 0) {
@@ -736,13 +737,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 printf("%d ", iterator_array[i]);
             }
             printf("\n");
-            master_product_array[array_index] = malloc((index+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
-            printf("iterations: %d\n", (index+leading_zero+trailing_zero));
+            printf("iterations: %d\n", product_array_index);
             printf("leading_zero: %d\n", leading_zero);
             printf("trailing_zero: %d\n", trailing_zero);
             int temp_index = 0;
-            for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
+            for (int i = 0; i < product_array_index; i++) {
                 // Adds leading 0s
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
@@ -756,9 +757,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else {
-            master_product_array[array_index] = malloc((iterator+leading_zero+trailing_zero) * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
             int temp_index = 0;
-            for (int i = 0; i < (iterator+leading_zero+trailing_zero); i++) {
+            for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                 } else if (i > leading_zero && i < trailing_zero) {
@@ -798,7 +799,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } else if (muls == 2) { // NOTE: WORKING HERE
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
-            for (int j = 0; j < (index+leading_zero+trailing_zero); j++) {
+            for (int j = 0; j < (index+1); j++) {
                 printf("%d ", master_product_array[i][j]);
             }
             printf("\n");
@@ -821,8 +822,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // carry needs to be given an arbitrary value (2) to be reinitialized inside of calc_add() - it is reinitialized with either 1 or 0
         // which effects the condition below
 
-        // NOTE: carry == 0 with 255 * 99
-        // NOTE: NEXT STEP: FIGURE OUT WHY carry == 0 AFTER calc_add() CALCULATIONS
+        // NOTE: WORKING HERE
+        printf("carry before calc_add() calculations: %d\n", carry);
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         printf("carry after calc_add() calculations: %d\n", carry);
         if (carry == 1) {
@@ -837,7 +838,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         } else {
             printf("carry: %d\n", carry);
             printf("\nProduct with no carry: ");
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < (index+1); i++) {
                 printf("%d", final_product_arr[i]);
             }
             printf("\n");
