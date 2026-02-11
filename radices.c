@@ -804,11 +804,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
 
-        // FIX: missing final digit for product
-        //      255 * 99 = 2524 - should be 25245
-        //      array size needs to be resized in calc_add() ?
-        //      final array inside of calc_add() contains the right digits, 
-        //      which means they're not being printed properly
+        // FIX: For 255 * 99
+        //      final array inside of calc_add(): [2, 5, 2, 4, 5]
+        //      array printed: [2, 5, 2, 4]
 
         // NOTE: using flat arrays may remove the need for all the bullshit I added to calc_add()
 
