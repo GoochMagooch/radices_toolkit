@@ -712,12 +712,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 temp_product_arr[j] = temp_product;
             } else {
+                printf("temp_product_arr[j] = temp_product - temp_quotient !> 0\n");
+                printf("temp_product: %d\n\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
         } // XXX: END OF INNER LOOP
-        int product_array_index = (index+leading_zero+trailing_zero);
 
-        // NOTE: NEW CONDITION TO PROPERLY ALLOCATE LEADING/TRALING 0S ALONG WITH ELEMENTS FROM temp_product_arr
+
+        int product_array_index = (index+leading_zero+trailing_zero);
         if (temp_quotient > 0) {
 
             int iterator_array[index];
@@ -757,9 +759,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else {
-            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
+            printf("index: %d\n", index);
+            master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
+            printf("temp_product_arr: ");
+            for (int i = 0; i < index; i++) {
+                printf("%d ", temp_product_arr[i]);
+            }
+            printf("\n");
             int temp_index = 0;
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                 } else if (i > leading_zero && i < trailing_zero) {
@@ -805,24 +813,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
 
-        // FIX: For 255 * 99
-        //      final array inside of calc_add(): [2, 5, 2, 4, 5]
-        //      array printed: [2, 5, 2, 4]
-
         // NOTE: using flat arrays may remove the need for all the bullshit I added to calc_add()
 
         int carry = 2; // not sure why this integer is 2
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
-        // calc_add() arguments: 
-        // takes the first and second pointer of master_product_array to add digits
-        // index is always going to (index+leading_zero+trailing_zero) - 1. It needs to stay the same if trailing_zero > 0
-        // r == radix
-        // true == using an extra array to send sum digits to
-        // final_product_arr is the array that sum digits will be sent to
-        // carry needs to be given an arbitrary value (2) to be reinitialized inside of calc_add() - it is reinitialized with either 1 or 0
-        // which effects the condition below
 
         // NOTE: WORKING HERE
+        // FIX: calc_add() getting 0 for all mini_sum calculations
         printf("carry before calc_add() calculations: %d\n", carry);
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         printf("carry after calc_add() calculations: %d\n", carry);
