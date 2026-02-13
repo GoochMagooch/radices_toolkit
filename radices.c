@@ -712,12 +712,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 temp_product_arr[j] = temp_product;
             } else {
-                printf("temp_product_arr[j] = temp_product - temp_quotient !> 0\n");
+                printf("temp_product_arr[%d] = temp_product - temp_quotient !> 0\n", j);
                 printf("temp_product: %d\n\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
         } // XXX: END OF INNER LOOP
-
 
         int product_array_index = (index+leading_zero+trailing_zero);
         if (temp_quotient > 0) {
@@ -741,9 +740,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
             master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
-            printf("iterations: %d\n", product_array_index);
-            printf("leading_zero: %d\n", leading_zero);
-            printf("trailing_zero: %d\n", trailing_zero);
+            printf("iterations (temp_quotient > 0): %d\n", product_array_index);
+            printf("leading_zero (temp_quotient > 0): %d\n", leading_zero);
+            printf("trailing_zero (temp_quotient > 0): %d\n", trailing_zero);
+
             int temp_index = 0;
             for (int i = 0; i < product_array_index; i++) {
                 // Adds leading 0s
@@ -758,25 +758,41 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = 0;
                 }
             }
-        } else {
+        } else { // TODO: WORKING HERE
             printf("index: %d\n", index);
-            master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
+            printf("array_index: %d\n", array_index);
+
+            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
+
             printf("temp_product_arr: ");
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < product_array_index; i++) {
                 printf("%d ", temp_product_arr[i]);
             }
             printf("\n");
+
             int temp_index = 0;
-            for (int i = 0; i < index; i++) {
+            printf("leading_zero (temp_quotient !> 0): %d\n", leading_zero);
+            printf("trailing_zero (temp_quotient !> 0): %d\n", trailing_zero);
+            // FIX: for 255 * 19:
+            //      master_product_array[0] = [0, 2, 2, 9, 5] - correct
+            //      master_product_array[1] = [2, 5, 5, 0, 0] - Incorrect, should be [0, 2, 5, 5, 0]
+            //      work on properly shifting over product digits, when necessary
+            for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
-                } else if (i > leading_zero && i < trailing_zero) {
+                } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
                 } else {
                     master_product_array[array_index][i] = 0;
                 }
             }
+
+            printf("master_product_array inside of temp_quotient condition: ");
+            for (int i = 0; i < product_array_index; i++) {
+                printf("%d ", master_product_array[array_index][i]);
+            }
+            printf("\n");
         }
         array_index++;
         row_counter++;
