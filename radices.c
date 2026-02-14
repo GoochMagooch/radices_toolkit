@@ -777,13 +777,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             // FIX: for 255 * 19:
             //      master_product_array[0] = [0, 2, 2, 9, 5] - correct
             //      master_product_array[1] = [2, 5, 5, 0, 0] - Incorrect, should be [0, 2, 5, 5, 0]
-            //      work on properly shifting over product digits, when necessary
             //      leading_zero starts as 1, with 2 multiplier digits, to account for the number of leading zeros the first row will get
             //      trailing_zero starts as 0, with 2 multiplier digits, to account for the number of trailing zeros the first row will get
             //      but neither of these account for the appropriate number of trailing/leading 0s that the SECOND row will recieve.
             //      trailing_zero is incremented, which is accurate since the second row will recieve 1 trailing 0, but then leading_zero
             //      is decremented, which is NOT accurate, because in this case with iterator number of product digts (3) and product_array_index 
             //      number of total digits (5) there will also need to be a single leading 0
+            //
+            // NOTE: trailing_zero will always be incremented, with every row of product digits
+            //       leading_zero will sometimes need to be present, whether or not a row is iterator # of digits
             for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
