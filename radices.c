@@ -651,11 +651,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
 
     int index = iterator+1;
-    int *outer_array_one = malloc(index * sizeof *outer_array_one);
-    int *outer_array_two = malloc(index * sizeof *outer_array_two);
-    int *array_sum = malloc(index * sizeof *array_sum);
-    int *inner_array = malloc(index * sizeof *inner_array);
-
     int row_counter = 0;
 
     // leading_zero = (muls - 1) to account for decrementing # of leading 0s
@@ -667,12 +662,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     int array_index = 0;
     int temp_quotient = 0;
-    int zero_count;
-    bool array_w_quotient = false;
+    // bool array_w_quotient = false;
 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
-        inner_array[index]; // initialized with (iterator+1)
         temp_quotient = 0;
         int temp_product;
         int temp_conversion;
@@ -780,6 +773,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             //
             // NOTE: trailing_zero will always be incremented, with every row of product digits
             //       But if any row[1+] has iterator # of digits then an extra leading 0 is needed
+            //       Or, in other words, if (temp_quotient !> 0) && (array_index > 0) {one loop runs} else {another loop runs}
             for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
