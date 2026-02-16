@@ -713,12 +713,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("trailing_zero before conditions: %d\n", trailing_zero);
 
         int product_array_index = (index+leading_zero+trailing_zero);
-        // NOTE: 
+        // NOTE: PSEUDOCODE:
         // if (temp_quotient > 0 in master_product_array[-1]) {
         //      sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
         // } else {
         //      sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
         // }
+        //
+        // This condition may need to be prefaced with a seprate multiplication function that finds the number
+        // of product digits that master_product_array[-1] is going to have.
+        // Multiply multipler_digit[0] * all multiplicand digits. Or something
         if (temp_quotient > 0) {
 
             int iterator_array[index];
