@@ -767,16 +767,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             int temp_index = 0;
             printf("leading_zero (temp_quotient !> 0): %d\n", leading_zero);
             printf("trailing_zero (temp_quotient !> 0): %d\n", trailing_zero);
-            // FIX: for 255 * 19:
-            //      master_product_array[0] = [0, 2, 2, 9, 5] - correct
-            //      master_product_array[1] = [2, 5, 5, 0, 0] - Incorrect, should be [0, 2, 5, 5, 0]
-            //
-            // NOTE: trailing_zero will always be incremented, with every row of product digits
-            //       But if any row[1+] has iterator # of digits then an extra leading 0 is needed
-            //       Or, in other words, if (temp_quotient !> 0) && (array_index > 0) {one loop runs} else {another loop runs}
             for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
+                    //  NOTE: Start with 255 * 11
+                    //       How to get:
+                    //       [0, 2, 5, 5], [2, 5, 5, 0] = 2805
+                    //       Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
@@ -817,7 +814,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         }
-    } else if (muls == 2) { // NOTE: WORKING HERE
+    } else if (muls == 2) {
         printf("\n");
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
@@ -829,7 +826,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // NOTE: using flat arrays may remove the need for all the bullshit I added to calc_add()
 
-        int carry = 2; // not sure why this integer is 2
+        int carry = 2; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
         // NOTE: WORKING HERE
