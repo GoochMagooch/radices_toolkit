@@ -713,6 +713,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("trailing_zero before conditions: %d\n", trailing_zero);
 
         int product_array_index = (index+leading_zero+trailing_zero);
+        // NOTE: 
+        // if (temp_quotient > 0 in master_product_array[-1]) {
+        //      sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
+        // } else {
+        //      sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
+        // }
         if (temp_quotient > 0) {
 
             int iterator_array[index];
@@ -770,7 +776,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             for (int i = 0; i < index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
-                    // FIX: Start with 255 * 11
+                    // FIX: 255 * 11
                     //      How to get:
                     //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
                     //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
@@ -782,8 +788,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
                 } else {
-                    // NOTE: trailing_zero might also need some type of condition, because with 255 * 11
-                    //       the first row of product digits won't need a tz, and the second row won't need a lz
                     master_product_array[array_index][i] = 0;
                 }
             }
@@ -836,8 +840,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
         // NOTE: WORKING HERE
-        //       First determine whether or not ptr length will be iterator, index, product_array_index, or anything in between.
-        //       Next set the iteration argument inside of calc_sum() to that integer
+        //       Once the length of the final pointer is determined, the iterator argument inside of calc_add() will follow suit
         // FIX: calc_add() getting 0 for all mini_sum calculations
         printf("carry before calc_add() calculations: %d\n", carry);
         // FIX: (index+leading_zero+trailing_zero) argument may play a role in adding 0s where there shouldn't be
