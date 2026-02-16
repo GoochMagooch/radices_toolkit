@@ -756,10 +756,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("index: %d\n", index);
             printf("array_index: %d\n", array_index);
 
-            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
 
             printf("temp_product_arr: ");
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < index; i++) {
                 printf("%d ", temp_product_arr[i]);
             }
             printf("\n");
@@ -767,23 +767,29 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             int temp_index = 0;
             printf("leading_zero (temp_quotient !> 0): %d\n", leading_zero);
             printf("trailing_zero (temp_quotient !> 0): %d\n", trailing_zero);
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
-                    //  NOTE: Start with 255 * 11
-                    //       How to get:
-                    //       [0, 2, 5, 5], [2, 5, 5, 0] = 2805
-                    //       Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
+                    // FIX: Start with 255 * 11
+                    //      How to get:
+                    //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
+                    //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
+                    //
+                    // NOTE: I think array_index will play a role by representing the row #
+                    //       What could play a role in determining the number of elements in row[-1]?
+                    //       Once that question is answered then every other row will follow suit
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
                 } else {
+                    // NOTE: trailing_zero might also need some type of condition, because with 255 * 11
+                    //       the first row of product digits won't need a tz, and the second row won't need a lz
                     master_product_array[array_index][i] = 0;
                 }
             }
 
             printf("master_product_array inside of temp_quotient condition: ");
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < index; i++) {
                 printf("%d ", master_product_array[array_index][i]);
             }
             printf("\n\n");
@@ -830,8 +836,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
         // NOTE: WORKING HERE
+        //       First determine whether or not ptr length will be iterator, index, product_array_index, or anything in between.
+        //       Next set the iteration argument inside of calc_sum() to that integer
         // FIX: calc_add() getting 0 for all mini_sum calculations
         printf("carry before calc_add() calculations: %d\n", carry);
+        // FIX: (index+leading_zero+trailing_zero) argument may play a role in adding 0s where there shouldn't be
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         printf("carry after calc_add() calculations: %d\n", carry);
         if (carry == 1) {
