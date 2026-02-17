@@ -646,7 +646,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // NOTE: master_product_array
+    // NOTE: Find multiplicand_row_length here
+
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
 
@@ -715,17 +716,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int product_array_index = (index+leading_zero+trailing_zero);
         // NOTE: DETERMINE IF temp_quotient > 0 in master_product_array[-1]
         //
-        // First find multiplicand_row_length and multiplier_row_length
-        // Next multiply multiplier_row[multiplicand_row_length-multiplier_row_length] * each multiplicand digit
+        // 1. Find multiplier_row_length
+        // 2. Multiply multiplier_row[iterator-multiplier_row_length] * each multiplicand digit
         // if (temp_quotient > 0) {
         //      sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
         // } else {
         //      sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
         // }
-        //
-        // This condition may need to be prefaced with a seprate multiplication function that finds the number
-        // of product digits that master_product_array[-1] is going to have.
-        // Multiply multipler_digit[0] * all multiplicand digits. Or something
+
         if (temp_quotient > 0) {
 
             int iterator_array[index];
