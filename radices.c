@@ -646,7 +646,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // NOTE: Find multiplicand_row_length here
+    // FIX: Find multiplicand_row_length here by breaking multiplicand row down to its single digit parts
+    if (multiplicand == 1) {
+        printf("multiplicand == top row\n");
+    } else {
+        printf("multiplicand == bottom row\n");
+    }
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
@@ -680,9 +685,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
             // (multiplier digit * multiplicand digit)
-            if (multiplicand == 1) { // bottom number is the multiplicand
+            if (multiplicand == 1) { // top number is the multiplicand
                 temp_product = num2[i] * num1[j];
-            } else { // top number is the multiplicand
+            } else { // bottom number is the multiplicand
                 temp_product = num1[i] * num2[j];
             }
 
