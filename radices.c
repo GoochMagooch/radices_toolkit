@@ -646,6 +646,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
+    if (multiplicand == 1) {
+        // Determine if num1[0] * multiplier_digits is going to result in (temp_quotient > 0)
+    } else {
+        // Determine if num2[0] * multiplier_digits is going to result in (temp_quotient > 0)
+    }
+
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
 
