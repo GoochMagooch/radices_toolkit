@@ -686,12 +686,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // top number is the multiplicand
                 temp_product = num2[i] * num1[j];
-                // NOTE: probably find multiplicand_row_length here
-                //       and do it by going through the entire multiplication process for multiplicand[0] * first_multiplier_digit
-                //       THERE HAS TO BE A BETTER WAAAAAAAAAAYYYYYYY!!!!
             } else { // bottom number is the multiplicand
                 temp_product = num1[i] * num2[j];
-                // NOTE: and here
             }
 
             // Adds quotient to temp_product
@@ -722,15 +718,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("trailing_zero before conditions: %d\n", trailing_zero);
 
         int product_array_index = (index+leading_zero+trailing_zero);
-        // NOTE: DETERMINE IF temp_quotient > 0 in master_product_array[-1]
-        //
-        // 1. Find multiplier_row_length
-        // 2. Multiply multiplier_row[iterator-multiplier_row_length] * each multiplicand digit
-        // if (temp_quotient > 0) {
-        //      sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
-        // } else {
-        //      sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
-        // }
 
         if (temp_quotient > 0) {
 
