@@ -610,10 +610,47 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 }
 
 // CALCULATES PRODUCT OF 2 SINGLE DIGITS
-int calc_single_digit(int x, int *y, int mults, int muls, int r) {
-    // multiply x by each digit inside of y
-    // return 0 for no temp_quotient
-    // return 1 for a temp_quotient
+int calc_single_digit(int x, int *y, int mults, int r) {
+    for (int i = iterator-1; i >= (iterator-muls); i--) {
+    temp_quotient = 0;
+    int temp_product;
+    int temp_conversion;
+
+    // Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
+    master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
+
+    // Temporary array whose elements are eventually added to master_product_array on each outer loop
+    int temp_product_arr[iterator];
+
+    for (int j = iterator-1; j >= 0; j--) {
+        // (multiplier digit * multiplicand digit)
+        if (multiplicand == 1) { // top number is the multiplicand
+            temp_product = num2[i] * num1[j];
+        } else { // bottom number is the multiplicand
+            temp_product = num1[i] * num2[j];
+        }
+            // Adds quotient to temp_product
+        if (temp_quotient > 0) {
+            temp_product += temp_quotient;
+            temp_quotient = 0;
+        }
+        if (temp_product >= r) {
+            temp_conversion = decimal_to_radix(temp_product, r, true);
+
+                // Separates product from quotient
+            if (temp_conversion > 99) {
+                temp_quotient = temp_conversion / 100;
+                temp_product = temp_conversion - 100;
+            } else {
+                temp_quotient = temp_conversion / 10;
+                temp_product = temp_conversion - (temp_quotient * 10);
+            }
+
+            temp_product_arr[j] = temp_product;
+        } else {
+            temp_product_arr[j] = temp_product;
+        }
+    }
 }
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
