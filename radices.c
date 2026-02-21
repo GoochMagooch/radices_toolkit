@@ -609,6 +609,13 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     printf("\n");
 }
 
+// CALCULATES PRODUCT OF 2 SINGLE DIGITS
+int calc_single_digit(int x, int *y, int mults, int muls, int r) {
+    // multiply x by each digit inside of y
+    // return 0 for no temp_quotient
+    // return 1 for a temp_quotient
+}
+
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
@@ -646,10 +653,25 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
+    // FIX:
+    // what am I determining, depending on a 0 or a 1?
+    // 0 == temp_quotient !> 0;
+    // 1 == temp_quotient > 0;
+    //
+    // if temp_quotient > 0 {
+    //     sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
+    // } else {
+    //     sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
+    // }
+    //
+    // Depending on the length of master_product_array[-1], each other ptr will need to be the same size.
+    // This may mean the 2 trailing 0s for master_product_array[0], 1 trailing 0 for master_product_array[1], or 
+    // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means.
+    int temp_quotient_bool;
     if (multiplicand == 1) {
-        // Determine if num1[0] * multiplier_digits is going to result in (temp_quotient > 0)
+        temp_quotient_bool = calc_single_digit(num1[0], num2, iterator, muls, r);
     } else {
-        // Determine if num2[0] * multiplier_digits is going to result in (temp_quotient > 0)
+        temp_quotient_bool = calc_single_digit(num2[0], num1, iterator, muls, r);
     }
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
