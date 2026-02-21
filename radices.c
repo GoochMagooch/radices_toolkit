@@ -609,39 +609,42 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     printf("\n");
 }
 
-// CALCULATES PRODUCT OF 2 SINGLE DIGITS
-int single_digit_mul(int x, int *y, int mults, int r) {
-    int **master_array;
+// FIX: CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
+int calc_single_multiplicand(int x, int *y, int mults, int r) {
+    int *master_array;
     master_array = malloc(mults * sizeof *master_array);
 
+    // NOTE: functions on each loop:
     // multiply x * y[i]
     // separate temp_product
     // add temp_quotient, if present
     // full_product -> master_array[i]
-    // if (i == (mults - 1) && temp_quotient > 0) {
-    //     return 1;
-    // } else {
-    //     return 0;
-    // }
-    for (int i = iterator-1; i >= (iterator-muls); i--) {
-    temp_quotient = 0;
-    int temp_product;
-    int temp_conversion;
 
-    // Dynamically sizes each row of master_product_array, according to index at master_product_array[array_index]
-    master_product_array[array_index] = malloc(iterator * sizeof *master_product_array[array_index]);
+    for (int i = 0; i < mults; i++) {
+        int temp_quotient = 0;
+        int temp_product;
+        int temp_conversion;
 
-    // Temporary array whose elements are eventually added to master_product_array on each outer loop
-    int temp_product_arr[iterator];
+        // returns 0 or 1 based on presence of temp_quotient
+        if (i == (mults - 1) && temp_quotient > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
 
-    for (int j = iterator-1; j >= 0; j--) {
-        // (multiplier digit * multiplicand digit)
+        // XXX: REMOVE LATER
+        /*
         if (multiplicand == 1) { // top number is the multiplicand
             temp_product = num2[i] * num1[j];
         } else { // bottom number is the multiplicand
             temp_product = num1[i] * num2[j];
         }
-            // Adds quotient to temp_product
+        */
+
+        // calculates product digits
+        master_array[i] = (x * y[i]); // FIX: attempting to assign an integer value to a pointer variable
+
+        // Adds quotient to temp_product
         if (temp_quotient > 0) {
             temp_product += temp_quotient;
             temp_quotient = 0;
@@ -649,7 +652,7 @@ int single_digit_mul(int x, int *y, int mults, int r) {
         if (temp_product >= r) {
             temp_conversion = decimal_to_radix(temp_product, r, true);
 
-                // Separates product from quotient
+            // Separates product from quotient
             if (temp_conversion > 99) {
                 temp_quotient = temp_conversion / 100;
                 temp_product = temp_conversion - 100;
@@ -658,9 +661,9 @@ int single_digit_mul(int x, int *y, int mults, int r) {
                 temp_product = temp_conversion - (temp_quotient * 10);
             }
 
-            temp_product_arr[j] = temp_product;
+            master_array[i] = temp_product; // FIX: attempting to assign an integer value to a pointer variable 
         } else {
-            temp_product_arr[j] = temp_product;
+            master_array[i] = temp_product; // FIX: attempting to assign an integer value to a pointer variable 
         }
     }
 }
@@ -718,10 +721,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means.
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        temp_quotient_bool = single_digit_mul(num1[0], num2, iterator, muls, r);
+        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, r);
     } else {
-        temp_quotient_bool = single_digit_mul(num2[0], num1, iterator, muls, r);
+        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, iterator, r);
     }
+    printf("temp_quotient_bool: %d\n", temp_quotient_bool);
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
