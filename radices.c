@@ -642,7 +642,7 @@ int calc_single_multiplicand(int x, int *y, int mults, int r) {
         */
 
         // calculates product digits
-        master_array[i] = (x * y[i]); // FIX: attempting to assign an integer value to a pointer variable
+        master_array[i] = (x * y[i]);
 
         // Adds quotient to temp_product
         if (temp_quotient > 0) {
@@ -661,9 +661,9 @@ int calc_single_multiplicand(int x, int *y, int mults, int r) {
                 temp_product = temp_conversion - (temp_quotient * 10);
             }
 
-            master_array[i] = temp_product; // FIX: attempting to assign an integer value to a pointer variable 
+            master_array[i] = temp_product;
         } else {
-            master_array[i] = temp_product; // FIX: attempting to assign an integer value to a pointer variable 
+            master_array[i] = temp_product;
         }
     }
 }
@@ -718,7 +718,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //
     // Depending on the length of master_product_array[-1], each other ptr will need to be the same size.
     // This may mean the 2 trailing 0s for master_product_array[0], 1 trailing 0 for master_product_array[1], or 
-    // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means.
+    // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means
+    
+    // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
         temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, r);
