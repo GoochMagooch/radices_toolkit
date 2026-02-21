@@ -610,7 +610,19 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 }
 
 // CALCULATES PRODUCT OF 2 SINGLE DIGITS
-int calc_single_digit(int x, int *y, int mults, int r) {
+int calc_single_digit_mul(int x, int *y, int mults, int r) {
+    int **master_array;
+    master_array = malloc(mults * sizeof *master_array);
+
+    // multiply x * y[i]
+    // separate temp_product
+    // add temp_quotient, if present
+    // full_product -> master_array[i]
+    // if (i == (mults - 1) && temp_quotient > 0) {
+    //     return 1;
+    // } else {
+    //     return 0;
+    // }
     for (int i = iterator-1; i >= (iterator-muls); i--) {
     temp_quotient = 0;
     int temp_product;
@@ -706,9 +718,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means.
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        temp_quotient_bool = calc_single_digit(num1[0], num2, iterator, muls, r);
+        temp_quotient_bool = calc_single_digit_mul(num1[0], num2, iterator, muls, r);
     } else {
-        temp_quotient_bool = calc_single_digit(num2[0], num1, iterator, muls, r);
+        temp_quotient_bool = calc_single_digit_mul(num2[0], num1, iterator, muls, r);
     }
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
