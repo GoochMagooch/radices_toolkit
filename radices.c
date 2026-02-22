@@ -609,7 +609,7 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
     printf("\n");
 }
 
-// FIX: CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
+// CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
 int calc_single_multiplicand(int x, int *y, int mults, int r) {
     int *master_array;
     master_array = malloc(mults * sizeof *master_array);
@@ -619,6 +619,15 @@ int calc_single_multiplicand(int x, int *y, int mults, int r) {
     // separate temp_product
     // add temp_quotient, if present
     // full_product -> master_array[i]
+
+    // FIX: for (255 * 11)
+    //      y array == [0, 1, 1] - correct
+    //      I need the multiplier digits isolated
+    printf("y array: ");
+    for (int i = 0; i < mults; i++) {
+        printf("%d ", y[i]);
+    }
+    printf("\n");
 
     for (int i = 0; i < mults; i++) {
         int temp_quotient = 0;
@@ -723,9 +732,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, r);
+        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, muls, r);
     } else {
-        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, iterator, r);
+        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, muls, r);
     }
     printf("temp_quotient_bool: %d\n", temp_quotient_bool);
 
@@ -1050,6 +1059,7 @@ void radices_calculator() {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
             int multipliers = (num1_integers_len - len_diff);
+            printf("multipliers: %d\n", multipliers);
             calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
         } else if (op == '/') {
             calc_div(num1_integers, num2_integers);
