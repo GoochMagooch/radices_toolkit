@@ -614,11 +614,17 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
     int *master_array;
     master_array = malloc(multipliers * sizeof *master_array);
 
-    printf("iterator: %d\n", iterator);
-    printf("multipliers: %d\n", multipliers);
+    printf("\niterator: %d\n", iterator);
+    printf("master_arrayultipliers: %d\n", multipliers);
+    printf("x: %d\n", x);
+    printf("y array: ");
+    for (int i = (iterator-1); i >= (iterator-multipliers); i--) {
+        printf("%d ", y[i]);
+    }
+    printf("\n");
 
     int temp_quotient = 0;
-    for (int i = (iterator-1); i >= (iterator-multipliers); i--) {
+    for (int i = (iterator-1); i >= 0; i--) {
         int temp_product;
         int temp_conversion;
 
@@ -633,7 +639,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 
         printf("iterator inside of calc_single_multiplicand: %d\n", i);
         // calculates product digits
-        master_array[i-1] = (x * y[i]);
+        temp_product = (x * y[i]);
 
         // Adds quotient to temp_product
         if (temp_quotient > 0) {
@@ -653,14 +659,14 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
                 temp_product = temp_conversion - (temp_quotient * 10);
             }
 
-            master_array[i] = temp_product;
+            master_array[i-1] = temp_product;
         } else {
-            master_array[i] = temp_product;
+            master_array[i-1] = temp_product;
         }
     }
-    printf("master_array: ");
+    printf("master_array: \n");
     for (int i = 0; i < (iterator-multipliers); i++) {
-        printf("%d ", master_array[i]);
+        printf("%d\n", master_array[i]);
     }
     printf("\n");
     return 0;
@@ -717,9 +723,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, muls, r);
+        temp_quotient_bool = calc_single_multiplicand(num2[iterator-muls], num1, iterator, muls, r);
     } else {
-        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, iterator, muls, r);
+        temp_quotient_bool = calc_single_multiplicand(num1[iterator-muls], num2, iterator, muls, r);
     }
     printf("temp_quotient_bool: %d\n", temp_quotient_bool);
 
