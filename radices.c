@@ -610,21 +610,17 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 }
 
 // CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
-int calc_single_multiplicand(int x, int *y, int mults, int r) {
+int calc_single_multiplicand(int x, int *y, int i, int mults, int r) {
     int *master_array;
     master_array = malloc(mults * sizeof *master_array);
 
-    // NOTE: functions on each loop:
-    // multiply x * y[i]
-    // separate temp_product
-    // add temp_quotient, if present
-    // full_product -> master_array[i]
-
     // FIX: for (255 * 11)
-    //      y array == [0, 1, 1] - correct
-    //      I need the multiplier digits isolated
+    //      successfully isolated digits, but I am getting 2, 2 instead of 1, 1
+
+    printf("i: %d\n", i);
+    printf("mults: %d\n", mults);
     printf("y array: ");
-    for (int i = 0; i < mults; i++) {
+    for (int j = (i-1); j >= (i-mults); j--) {
         printf("%d ", y[i]);
     }
     printf("\n");
@@ -640,15 +636,6 @@ int calc_single_multiplicand(int x, int *y, int mults, int r) {
         } else {
             return 0;
         }
-
-        // XXX: REMOVE LATER
-        /*
-        if (multiplicand == 1) { // top number is the multiplicand
-            temp_product = num2[i] * num1[j];
-        } else { // bottom number is the multiplicand
-            temp_product = num1[i] * num2[j];
-        }
-        */
 
         // calculates product digits
         master_array[i] = (x * y[i]);
@@ -693,6 +680,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
     printf("\n");
 
+    printf("muls: %d\n", muls);
+
     // Determines if the top number is the multiplicand or multiplier
     int multiplyer_one = 0;
     int multiplyer_two = 0;
@@ -728,13 +717,31 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // Depending on the length of master_product_array[-1], each other ptr will need to be the same size.
     // This may mean the 2 trailing 0s for master_product_array[0], 1 trailing 0 for master_product_array[1], or 
     // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means
-    
+
     // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, muls, r);
+        int temp_num_arr[iterator];
+        for (int i = 0; i < iterator; i++) {
+            temp_num_arr[i] = num2[i];
+        }
+        printf("temp_num_arr: ");
+        for (int i = 0; i < iterator; i++) {
+            printf("%d ", temp_num_arr[i]);
+        }
+        printf("\n");
+        temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, muls, r);
     } else {
-        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, muls, r);
+        int temp_num_arr[iterator];
+        for (int i = 0; i < iterator; i++) {
+            temp_num_arr[i] = num1[i];
+        }
+        printf("temp_num_arr: ");
+        for (int i = 0; i < iterator; i++) {
+            printf("%d ", temp_num_arr[i]);
+        }
+        printf("\n");
+        temp_quotient_bool = calc_single_multiplicand(num2[0], num1, iterator, muls, r);
     }
     printf("temp_quotient_bool: %d\n", temp_quotient_bool);
 
