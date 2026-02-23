@@ -610,35 +610,30 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 }
 
 // CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
-int calc_single_multiplicand(int x, int *y, int i, int mults, int r) {
+int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r) {
     int *master_array;
-    master_array = malloc(mults * sizeof *master_array);
+    master_array = malloc(multipliers * sizeof *master_array);
 
-    // FIX: for (255 * 11)
-    //      successfully isolated digits, but I am getting 2, 2 instead of 1, 1
+    printf("iterator: %d\n", iterator);
+    printf("multipliers: %d\n", multipliers);
 
-    printf("i: %d\n", i);
-    printf("mults: %d\n", mults);
-    printf("y array: ");
-    for (int j = (i-1); j >= (i-mults); j--) {
-        printf("%d ", y[j]);
-    }
-    printf("\n");
-
-    for (int i = 0; i < mults; i++) {
-        int temp_quotient = 0;
+    int temp_quotient = 0;
+    for (int i = (iterator-1); i >= (iterator-multipliers); i--) {
         int temp_product;
         int temp_conversion;
 
+        /*
         // returns 0 or 1 based on presence of temp_quotient
-        if (i == (mults - 1) && temp_quotient > 0) {
+        if (i == (iterator-multipliers) && temp_quotient > 0) {
             return 1;
         } else {
             return 0;
         }
+        */
 
+        printf("iterator inside of calc_single_multiplicand: %d\n", i);
         // calculates product digits
-        master_array[i] = (x * y[i]);
+        master_array[i-1] = (x * y[i]);
 
         // Adds quotient to temp_product
         if (temp_quotient > 0) {
@@ -647,6 +642,7 @@ int calc_single_multiplicand(int x, int *y, int i, int mults, int r) {
         }
         if (temp_product >= r) {
             temp_conversion = decimal_to_radix(temp_product, r, true);
+            printf("temp_conversion inside of calc_single_multiplicand on iteration %d: %d\n", i, temp_conversion);
 
             // Separates product from quotient
             if (temp_conversion > 99) {
@@ -662,6 +658,12 @@ int calc_single_multiplicand(int x, int *y, int i, int mults, int r) {
             master_array[i] = temp_product;
         }
     }
+    printf("master_array: ");
+    for (int i = 0; i < (iterator-multipliers); i++) {
+        printf("%d ", master_array[i]);
+    }
+    printf("\n");
+    return 0;
 }
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
@@ -679,8 +681,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("%d ", num2[i]);
     }
     printf("\n");
-
-    printf("muls: %d\n", muls);
 
     // Determines if the top number is the multiplicand or multiplier
     int multiplyer_one = 0;
@@ -703,15 +703,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // FIX:
-    // what am I determining, depending on a 0 or a 1?
-    // 0 == temp_quotient !> 0;
-    // 1 == temp_quotient > 0;
-    //
+    // NOTE:
     // if temp_quotient > 0 {
-    //     sizeof(master_product_array[-1]) == (iterator+leading_zero+trailing_zero);
+    //     sizeof(every row) == (iterator+leading_zero+trailing_zero);
     // } else {
-    //     sizeof(master_product_array[-1]) == (index+leading_zero+trailing_zero);
+    //     sizeof(every row) == (index+leading_zero+trailing_zero);
     // }
     //
     // Depending on the length of master_product_array[-1], each other ptr will need to be the same size.
@@ -721,26 +717,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
-        int temp_num_arr[iterator];
-        for (int i = 0; i < iterator; i++) {
-            temp_num_arr[i] = num2[i];
-        }
-        printf("temp_num_arr: ");
-        for (int i = 0; i < iterator; i++) {
-            printf("%d ", temp_num_arr[i]);
-        }
-        printf("\n");
         temp_quotient_bool = calc_single_multiplicand(num1[0], num2, iterator, muls, r);
     } else {
-        int temp_num_arr[iterator];
-        for (int i = 0; i < iterator; i++) {
-            temp_num_arr[i] = num1[i];
-        }
-        printf("temp_num_arr: ");
-        for (int i = 0; i < iterator; i++) {
-            printf("%d ", temp_num_arr[i]);
-        }
-        printf("\n");
         temp_quotient_bool = calc_single_multiplicand(num2[0], num1, iterator, muls, r);
     }
     printf("temp_quotient_bool: %d\n", temp_quotient_bool);
@@ -873,10 +851,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      How to get:
                     //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
                     //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
-                    //
-                    // NOTE: I think array_index will play a role by representing the row #
-                    //       What could play a role in determining the number of elements in row[-1]?
-                    //       Once that question is answered then every other row will follow suit
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
