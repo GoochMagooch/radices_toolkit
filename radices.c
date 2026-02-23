@@ -621,7 +621,7 @@ int calc_single_multiplicand(int x, int *y, int i, int mults, int r) {
     printf("mults: %d\n", mults);
     printf("y array: ");
     for (int j = (i-1); j >= (i-mults); j--) {
-        printf("%d ", y[i]);
+        printf("%d ", y[j]);
     }
     printf("\n");
 
