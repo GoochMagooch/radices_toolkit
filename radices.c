@@ -628,15 +628,6 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
         int temp_product;
         int temp_conversion;
 
-        /*
-        // returns 0 or 1 based on presence of temp_quotient
-        if (i == (iterator-multipliers) && temp_quotient > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
-        */
-
         printf("iterator inside of calc_single_multiplicand: %d\n", i);
         // calculates product digits
         temp_product = (x * y[i]);
@@ -669,7 +660,13 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
         printf("%d\n", master_array[i]);
     }
     printf("\n");
-    return 0;
+
+    // returns 0 or 1 based on presence of temp_quotient
+    if (i == (iterator-multipliers) && temp_quotient > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
