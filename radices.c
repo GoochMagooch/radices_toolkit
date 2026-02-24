@@ -614,15 +614,6 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
     int *master_array;
     master_array = malloc(multipliers * sizeof *master_array);
 
-    printf("\niterator: %d\n", iterator);
-    printf("master_arrayultipliers: %d\n", multipliers);
-    printf("x: %d\n", x);
-    printf("y array: ");
-    for (int i = (iterator-1); i >= (iterator-multipliers); i--) {
-        printf("%d ", y[i]);
-    }
-    printf("\n");
-
     int temp_quotient = 0;
     for (int i = (iterator-1); i >= 0; i--) {
         int temp_product;
