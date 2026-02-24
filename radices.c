@@ -646,6 +646,8 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
             master_array[i-1] = temp_product;
         }
     }
+    printf("temp_quotient: %d\n", temp_quotient);
+
     printf("master_array: \n");
     for (int i = 0; i < (iterator-multipliers); i++) {
         printf("%d\n", master_array[i]);
@@ -653,7 +655,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
     printf("\n");
 
     // returns 0 or 1 based on presence of temp_quotient
-    if (i == (iterator-multipliers) && temp_quotient > 0) {
+    if (temp_quotient > 0) {
         return 1;
     } else {
         return 0;
