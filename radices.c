@@ -648,6 +648,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
     }
     printf("temp_quotient: %d\n", temp_quotient);
 
+    // FIX: MAKE SURE master_array IS POPULATED CORRECTLY
     printf("master_array: \n");
     for (int i = 0; i < (iterator-multipliers); i++) {
         printf("%d\n", master_array[i]);
@@ -710,7 +711,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // This may mean the 2 trailing 0s for master_product_array[0], 1 trailing 0 for master_product_array[1], or 
     // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means
 
-    // FIX: temp_quotient_bool always == 0
     int temp_quotient_bool;
     if (multiplicand == 1) {
         temp_quotient_bool = calc_single_multiplicand(num2[iterator-muls], num1, iterator, muls, r);
@@ -725,16 +725,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int index = iterator+1;
     int row_counter = 0;
 
-    // leading_zero = (muls - 1) to account for decrementing # of leading 0s
-    // trailing_zero = 0 to account for incrementing # of trailing 0s
-    // ensures first row never has trailing zero
-    // ensures last row never has leading zero
+    // calculates leading and trailing 0s
     int leading_zero = (muls - 1);
     int trailing_zero = 0;
 
     int array_index = 0;
     int temp_quotient = 0;
-    // bool array_w_quotient = false;
 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
@@ -781,9 +777,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        printf("\nleading_zero before conditions: %d\n", leading_zero);
-        printf("trailing_zero before conditions: %d\n", trailing_zero);
-
         int product_array_index = (index+leading_zero+trailing_zero);
 
         if (temp_quotient > 0) {
@@ -800,16 +793,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             // This will always ensure the correct number of trailing and leading 0s
-            printf("iterator_array condition one: ");
-            for (int i = 0; i < index; i++) {
-                printf("%d ", iterator_array[i]);
-            }
-            printf("\n");
             master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
-
-            printf("iterations (temp_quotient > 0): %d\n", product_array_index);
-            printf("leading_zero (temp_quotient > 0): %d\n", leading_zero);
-            printf("trailing_zero (temp_quotient > 0): %d\n\n", trailing_zero);
 
             int temp_index = 0;
             for (int i = 0; i < product_array_index; i++) {
@@ -826,20 +810,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else { // TODO: WORKING HERE
-            printf("index: %d\n", index);
-            printf("array_index: %d\n", array_index);
 
             master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
 
-            printf("temp_product_arr: ");
-            for (int i = 0; i < index; i++) {
-                printf("%d ", temp_product_arr[i]);
-            }
-            printf("\n");
-
             int temp_index = 0;
-            printf("leading_zero (temp_quotient !> 0): %d\n", leading_zero);
-            printf("trailing_zero (temp_quotient !> 0): %d\n", trailing_zero);
             for (int i = 0; i < index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
@@ -854,12 +828,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = 0;
                 }
             }
-
-            printf("master_product_array inside of temp_quotient condition: ");
-            for (int i = 0; i < index; i++) {
-                printf("%d ", master_product_array[array_index][i]);
-            }
-            printf("\n\n");
         }
         array_index++;
         row_counter++;
