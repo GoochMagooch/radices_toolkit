@@ -636,9 +636,13 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
             if (temp_conversion > 99) {
                 temp_quotient = temp_conversion / 100;
                 temp_product = temp_conversion - 100;
+                printf("temp_quotient: %d\n", temp_quotient);
+                printf("temp_product: %d\n", temp_product);
             } else {
                 temp_quotient = temp_conversion / 10;
                 temp_product = temp_conversion - (temp_quotient * 10);
+                printf("temp_quotient: %d\n", temp_quotient);
+                printf("temp_product: %d\n", temp_product);
             }
 
             master_array[i-1] = temp_product;
