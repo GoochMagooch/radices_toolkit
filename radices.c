@@ -611,14 +611,12 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 
 // CALCULATES PRODUCTS OF MULTIPLICAND DIGIT * MULTIPLER DIGITS
 int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r) {
-    int *master_array;
-    master_array = malloc(multipliers * sizeof *master_array);
 
     int temp_quotient = 0;
-    for (int i = (iterator-1); i >= 0; i--) {
-        int temp_product;
-        int temp_conversion;
+    int temp_product;
+    int temp_conversion;
 
+    for (int i = (iterator-1); i >= 0; i--) {
         printf("iterator inside of calc_single_multiplicand: %d\n", i);
         // calculates product digits
         temp_product = (x * y[i]);
@@ -644,20 +642,11 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
                 printf("temp_quotient: %d\n", temp_quotient);
                 printf("temp_product: %d\n", temp_product);
             }
-
-            master_array[i-1] = temp_product;
         } else {
-            master_array[i-1] = temp_product;
+            continue;
         }
     }
     printf("temp_quotient: %d\n", temp_quotient);
-
-    // FIX: MAKE SURE master_array IS POPULATED CORRECTLY
-    printf("master_array: \n");
-    for (int i = 0; i < (iterator-multipliers); i++) {
-        printf("%d\n", master_array[i]);
-    }
-    printf("\n");
 
     // returns 0 or 1 based on presence of temp_quotient
     if (temp_quotient > 0) {
