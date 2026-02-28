@@ -772,6 +772,17 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         int product_array_index = (index+leading_zero+trailing_zero);
 
+
+        // NOTE: 255 * 91
+        //       calc_single_multiplicand == 1
+        //       sizeof(master_product_array[-1]) == index;
+        //       master_product_array[0] will need 2 leading 0s, instead of 1
+        //
+        //       master_product_array[-1] will always need 0 leading 0s and (muls-1) trailing 0s
+        //       what changes:
+        //       the number of product digits, either index of iterator
+        //       the number of trailing and leading 0s in other rows. they won't always follow leading_zero-- and trailing_zero++
+
         if (temp_quotient > 0) {
 
             int iterator_array[index];
