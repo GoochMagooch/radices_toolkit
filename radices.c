@@ -617,7 +617,6 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
     int temp_conversion;
 
     for (int i = (iterator-1); i >= 0; i--) {
-        printf("iterator inside of calc_single_multiplicand: %d\n", i);
         // calculates product digits
         temp_product = (x * y[i]);
 
@@ -628,25 +627,19 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
         }
         if (temp_product >= r) {
             temp_conversion = decimal_to_radix(temp_product, r, true);
-            printf("temp_conversion inside of calc_single_multiplicand on iteration %d: %d\n", i, temp_conversion);
 
             // Separates product from quotient
             if (temp_conversion > 99) {
                 temp_quotient = temp_conversion / 100;
                 temp_product = temp_conversion - 100;
-                printf("temp_quotient: %d\n", temp_quotient);
-                printf("temp_product: %d\n", temp_product);
             } else {
                 temp_quotient = temp_conversion / 10;
                 temp_product = temp_conversion - (temp_quotient * 10);
-                printf("temp_quotient: %d\n", temp_quotient);
-                printf("temp_product: %d\n", temp_product);
             }
         } else {
             continue;
         }
     }
-    printf("temp_quotient: %d\n", temp_quotient);
 
     // returns 0 or 1 based on presence of temp_quotient
     if (temp_quotient > 0) {
@@ -693,22 +686,21 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         multiplicand = 0;
     }
 
-    // NOTE:
-    // if temp_quotient > 0 {
-    //     sizeof(every row) == (iterator+leading_zero+trailing_zero);
-    // } else {
-    //     sizeof(every row) == (index+leading_zero+trailing_zero);
-    // }
-    //
-    // Depending on the length of master_product_array[-1], each other ptr will need to be the same size.
-    // This may mean the 2 trailing 0s for master_product_array[0], 1 trailing 0 for master_product_array[1], or 
-    // it may mean 1 trailing 0 for them both. A problem to be solved later, but that's what it means
+    // calculates leading and trailing 0s
+    int leading_zero = (muls - 1);
+    int trailing_zero = 0;
+
+    int array_index = 0;
+    int temp_quotient = 0;
 
     int temp_quotient_bool;
+    int final_row_size;
     if (multiplicand == 1) {
         temp_quotient_bool = calc_single_multiplicand(num2[iterator-muls], num1, iterator, muls, r);
+        final_row_size = (index+leading_zero+trailing_zero);
     } else {
         temp_quotient_bool = calc_single_multiplicand(num1[iterator-muls], num2, iterator, muls, r);
+        final_row_size = (iterator+leading_zero+trailing_zero);
     }
     printf("temp_quotient_bool: %d\n", temp_quotient_bool);
 
@@ -717,13 +709,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     int index = iterator+1;
     int row_counter = 0;
-
-    // calculates leading and trailing 0s
-    int leading_zero = (muls - 1);
-    int trailing_zero = 0;
-
-    int array_index = 0;
-    int temp_quotient = 0;
 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
@@ -770,7 +755,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        int product_array_index = (index+leading_zero+trailing_zero);
+        // I think this changes depending on the presence of temp_quotient
+        if (temp_quotient_bool == 1) {
+            int product_array_index = (index+leading_zero+trailing_zero);
+        } else {
+            int product_array_index = (iterator+leading_zero+trailing_zero);
+        }
 
 
         // NOTE: 255 * 91
@@ -782,6 +772,19 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //       what changes:
         //       the number of product digits, either index of iterator
         //       the number of trailing and leading 0s in other rows. they won't always follow leading_zero-- and trailing_zero++
+        //       trailing 0s will also always increment by 1
+        //       leading 0s are what will change, based on the value of temp_quotient_bool, and always be 0 once the loop reaches the last row
+        //
+        // NOTE: depending on the presence of temp_quotient, the number of leading 0s changes:
+        //       sizeof(current_row) = final_row_size - (# of product digits + trailing_zero)
+        //       A counter for product digits will be necessary to add to trailing_zero and then the sum subtracted from final_row_size
+        //
+        //       if temp_quotient_bool == 1 {
+        //           leading_zero = sizeof(master_product_array[-1]) - muls;
+        //       } else {
+        //           // 
+        //       }
+
 
         if (temp_quotient > 0) {
 
