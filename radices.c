@@ -690,11 +690,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int leading_zero = (muls - 1);
     int trailing_zero = 0;
 
+    int index = iterator+1;
+    int row_counter = 0;
+
     int array_index = 0;
     int temp_quotient = 0;
 
     int temp_quotient_bool;
-    int final_row_size;
+    int final_row_size = 0;
     if (multiplicand == 1) {
         temp_quotient_bool = calc_single_multiplicand(num2[iterator-muls], num1, iterator, muls, r);
         final_row_size = (index+leading_zero+trailing_zero);
@@ -706,10 +709,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
-
-    int index = iterator+1;
-    int row_counter = 0;
-
+ 
     // XXX: START OF OUTER LOOP
     for (int i = iterator-1; i >= (iterator-muls); i--) {
         temp_quotient = 0;
@@ -755,11 +755,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        // I think this changes depending on the presence of temp_quotient
-        if (temp_quotient_bool == 1) {
-            int product_array_index = (index+leading_zero+trailing_zero);
+        int product_array_index;
+        if (temp_quotient > 0) {
+            product_array_index = (index+leading_zero+trailing_zero);
         } else {
-            int product_array_index = (iterator+leading_zero+trailing_zero);
+            product_array_index = (iterator+leading_zero+trailing_zero);
         }
 
 
@@ -778,13 +778,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // NOTE: depending on the presence of temp_quotient, the number of leading 0s changes:
         //       sizeof(current_row) = final_row_size - (# of product digits + trailing_zero)
         //       A counter for product digits will be necessary to add to trailing_zero and then the sum subtracted from final_row_size
-        //
-        //       if temp_quotient_bool == 1 {
-        //           leading_zero = sizeof(master_product_array[-1]) - muls;
-        //       } else {
-        //           // 
-        //       }
-
 
         if (temp_quotient > 0) {
 
@@ -818,10 +811,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } else { // TODO: WORKING HERE
 
-            master_product_array[array_index] = malloc(index * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < product_array_index; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                     // FIX: 255 * 11
