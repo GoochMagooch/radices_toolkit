@@ -776,10 +776,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //       leading 0s are what will change, based on the value of temp_quotient_bool, and always be 0 once the loop reaches the last row
         //
         // NOTE: depending on the presence of temp_quotient, the number of leading 0s changes:
-        //       sizeof(current_row) = final_row_size - (# of product digits + trailing_zero)
+        //       leading_zero = final_row_size - (# of product digits (index of iterator) + trailing_zero);
         //       A counter for product digits will be necessary to add to trailing_zero and then the sum subtracted from final_row_size
+        //       This is close! 255 * 91 == 23200 instead of 23205
 
         if (temp_quotient > 0) {
+            leading_zero = final_row_size - (index + trailing_zero);
 
             int iterator_array[index];
             int iterator_counter = 1;
@@ -810,6 +812,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else { // TODO: WORKING HERE
+            leading_zero = final_row_size - (iterator + trailing_zero);
 
             master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
