@@ -688,9 +688,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     // calculates leading and trailing 0s
     int leading_zero = (muls - 1);
+    printf("leading_zero: %d\n", leading_zero);
     int trailing_zero = 0;
 
     int index = iterator+1;
+    printf("index: %d\n", index);
     int row_counter = 0;
 
     int array_index = 0;
@@ -705,7 +707,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         temp_quotient_bool = calc_single_multiplicand(num1[iterator-muls], num2, iterator, muls, r);
         final_row_size = (iterator+leading_zero+trailing_zero);
     }
-    printf("temp_quotient_bool: %d\n", temp_quotient_bool);
+    printf("temp_quotient_bool: %d\n\n", temp_quotient_bool);
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
@@ -757,31 +759,33 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         int product_array_index;
         if (temp_quotient > 0) {
+            // FIX: product_array_index == 6 here when it should be 5
+            //      leading_zero becomes 2 during the else condition below, decrements and becomes 1 for this calculation
+            printf("index: %d\n", index);
+            printf("leading_zero: %d\n", leading_zero);
+            printf("trailing_zero: %d\n", trailing_zero);
             product_array_index = (index+leading_zero+trailing_zero);
         } else {
             product_array_index = (iterator+leading_zero+trailing_zero);
         }
+        printf("product_array_index: %d\n", product_array_index);
 
 
         // NOTE: 255 * 91
         //       calc_single_multiplicand == 1
         //       sizeof(master_product_array[-1]) == index;
         //       master_product_array[0] will need 2 leading 0s, instead of 1
-        //
-        //       master_product_array[-1] will always need 0 leading 0s and (muls-1) trailing 0s
-        //       what changes:
-        //       the number of product digits, either index of iterator
-        //       the number of trailing and leading 0s in other rows. they won't always follow leading_zero-- and trailing_zero++
-        //       trailing 0s will also always increment by 1
-        //       leading 0s are what will change, based on the value of temp_quotient_bool, and always be 0 once the loop reaches the last row
-        //
+        //       leading_zero will always be 0 at master_product_array[-1]
+
         // NOTE: depending on the presence of temp_quotient, the number of leading 0s changes:
         //       leading_zero = final_row_size - (# of product digits (index of iterator) + trailing_zero);
         //       A counter for product digits will be necessary to add to trailing_zero and then the sum subtracted from final_row_size
-        //       This is close! 255 * 91 == 23200 instead of 23205
+        //       This is close! 255 * 91 == 23200 instead of 23205. The last digit of calculations is not being added
 
         if (temp_quotient > 0) {
+            printf("final_row_size: %d\n", final_row_size);
             leading_zero = final_row_size - (index + trailing_zero);
+            printf("leading_zero temp_quotient > 0: %d\n", leading_zero);
 
             int iterator_array[index];
             int iterator_counter = 1;
@@ -812,8 +816,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else { // TODO: WORKING HERE
+            printf("final_row_size: %d\n", final_row_size);
             leading_zero = final_row_size - (iterator + trailing_zero);
-
+            printf("leading_zero temp_quotient !> 0: %d\n\n", leading_zero);
             master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
@@ -824,6 +829,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      How to get:
                     //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
                     //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
+                    //
+                    // FIX: Something in here is causing the last digit of the first array to be 0 instead of a product digit
+                    //      The same thing doesn't happen if (temp_quotient > 0)
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
@@ -831,6 +839,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = 0;
                 }
             }
+
         }
         array_index++;
         row_counter++;
