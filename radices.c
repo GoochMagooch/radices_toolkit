@@ -783,12 +783,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //       This is close! 255 * 91 == 23200 instead of 23205. The last digit of calculations is not being added
 
         if (temp_quotient > 0) {
-            printf("final_row_size: %d\n", final_row_size);
-            printf("index: %d\n", index);
-            printf("trailing_zero: %d\n", trailing_zero);
-            leading_zero = final_row_size - (index - trailing_zero);
+            printf("1. final_row_size: %d\n", final_row_size);
+            printf("2. index: %d\n", index);
+            printf("3. trailing_zero: %d\n", trailing_zero);
+            leading_zero = final_row_size - (index + trailing_zero);
             // FIX: this SHOULD BE 0, but it's 2???
-            printf("leading_zero temp_quotient > 0: %d\n", leading_zero);
+            printf("4. leading_zero temp_quotient > 0: %d\n", leading_zero);
 
             int iterator_array[index];
             int iterator_counter = 1;
@@ -818,7 +818,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     master_product_array[array_index][i] = 0;
                 }
             }
-        } else { // TODO: WORKING HERE
+        } else {
             printf("final_row_size: %d\n", final_row_size);
             leading_zero = final_row_size - (iterator - trailing_zero);
             printf("leading_zero temp_quotient !> 0: %d\n\n", leading_zero);
