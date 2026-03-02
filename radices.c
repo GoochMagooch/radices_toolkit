@@ -765,19 +765,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             leading_zero = final_row_size - (iterator - trailing_zero);
             product_array_index = (iterator+leading_zero+trailing_zero);
         }
+
+        // FIX: 255 * 11
+        //      product_array_index == 5 on iteration 0
+        //      product_array_index == 7 on iteration 1
         printf("product_array_index: %d\n", product_array_index);
-
-
-        // NOTE: 255 * 91
-        //       calc_single_multiplicand == 1
-        //       sizeof(master_product_array[-1]) == index;
-        //       master_product_array[0] will need 2 leading 0s, instead of 1
-        //       leading_zero will always be 0 at master_product_array[-1]
-
-        // NOTE: depending on the presence of temp_quotient, the number of leading 0s changes:
-        //       leading_zero = final_row_size - (# of product digits (index of iterator) + trailing_zero);
-        //       A counter for product digits will be necessary to add to trailing_zero and then the sum subtracted from final_row_size
-        //       This is close! 255 * 91 == 23200 instead of 23205. The last digit of calculations is not being added
 
         if (temp_quotient > 0) {
             int iterator_array[index];
@@ -841,7 +833,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%d ", master_product_array[i][j]);
+                    printf("%d", master_product_array[i][j]);
                 }
             }
             printf("\n");
@@ -849,7 +841,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
-                   printf("%d ", master_product_array[i][j]);
+                   printf("%d", master_product_array[i][j]);
                 }
             }
             printf("\n");
