@@ -784,7 +784,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         if (temp_quotient > 0) {
             printf("final_row_size: %d\n", final_row_size);
-            leading_zero = final_row_size - (index + trailing_zero);
+            printf("index: %d\n", index);
+            printf("trailing_zero: %d\n", trailing_zero);
+            leading_zero = final_row_size - (index - trailing_zero);
+            // FIX: this SHOULD BE 0, but it's 2???
             printf("leading_zero temp_quotient > 0: %d\n", leading_zero);
 
             int iterator_array[index];
@@ -817,7 +820,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } else { // TODO: WORKING HERE
             printf("final_row_size: %d\n", final_row_size);
-            leading_zero = final_row_size - (iterator + trailing_zero);
+            leading_zero = final_row_size - (iterator - trailing_zero);
             printf("leading_zero temp_quotient !> 0: %d\n\n", leading_zero);
             master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
 
