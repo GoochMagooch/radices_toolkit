@@ -764,12 +764,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         } else {
             leading_zero = final_row_size - (iterator - trailing_zero);
             product_array_index = (iterator+leading_zero+trailing_zero);
+            // FIX: 255 * 11
+            //      product_array_index == 5 on iteration 0
+            //      product_array_index == 7 on iteration 1
+            //
+            //      final_row_size should == 4, instead it == 5
+            printf("leading_zero: %d\n", leading_zero);
+            printf("product_array_index: %d\n", product_array_index);
         }
-
-        // FIX: 255 * 11
-        //      product_array_index == 5 on iteration 0
-        //      product_array_index == 7 on iteration 1
-        printf("product_array_index: %d\n", product_array_index);
 
         if (temp_quotient > 0) {
             int iterator_array[index];
