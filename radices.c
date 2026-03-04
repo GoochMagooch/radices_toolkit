@@ -769,6 +769,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             //      product_array_index == 7 on iteration 1
             //
             //      final_row_size should == 4, instead it == 5
+            //      leading_zero == (muls -1)
+            //      a new way to initialize leading_zero is necessary
+            printf("final_row_size: %d\n", final_row_size);
             printf("leading_zero: %d\n", leading_zero);
             printf("product_array_index: %d\n", product_array_index);
         }
