@@ -760,21 +760,20 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
         } // XXX: END OF INNER LOOP
 
-        int product_array_index;
+        // int product_array_index;
         // NOTE: why is this condition separate if the conditions are the same as Ln 783?
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
-            product_array_index = (index+leading_zero+trailing_zero);
+            // product_array_index = (index+leading_zero+trailing_zero);
         } else {
             leading_zero = final_row_size - (iterator - trailing_zero);
-            product_array_index = (iterator+leading_zero+trailing_zero);
+            // product_array_index = (iterator+leading_zero+trailing_zero);
             // FIX: 255 * 11
             //      product_array_index == 4 on iteration 0
             //      product_array_index == 6 on iteration 1
             //      leading_zero is interrupting the process of properly allocating value to product_array_index
             printf("final_row_size: %d\n", final_row_size);
             printf("leading_zero: %d\n", leading_zero);
-            printf("product_array_index: %d\n", product_array_index);
         }
 
         if (temp_quotient > 0) {
@@ -790,10 +789,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             // This will always ensure the correct number of trailing and leading 0s
-            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(final_row_size * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < final_row_size; i++) {
                 // Adds leading 0s
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
@@ -807,16 +806,18 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else {
-            master_product_array[array_index] = malloc(product_array_index * sizeof *master_product_array[array_index]);
+            master_product_array[array_index] = malloc(final_row_size * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
-            for (int i = 0; i < product_array_index; i++) {
+            for (int i = 0; i < final_row_size; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
                     // FIX: 255 * 11
                     //      How to get:
                     //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
                     //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
+                    //
+                    //      master_product_array[0] == [0, 0, 2, 5], instead of [2, 5, 5, 0]
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
@@ -856,7 +857,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
-            for (int j = 0; j < (index+1); j++) {
+            for (int j = 0; j < final_row_size; j++) {
                 printf("%d ", master_product_array[i][j]);
             }
             printf("\n");
@@ -884,9 +885,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
+            // FIX: 255 * 11 not assigning different value to carry, it still == 2, instead of 0 or 1
             printf("carry: %d\n", carry);
             printf("\nProduct with no carry: ");
-            for (int i = 0; i < (index+1); i++) {
+            for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
             }
             printf("\n");
