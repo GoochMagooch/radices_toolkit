@@ -764,14 +764,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // NOTE: why is this condition separate if the conditions are the same as Ln 783?
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
-            // product_array_index = (index+leading_zero+trailing_zero);
         } else {
             leading_zero = final_row_size - (iterator - trailing_zero);
-            // product_array_index = (iterator+leading_zero+trailing_zero);
-            // FIX: 255 * 11
-            //      product_array_index == 4 on iteration 0
-            //      product_array_index == 6 on iteration 1
-            //      leading_zero is interrupting the process of properly allocating value to product_array_index
             printf("final_row_size: %d\n", final_row_size);
             printf("leading_zero: %d\n", leading_zero);
         }
