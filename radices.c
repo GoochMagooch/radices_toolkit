@@ -702,12 +702,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int final_row_size = 0;
     if (multiplicand == 1) {
         temp_quotient_bool = calc_single_multiplicand(num2[iterator-muls], num1, iterator, muls, r);
-        final_row_size = (index+leading_zero+trailing_zero);
     } else {
         temp_quotient_bool = calc_single_multiplicand(num1[iterator-muls], num2, iterator, muls, r);
-        final_row_size = (iterator+leading_zero+trailing_zero);
     }
     printf("temp_quotient_bool: %d\n\n", temp_quotient_bool);
+    if (temp_quotient_bool == 1) {
+        final_row_size = (index+leading_zero+trailing_zero);
+    } else {
+        final_row_size = (iterator+leading_zero+trailing_zero);
+    }
 
     int **master_product_array; // Holds all (multiplyer digit * multiplicand digit) calculations
     master_product_array = malloc(muls * sizeof *master_product_array); // Assigns master_product_array a size of muls
@@ -758,6 +761,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         } // XXX: END OF INNER LOOP
 
         int product_array_index;
+        // NOTE: why is this condition separate if the conditions are the same as Ln 783?
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
             product_array_index = (index+leading_zero+trailing_zero);
