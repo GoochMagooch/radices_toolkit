@@ -804,12 +804,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             for (int i = 0; i < final_row_size; i++) {
                 if (i < leading_zero) {
                     master_product_array[array_index][i] = 0;
-                    // FIX: 255 * 11
-                    //      How to get:
-                    //      [0, 2, 5, 5], [2, 5, 5, 0] = 2805
-                    //      Instead of [0, 2, 5, 5, 0], [2, 5, 5, 0, 0] = 28050
-                    //
-                    //      master_product_array[0] == [0, 0, 2, 5], instead of [2, 5, 5, 0]
                 } else if (i >= leading_zero && i < (iterator + leading_zero)) {
                     master_product_array[array_index][i] = temp_product_arr[temp_index];
                     temp_index++;
