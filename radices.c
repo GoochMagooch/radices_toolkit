@@ -765,12 +765,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
         } else {
-            leading_zero = final_row_size - (iterator - trailing_zero);
-            // FIX:
-            //      iteration 0: leading_zero == 1
-            //      iteration 1: leading_zero == 2 after trailing_zero increments
-            printf("final_row_size: %d\n", final_row_size);
-            printf("leading_zero print 2: %d\n", leading_zero);
+            leading_zero = final_row_size - iterator - trailing_zero;
         }
 
         if (temp_quotient > 0) {
