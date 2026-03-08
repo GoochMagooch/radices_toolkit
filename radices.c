@@ -643,6 +643,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
+    // FIX: ALLOWS INVALID BASE DIGITS (255 * 99 in base 6)
 
     clear();
     menu_banner();
