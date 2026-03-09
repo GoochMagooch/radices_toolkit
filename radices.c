@@ -267,6 +267,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     char final_arr[256];
     bool invalid_int = false;
 
+    // NOTE: THIS SHOULD DETECT THE INVALID DIGIT
     for (int i = (iterator-1); i >= 0; i--) {
         if (num1[i] >= r) {
             invalid_int = true;
