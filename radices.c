@@ -265,35 +265,42 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     int mini_sum;
     bool carry_over = false;
     char final_arr[256];
-    bool invalid_int = false;
+    bool invalid = false;
+    int invalid_int;
 
-    // NOTE: THIS SHOULD DETECT THE INVALID DIGIT
     for (int i = (iterator-1); i >= 0; i--) {
-        if (num1[i] >= r) {
-            invalid_int = true;
-            printf("Digit %c invalid in base %d\n", return_char(num1[i]), r);
-            break;
-        } else if (num2[i] >= r) {
-            invalid_int = true;
-            printf("Digit %c invalid in base %d\n", return_char(num2[i]), r);
-            break;
-        }
-        mini_sum = (num1[i] + num2[i]);
-        printf("mini_sum: %d\n", mini_sum);
-        if (carry_over == true) {
-            mini_sum += 1;
-            if (mini_sum > (r-1)) {
-                final_arr[i] = return_char(mini_sum-r);
-            } else {
-                final_arr[i] = return_char(mini_sum);
-                carry_over = false;
-            }
+        if (invalid == true) {
+            printf("TEST\n");
+            continue;
         } else {
-            if (mini_sum > (r-1)) {
-                final_arr[i] = return_char(mini_sum-r);
-                carry_over = true;
+            if (num1[i] >= r) {
+                invalid = true;
+                invalid_int = num1[i];
+                printf("Digit %c invalid in base %d\n", return_char(num1[i]), r);
+                break;
+            } else if (num2[i] >= r) {
+                invalid = true;
+                invalid_int = num2[i];
+                printf("Digit %c invalid in base %d\n", return_char(num2[i]), r);
+                break;
+            }
+            mini_sum = (num1[i] + num2[i]);
+            printf("mini_sum: %d\n", mini_sum);
+            if (carry_over == true) {
+                mini_sum += 1;
+                if (mini_sum > (r-1)) {
+                    final_arr[i] = return_char(mini_sum-r);
+                } else {
+                    final_arr[i] = return_char(mini_sum);
+                    carry_over = false;
+                }
             } else {
-                final_arr[i] = return_char(mini_sum);
+                if (mini_sum > (r-1)) {
+                    final_arr[i] = return_char(mini_sum-r);
+                    carry_over = true;
+                } else {
+                    final_arr[i] = return_char(mini_sum);
+                }
             }
         }
     }
@@ -303,48 +310,55 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     menu_banner();
     */
     // output sum
-    if (invalid_int == true) {
-        // TODO: future code to persist loop
-    } else if (extra_arr == true) {
-        // fill empty in array with 2s complement
-        for (int i = 0; i < iterator; i++) {
-            ex_arr[i] = return_int(final_arr[i]);
-        }
-        printf("final array in calc_add(): ");
-        for (int i = 0; i < iterator; i++) {
-            printf("%d ", ex_arr[i]);
-        }
-        printf("\n");
-        if (carry_over == true) {
-            *carry = 1;
-        } else {
-            *carry = 0;
-        }
+    if (invalid == true) {
+
+        // FIX: If invalid is false the rest of the condition runs just fine
+        //      If invalid is true the rest of the condition doesn't run, 
+        //      but then nothing inside of this condition runs
+        printf("TEST\n");
+        printf("%d invalid in base %d", invalid_int, r);
     } else {
-        for (int i = 0; i < iterator; i++) {
-            printf("%c", return_char(num1[i]));
-        }
-        printf(" + ");
-        for (int i = 0; i < iterator; i++) {
-            printf("%c", return_char(num2[i]));
-        }
-        printf(" = ");
-        if (carry_over == true) {
-            printf("1");
-        }
-        for (int i = 0; final_arr[i] != '\0'; i++) {
-            printf("%c", final_arr[i]);
-        }
-        if (r == 2) {
-            printf(" (Binary)\n");
-        } else if (r == 8) {
-            printf(" (Octal)\n");
-        } else if (r == 10) {
-            printf(" (Decimal)\n");
-        } else if (r == 16) {
-            printf(" (Hexadecimal)\n");
+        if (extra_arr == true) {
+            // fill empty in array with 2s complement
+            for (int i = 0; i < iterator; i++) {
+                ex_arr[i] = return_int(final_arr[i]);
+            }
+            printf("final array in calc_add(): ");
+            for (int i = 0; i < iterator; i++) {
+                printf("%d ", ex_arr[i]);
+            }
+            printf("\n");
+            if (carry_over == true) {
+                *carry = 1;
+            } else {
+                *carry = 0;
+            }
         } else {
-            printf(" (base %d)\n", r);
+            for (int i = 0; i < iterator; i++) {
+                printf("%c", return_char(num1[i]));
+            }
+            printf(" + ");
+            for (int i = 0; i < iterator; i++) {
+                printf("%c", return_char(num2[i]));
+            }
+            printf(" = ");
+            if (carry_over == true) {
+                printf("1");
+            }
+            for (int i = 0; final_arr[i] != '\0'; i++) {
+                printf("%c", final_arr[i]);
+            }
+            if (r == 2) {
+                printf(" (Binary)\n");
+            } else if (r == 8) {
+                printf(" (Octal)\n");
+            } else if (r == 10) {
+                printf(" (Decimal)\n");
+            } else if (r == 16) {
+                printf(" (Hexadecimal)\n");
+            } else {
+                printf(" (base %d)\n", r);
+            }
         }
     }
 }
