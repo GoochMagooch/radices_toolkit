@@ -268,10 +268,14 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     bool invalid = false;
     int invalid_int;
 
+    // NOTE: This won't print if an invalid digit is entered, even though it's outside
+    //       of the below condition. The problem is somewhere else.
+    printf("WILL THIS FUCKING PRINT????????????\n");
+
     for (int i = (iterator-1); i >= 0; i--) {
         if (invalid == true) {
             printf("TEST\n");
-            continue;
+            break;
         } else {
             if (num1[i] >= r) {
                 invalid = true;
