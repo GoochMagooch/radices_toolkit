@@ -315,10 +315,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     */
     // output sum
     if (invalid == true) {
-
-        // FIX: If invalid is false the rest of the condition runs just fine
-        //      If invalid is true the rest of the condition doesn't run, 
-        //      but then nothing inside of this condition runs
         printf("TEST\n");
         printf("%d invalid in base %d", invalid_int, r);
     } else {
@@ -936,6 +932,8 @@ void radices_calculator() {
             printf("Enter your second number in base %d: ", radix);
         }
         scanf("%255s", num2);
+
+        // NOTE: THE CHECK FOR INVALID DIGITS SHOULD BE HERE, BEFORE ANYTHING ELSE RUNS
 
         // add leading 0s, if applicable
         int num1_len = arr_len(num1);
