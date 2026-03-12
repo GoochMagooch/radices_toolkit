@@ -934,6 +934,19 @@ void radices_calculator() {
         scanf("%255s", num2);
 
         // NOTE: THE CHECK FOR INVALID DIGITS SHOULD BE HERE, BEFORE ANYTHING ELSE RUNS
+        for (int i = 0; i < 256; i++) {
+            if (int_return(num1[i]) >= radix) {
+                printf("%c invalid in base %d\n", num1[i], radix);
+                break;
+            }
+        }
+
+        for (int i = 0; i < 256; i++) {
+            if (int_return(num2[i]) >= radix) {
+                printf("%c invalid in base %d\n", num2[i], radix);
+                break;
+            }
+        }
 
         // add leading 0s, if applicable
         int num1_len = arr_len(num1);
