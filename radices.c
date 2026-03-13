@@ -891,6 +891,9 @@ void radices_calculator() {
     printf("RADICES CALCULATOR\n");
     printf("Add, Subtract or Multiply radices from binary to hexadecimal!\n\n");
 
+    bool invalid_character = false;
+    int invalid_character_printed;
+
     bool persist = true;
     while (persist) {
         int radix;
@@ -933,17 +936,21 @@ void radices_calculator() {
         }
         scanf("%255s", num2);
 
-        // NOTE: THE CHECK FOR INVALID DIGITS SHOULD BE HERE, BEFORE ANYTHING ELSE RUNS
+        // FIX: As the arrays are traversed they are filled with random noise, because they're assigned 256 character.
+        //      This means that no matter which digits are entered, there will likely always be one that's invalid.
+        //      The invalid_character check will need to go somewhere else.
         for (int i = 0; i < 256; i++) {
-            if (int_return(num1[i]) >= radix) {
-                printf("%c invalid in base %d\n", num1[i], radix);
+            if (return_int(num1[i]) >= radix) {
+                invalid_character = true;
+                invalid_character_printed = return_int(num1[i]);
                 break;
             }
         }
 
         for (int i = 0; i < 256; i++) {
-            if (int_return(num2[i]) >= radix) {
-                printf("%c invalid in base %d\n", num2[i], radix);
+            if (return_int(num2[i]) >= radix) {
+                invalid_character = true;
+                invalid_character_printed = return_int(num2[i]);
                 break;
             }
         }
@@ -997,9 +1004,14 @@ void radices_calculator() {
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
-            int multipliers = (num1_integers_len - len_diff);
-            printf("multipliers: %d\n", multipliers);
-            calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
+            if (invalid_character == true) {
+                printf("%d invalid in base %d\n", invalid_character_printed, radix);
+                break;
+            } else {
+                int multipliers = (num1_integers_len - len_diff);
+                printf("multipliers: %d\n", multipliers);
+                calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
+            }
         } else if (op == '/') {
             calc_div(num1_integers, num2_integers);
         } else {
