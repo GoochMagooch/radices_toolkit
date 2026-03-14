@@ -663,15 +663,30 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     clear();
     menu_banner();
 
+    bool invalid_digit = false;
+    int invalid_digit_printed;
+
     printf("\n");
     for (int i = 0; i < iterator; i++) {
+        if (num1[i] >= r) {
+            invalid_digit = true;
+            invalid_digit_printed = num1[i];
+        }
         printf("%d ", num1[i]);
     }
     printf("\n");
     for (int i = 0; i < iterator; i++) {
+        if (num2[i] >= r) {
+            invalid_digit = true;
+            invalid_digit_printed = num2[i];
+        }
         printf("%d ", num2[i]);
     }
     printf("\n");
+
+    if (invalid_digit == true) {
+        printf("Digit %d invalid in base %d", invalid_digit_printed, r);
+    }
 
     // Determines if the top number is the multiplicand or multiplier
     int multiplyer_one = 0;
@@ -891,9 +906,6 @@ void radices_calculator() {
     printf("RADICES CALCULATOR\n");
     printf("Add, Subtract or Multiply radices from binary to hexadecimal!\n\n");
 
-    bool invalid_character = false;
-    int invalid_character_printed;
-
     bool persist = true;
     while (persist) {
         int radix;
@@ -935,25 +947,6 @@ void radices_calculator() {
             printf("Enter your second number in base %d: ", radix);
         }
         scanf("%255s", num2);
-
-        // FIX: As the arrays are traversed they are filled with random noise, because they're assigned 256 character.
-        //      This means that no matter which digits are entered, there will likely always be one that's invalid.
-        //      The invalid_character check will need to go somewhere else.
-        for (int i = 0; i < 256; i++) {
-            if (return_int(num1[i]) >= radix) {
-                invalid_character = true;
-                invalid_character_printed = return_int(num1[i]);
-                break;
-            }
-        }
-
-        for (int i = 0; i < 256; i++) {
-            if (return_int(num2[i]) >= radix) {
-                invalid_character = true;
-                invalid_character_printed = return_int(num2[i]);
-                break;
-            }
-        }
 
         // add leading 0s, if applicable
         int num1_len = arr_len(num1);
@@ -1004,14 +997,9 @@ void radices_calculator() {
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
-            if (invalid_character == true) {
-                printf("%d invalid in base %d\n", invalid_character_printed, radix);
-                break;
-            } else {
-                int multipliers = (num1_integers_len - len_diff);
-                printf("multipliers: %d\n", multipliers);
-                calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
-            }
+            int multipliers = (num1_integers_len - len_diff);
+            printf("multipliers: %d\n", multipliers);
+            calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
         } else if (op == '/') {
             calc_div(num1_integers, num2_integers);
         } else {
