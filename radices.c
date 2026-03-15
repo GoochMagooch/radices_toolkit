@@ -664,13 +664,21 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     menu_banner();
 
     bool invalid_digit = false;
-    int invalid_digit_printed;
+    int invalid_condition;
+    int invalid_integer;
+    char invalid_character;
 
     printf("\n");
     for (int i = 0; i < iterator; i++) {
         if (num1[i] >= r) {
             invalid_digit = true;
-            invalid_digit_printed = num1[i];
+            if (num1[i] > 9) {
+                invalid_condition = 0;
+                invalid_character = return_char(num1[i]);
+            } else {
+                invalid_condition = 1;
+                invalid_integer = num1[i];
+            }
         }
         printf("%d ", num1[i]);
     }
@@ -678,14 +686,26 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     for (int i = 0; i < iterator; i++) {
         if (num2[i] >= r) {
             invalid_digit = true;
-            invalid_digit_printed = num2[i];
+            if (num2[i] > 9) {
+                invalid_condition = 0;
+                invalid_character = return_char(num2[i]);
+            } else {
+                invalid_condition = 1;
+                invalid_integer = num2[i];
+            }
         }
         printf("%d ", num2[i]);
     }
     printf("\n");
 
     if (invalid_digit == true) {
-        printf("Digit %d invalid in base %d", invalid_digit_printed, r);
+        if (invalid_condition == 0) {
+            printf("Digit %c invalid in base %d\n", invalid_character, r);
+            return;
+        } else {
+            printf("Digit %d invalid in base %d\n", invalid_integer, r);
+            return;
+        }
     }
 
     // Determines if the top number is the multiplicand or multiplier
