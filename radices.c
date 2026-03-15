@@ -268,10 +268,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     bool invalid = false;
     int invalid_int;
 
-    // NOTE: This won't print if an invalid digit is entered, even though it's outside
-    //       of the below condition. The problem is somewhere else.
-    printf("WILL THIS FUCKING PRINT????????????\n");
-
     for (int i = (iterator-1); i >= 0; i--) {
         if (invalid == true) {
             printf("TEST\n");
@@ -658,11 +654,11 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
-    // FIX: ALLOWS INVALID BASE DIGITS (255 * 99 in base 6)
 
     clear();
     menu_banner();
 
+    // NOTE: ALL DIGIT SYMBOLS NEED TO BE ADDED TO FINAL PRODUCT AS THEIR SYMBOL FORMS, NOT THEIR INTEGER FORM
     bool invalid_digit = false;
     int invalid_condition;
     int invalid_integer;
