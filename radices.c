@@ -310,12 +310,15 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     menu_banner();
     */
     // output sum
+    // FIX: calc_add() is broken and I think it's because of all the changes here.
+    //      Change them back since they weren't needed in the first place.
     if (invalid == true) {
         printf("TEST\n");
         printf("%d invalid in base %d", invalid_int, r);
     } else {
         if (extra_arr == true) {
             // fill empty in array with 2s complement
+            // XXX: what is this doing?
             for (int i = 0; i < iterator; i++) {
                 ex_arr[i] = return_int(final_arr[i]);
             }
@@ -659,6 +662,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     menu_banner();
 
     // NOTE: ALL DIGIT SYMBOLS NEED TO BE ADDED TO FINAL PRODUCT AS THEIR SYMBOL FORMS, NOT THEIR INTEGER FORM
+    //       This could be done by: 
+    //       Converting the final array in calc_add() to a character array
+    //       Converting each character that is allocated to it, to its character form
+    //       Printing out the contents of that array
     bool invalid_digit = false;
     int invalid_condition;
     int invalid_integer;
