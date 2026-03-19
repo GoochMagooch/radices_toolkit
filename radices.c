@@ -337,6 +337,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         }
         if (r == 2) {
             // FIX: CORRECT ANSWER WITH ADDED JUNK CHARACTERS
+            //      It might have something to do with ex_arr? It works with calc_mul(), but maybe not calc_add()?
             printf(" (Binary)\n");
         } else if (r == 8) {
             printf(" (Octal)\n");
