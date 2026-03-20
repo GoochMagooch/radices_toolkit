@@ -321,6 +321,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             *carry = 0;
         }
     } else {
+        // NOTE: RUNS IF calc_mul() NOT ACTIVE
         for (int i = 0; i < iterator; i++) {
             printf("%c", return_char(num1[i]));
         }
@@ -332,12 +333,11 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         if (carry_over == true) {
             printf("1");
         }
+        // FIX: final_arr being traversed too many times, printing past '\0'
         for (int i = 0; final_arr[i] != '\0'; i++) {
             printf("%c", final_arr[i]);
         }
         if (r == 2) {
-            // FIX: CORRECT ANSWER WITH ADDED JUNK CHARACTERS
-            //      It might have something to do with ex_arr? It works with calc_mul(), but maybe not calc_add()?
             printf(" (Binary)\n");
         } else if (r == 8) {
             printf(" (Octal)\n");
@@ -1005,12 +1005,16 @@ void radices_calculator() {
 
         // outputs calculations depending on operator
         if (op == '+') {
+            printf("num1_integers: ");
+            for (int i = 0; i < num1_integers_len; i++) {
+                printf("%d ", num1_integers[i]);
+            }
+            printf("\n");
             calc_add(num1_integers, num2_integers, num1_integers_len, radix, false, num1_integers, &carry_over);
         } else if (op == '-') {
             calc_sub(num1_integers, num2_integers, num1_integers_len, radix);
         } else if (op == '*') {
             int multipliers = (num1_integers_len - len_diff);
-            printf("multipliers: %d\n", multipliers);
             calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
         } else if (op == '/') {
             calc_div(num1_integers, num2_integers);
