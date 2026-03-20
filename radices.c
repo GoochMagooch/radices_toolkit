@@ -333,8 +333,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         if (carry_over == true) {
             printf("1");
         }
-        // FIX: final_arr being traversed too many times, printing past '\0'
-        for (int i = 0; final_arr[i] != '\0'; i++) {
+        for (int i = 0; i < iterator; i++) {
             printf("%c", final_arr[i]);
         }
         if (r == 2) {
