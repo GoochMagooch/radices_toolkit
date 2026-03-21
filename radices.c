@@ -321,7 +321,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             *carry = 0;
         }
     } else {
-        // NOTE: RUNS IF calc_mul() NOT ACTIVE
         for (int i = 0; i < iterator; i++) {
             printf("%c", return_char(num1[i]));
         }
@@ -646,6 +645,8 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
+    // FIX: (BASE 11) AA * A = 9 810 1, INSTEAD OF 9A1
+
     clear();
     menu_banner();
 
@@ -856,7 +857,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%d", master_product_array[i][j]);
+                    printf("%d ", master_product_array[i][j]);
                 }
             }
             printf("\n");
@@ -864,7 +865,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
-                   printf("%d", master_product_array[i][j]);
+                   printf("%d ", master_product_array[i][j]);
                 }
             }
             printf("\n");
