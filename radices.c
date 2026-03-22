@@ -645,7 +645,14 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
-    // FIX: (BASE 11) AA * A = 9 810 1, INSTEAD OF 9A1
+    // FIX:
+    //      (BASE 11) AA * A = 9 810 1, INSTEAD OF 9A1
+    //      (BASE 5) 24 * 2 = 1 0 3, CORRECT
+    //      (HEXADECIMAL) A * A = 6 4, CORRECT
+    //      (HEXADECIMAL) AB * B = 7 5 9, CORRECT
+    //      (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
+    //      For some reason, when a letter digit is involved with the product it comes out wrong.
+    //      Something happening inside of calc_add()?
 
     clear();
     menu_banner();
