@@ -297,10 +297,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         }
     }
 
-    /*
-    clear();
-    menu_banner();
-    */
     // output sum
     if (invalid_digit == true) {
         // TODO: FUTURE CODE TO PERSIST LOOP
@@ -321,6 +317,8 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             *carry = 0;
         }
     } else {
+        clear();
+        menu_banner();
         for (int i = 0; i < iterator; i++) {
             printf("%c", return_char(num1[i]));
         }
@@ -658,7 +656,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     menu_banner();
 
     // NOTE: ALL DIGIT SYMBOLS NEED TO BE ADDED TO FINAL PRODUCT AS THEIR SYMBOL FORMS, NOT THEIR INTEGER FORM
-    //       This could be done by: 
+    //       This could be done by:
     //       Converting the final array in calc_add() to a character array
     //       Converting each character that is allocated to it, to its character form
     //       Printing out the contents of that array
@@ -1026,7 +1024,7 @@ void radices_calculator() {
         } else if (op == '/') {
             calc_div(num1_integers, num2_integers);
         } else {
-            printf("Please choose a valid operator...");
+            printf("\nPlease choose a valid operator...\n");
         }
         persist = false;
     }
