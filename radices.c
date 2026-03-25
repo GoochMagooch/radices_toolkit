@@ -650,7 +650,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //      (HEXADECIMAL) AB * B = 7 5 9, CORRECT
     //      (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
     //      For some reason, when a letter digit is involved with the product it comes out wrong.
-    //      Something happening inside of calc_add()?
+    //      Something happening inside of calc_add()? Maybe. It only happens when multiplying:
+    //      (HEXADECIMAL) 7B + 11 = 8C instead of random noise
 
     clear();
     menu_banner();
