@@ -654,6 +654,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //      (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
     //      The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
     //      TODO: figure out the need for extra_arr
+    //     extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
+    //     calc_add() that only checks for extra_arr if a counter is greater than a certain value,
+    //     and just run calc_add() normally, with the 2 multiplier and multiplicand arrays, if it isn't?
 
     clear();
     menu_banner();
