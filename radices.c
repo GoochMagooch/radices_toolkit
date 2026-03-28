@@ -652,7 +652,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //      For some reason, when a letter digit is involved with the product it comes out wrong.
     //      Something happening inside of calc_add()? Maybe. It only happens when multiplying:
     //      (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
-    //      The problem is either inside of calc_mul() or it's inside of calc_add() inside of the if (extra_arr == true) condition
+    //      The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
+    //      TODO: figure out the need for extra_arr
 
     clear();
     menu_banner();
