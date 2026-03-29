@@ -304,7 +304,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         // fill empty in array with 2s complement
         // XXX: what is this doing?
         for (int i = 0; i < iterator; i++) {
-            ex_arr[i] = return_int(final_arr[i]);
+            ex_arr[i] = final_arr[i];
         }
         printf("final array in calc_add(): ");
         for (int i = 0; i < iterator; i++) {
@@ -644,19 +644,16 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     // FIX:
-    //      (BASE 11) AA * A = 9 810 1, INSTEAD OF 9A1
-    //      (BASE 5) 24 * 2 = 1 0 3, CORRECT
-    //      (HEXADECIMAL) A * A = 6 4, CORRECT
-    //      (HEXADECIMAL) AB * B = 7 5 9, CORRECT
-    //      (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
-    //      For some reason, when a letter digit is involved with the product it comes out wrong.
-    //      Something happening inside of calc_add()? Maybe. It only happens when multiplying:
-    //      (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
-    //      The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
-    //      TODO: figure out the need for extra_arr
-    //     extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
-    //     calc_add() that only checks for extra_arr if a counter is greater than a certain value,
-    //     and just run calc_add() normally, with the 2 multiplier and multiplicand arrays, if it isn't?
+    // (HEXADECIMAL) AB * B = 7 5 9, CORRECT
+    // (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
+    // (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
+    //
+    // When a letter digit is involved with the product it comes out wrong, but only with calc_mul()
+    // The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
+    //  TODO: figure out the need for extra_arr
+    //            extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
+    //            calc_add() that only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run 
+    //            calc_add() normally if it isn't?
 
     clear();
     menu_banner();
