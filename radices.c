@@ -649,9 +649,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // (HEXADECIMAL) AB * A = 6 510 514 instead of 6 A E - The integers that show aren't the base 10 form of the letter digit
     // (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
     //
-    // The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
-    // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
-    // calc_add() that only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
+    // The problem is either inside of calc_mul(), or inside calc_add() within the (extra_arr == true) condition
+    // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within calc_add() that 
+    // only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
+    //
+    // TODO: debug AB * A (HEXADECIMAL)
+    //       If I figure out why this is producing [6, 510, 514] then I figure out why AB * AB (HEXADECIMAL) produces a bunch of junk
 
     clear();
     menu_banner();
@@ -860,7 +863,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     if (muls == 1) {
         if (temp_quotient > 0) {
-            printf("\nProduct: ");
+            printf("\nProduct temp_quotient > 0: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
                     printf("%d ", master_product_array[i][j]);
@@ -868,7 +871,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            printf("\nProduct: ");
+            printf("\nProduct no temp_quotient: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
                    printf("%d ", master_product_array[i][j]);
@@ -892,7 +895,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         if (carry == 1) {
-            printf("\nProduct: ");
+            printf("\nProduct carry == 1: ");
             int final_product_arr_carry[index];
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             for (int i = 0; i < index; i++) {
@@ -900,7 +903,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            printf("\nProduct: ");
+            printf("\nProduct carry == sum else: ");
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
             }
