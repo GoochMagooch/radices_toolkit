@@ -308,7 +308,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         }
         printf("final array in calc_add(): ");
         for (int i = 0; i < iterator; i++) {
-            printf("%d ", ex_arr[i]);
+            printf("%d ", return_int(ex_arr[i]));
         }
         printf("\n");
         if (carry_over == true) {
@@ -646,14 +646,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // FIX:
     // (HEXADECIMAL) AB * B = 7 5 9, CORRECT
     // (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
+    // (HEXADECIMAL) AB * A = 6 510 514 instead of 6 A E - The integers that show aren't the base 10 form of the letter digit
     // (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
     //
-    // When a letter digit is involved with the product it comes out wrong, but only with calc_mul()
     // The problem is either inside of calc_mul() or it's inside of calc_add(), inside of the if (extra_arr == true) condition
-    //  TODO: figure out the need for extra_arr
-    //            extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
-    //            calc_add() that only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run 
-    //            calc_add() normally if it isn't?
+    // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within 
+    // calc_add() that only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
 
     clear();
     menu_banner();
