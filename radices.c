@@ -653,8 +653,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within calc_add() that 
     // only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
     //
-    // TODO: debug AB * A (HEXADECIMAL)
-    //       If I figure out why this is producing [6, 510, 514] then I figure out why AB * AB (HEXADECIMAL) produces a bunch of junk
+    // TODO: debug AB * A: temp_product is becoming the full 2 digit product, instead of being separated. On top of that, instead of 
+    //       614 and 610, I'm getting 514 and 510
 
     clear();
     menu_banner();
@@ -799,6 +799,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             } else {
                 temp_product_arr[j] = temp_product;
             }
+            int temp_counter = 0;
+            printf("temp_product on iteration %d: %d\n", temp_counter, temp_product);
+            temp_counter++;
         } // XXX: END OF INNER LOOP
 
         // int product_array_index;
@@ -839,6 +842,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else {
+            printf("temp_quotient !> 0\n");
             master_product_array[array_index] = malloc(final_row_size * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
@@ -863,6 +867,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     if (muls == 1) {
         if (temp_quotient > 0) {
+            printf("temp_quotient: %d\n", temp_quotient);
+            printf("muls: %d", muls);
             printf("\nProduct temp_quotient > 0: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
