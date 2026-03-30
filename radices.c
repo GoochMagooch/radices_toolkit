@@ -653,8 +653,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within calc_add() that 
     // only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
     //
-    // TODO: debug AB * A: temp_product is becoming the full 2 digit product, instead of being separated. On top of that, instead of 
-    //       614 and 610, I'm getting 514 and 510
+    // TODO: (HEXADECIMAL) AB * A: temp_conversion outputs correctly (614 and 610), but then is added to temp_product_arr as 514 and 510
 
     clear();
     menu_banner();
@@ -784,7 +783,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             if (temp_product >= r) {
+                // NOTE: PROBLEM AREA
+                printf("temp_product >= r\n");
                 temp_conversion = decimal_to_radix(temp_product, r, true);
+                printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
@@ -797,6 +799,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 temp_product_arr[j] = temp_product;
             } else {
+                printf("temp_product !> r\n");
                 temp_product_arr[j] = temp_product;
             }
             int temp_counter = 0;
