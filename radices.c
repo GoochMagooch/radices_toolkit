@@ -653,7 +653,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within calc_add() that 
     // only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
     //
-    // TODO: (HEXADECIMAL) AB * A: temp_conversion outputs correctly (614 and 610), but then is added to temp_product_arr as 514 and 510
+    // TODO: (HEXADECIMAL) AB * A: temp_conversion correctly outputs 614 & 610 but then temp_product_arr receives 514 & 510
 
     clear();
     menu_banner();
@@ -769,6 +769,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
+            int temp_counter = 0;
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // top number is the multiplicand
                 temp_product = num2[i] * num1[j];
@@ -783,12 +784,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             if (temp_product >= r) {
-                // NOTE: PROBLEM AREA
-                printf("temp_product >= r\n");
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
+                // FIX: this logic is converting is not separating temp_quotient and temp_product for (HEXADECIMAL) AB * A
                 if (temp_conversion > 99) {
                     temp_quotient = temp_conversion / 100;
                     temp_product = temp_conversion - 100;
@@ -796,14 +796,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10);
                 }
+                printf("temp_quotient on iteration %d: %d\n", temp_counter, temp_quotient);
+                printf("temp_product on iteration %d: %d\n", temp_counter, temp_product);
 
                 temp_product_arr[j] = temp_product;
             } else {
                 printf("temp_product !> r\n");
                 temp_product_arr[j] = temp_product;
             }
-            int temp_counter = 0;
-            printf("temp_product on iteration %d: %d\n", temp_counter, temp_product);
             temp_counter++;
         } // XXX: END OF INNER LOOP
 
