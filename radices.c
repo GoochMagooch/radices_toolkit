@@ -783,21 +783,30 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_quotient = 0;
             }
 
+            printf("\ntemp_product before conversion: %d\n", temp_product);
             if (temp_product >= r) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
-                // FIX: this logic is converting is not separating temp_quotient and temp_product for (HEXADECIMAL) AB * A
+                // FIX: this logic is not separating temp_quotient and temp_product for (HEXADECIMAL) AB * A
+                //      temp_quotient is correctly allocated, but temp_product decrements by 1 digit in the very left instead of separating
+                //      614 becomes 514, 610 becomes 510
+                //      Could only happen when the temp_product is > 2 digits - AB * B (HEXADECIMAL) comes out fine at every stage
+                //      This could be because it's suited for base 10 where no single digits are > 9 so temp_product will only ever be 1 - 2 digits
                 if (temp_conversion > 99) {
-                    temp_quotient = temp_conversion / 100;
-                    temp_product = temp_conversion - 100;
+                    // NOTE: this condition checks for conversions > 99 but obviously isn't working
+                    // (HEXADECIMAL) AB * A:
+                    //                      temp_quotient == 6, temp_product == E (14)
+                    //                      temp_quotient == 6, temp_product == A (10)
+                    temp_quotient = temp_conversion / 100; // correct
+                    temp_product = temp_conversion - (temp_quotient * 100); // FIX: 614 - 100, 610 - 100 >:[
                 } else {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10);
                 }
-                printf("temp_quotient on iteration %d: %d\n", temp_counter, temp_quotient);
-                printf("temp_product on iteration %d: %d\n", temp_counter, temp_product);
+                printf("temp_quotient: %d\n", temp_quotient);
+                printf("temp_product: %d\n", temp_product);
 
                 temp_product_arr[j] = temp_product;
             } else {
@@ -809,6 +818,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // int product_array_index;
         // NOTE: why is this condition separate if the conditions are the same as Ln 783?
+        //       possibly combine with logic that adds quotient to temp_product
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
         } else {
@@ -870,7 +880,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     if (muls == 1) {
         if (temp_quotient > 0) {
-            printf("temp_quotient: %d\n", temp_quotient);
+            printf("\ntemp_quotient: %d\n", temp_quotient);
             printf("muls: %d", muls);
             printf("\nProduct temp_quotient > 0: ");
             for (int i = 0; i < muls; i++) {
