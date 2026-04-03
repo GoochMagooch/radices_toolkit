@@ -643,18 +643,6 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
-    // FIX:
-    // (HEXADECIMAL) AB * B = 7 5 9, CORRECT
-    // (HEXADECIMAL) A * E = 8 712, INSTEAD OF 8C
-    // (HEXADECIMAL) AB * A = 6 510 514 instead of 6 A E - The integers that show aren't the base 10 form of the letter digit
-    // (HEXADECIMAL) 7B + 11 = 8C instead of random noise.
-    //
-    // The problem is either inside of calc_mul(), or inside calc_add() within the (extra_arr == true) condition
-    // extra_arr stores digits of any extra arrays necessary for multipliers beyond 2 digits. Maybe set a condition within calc_add() that 
-    // only runs extra_arr code if a boolean is true that checks for more than 2 multipliers, and just run calc_add() normally if it isn't?
-    //
-    // TODO: (HEXADECIMAL) AB * A: temp_conversion correctly outputs 614 & 610 but then temp_product_arr receives 514 & 510
-
     clear();
     menu_banner();
 
@@ -789,18 +777,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
-                // FIX: this logic is not separating temp_quotient and temp_product for (HEXADECIMAL) AB * A
-                //      temp_quotient is correctly allocated, but temp_product decrements by 1 digit in the very left instead of separating
-                //      614 becomes 514, 610 becomes 510
-                //      Could only happen when the temp_product is > 2 digits - AB * B (HEXADECIMAL) comes out fine at every stage
-                //      This could be because it's suited for base 10 where no single digits are > 9 so temp_product will only ever be 1 - 2 digits
                 if (temp_conversion > 99) {
-                    // NOTE: this condition checks for conversions > 99 but obviously isn't working
-                    // (HEXADECIMAL) AB * A:
-                    //                      temp_quotient == 6, temp_product == E (14)
-                    //                      temp_quotient == 6, temp_product == A (10)
                     temp_quotient = temp_conversion / 100; // correct
-                    temp_product = temp_conversion - (temp_quotient * 100); // FIX: 614 - 100, 610 - 100 >:[
+                    temp_product = temp_conversion - (temp_quotient * 100);
                 } else {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10);
@@ -922,6 +901,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
+            // FIX: I don't think final_product_arr is being populated correctly or not being iterated correctly
+            // (HEX) 7A3 * 11 - final array in calc_add(): 8, 1, 13, 3, 0 - CORRECT EXCEPT FOR THE 0
             printf("\nProduct carry == sum else: ");
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
