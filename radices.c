@@ -904,9 +904,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            // FIX: I don't think final_product_arr is being populated correctly or not being iterated correctly
-            // (HEX) 7A3 * 11 - final array in calc_add(): 8, 1, 13, 3, 0 - CORRECT EXCEPT FOR THE 0
-            // but doesn't print the same from final_product_arr
+            // FIX: final_product_arr not printing correctly with 2 multiplier digits
             printf("\nProduct carry == sum else: ");
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
