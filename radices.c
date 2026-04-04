@@ -302,6 +302,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         // TODO: FUTURE CODE TO PERSIST LOOP
     } else if (extra_arr == true) {
         // FIX: why is final_arr getting an extra 0?
+        //      DEBUG (HEX) 7A3 * 11
         printf("extra_arr == true\n");
         // fill empty in array with 2s complement
         // XXX: what is this doing?
