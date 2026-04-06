@@ -324,7 +324,9 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         printf("\n");
         if (carry_over == true) {
             *carry = 1;
+            printf("carry == 1\n");
         } else {
+            printf("carry == 0\n");
             *carry = 0;
         }
     } else {
@@ -900,12 +902,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
 
         int carry = 2; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
+        // NOTE: set the index depending on 
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         if (carry == 1) {
-            printf("\nProduct carry == 1: ");
             int final_product_arr_carry[index];
+            printf("iterator - carry == 1: %d\n", index);
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             for (int i = 0; i < index; i++) {
                 printf("%d", final_product_arr_carry[i]);
@@ -913,7 +916,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         } else {
             // FIX: final_product_arr not printing correctly with 2 multiplier digits
-            printf("\nProduct carry == sum else: ");
+            //      something is going on with the way calc_add() populates final_product_arr or final_product_arr_carry above
+            printf("iterator - carry == 0: %d\n", index);
+            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
             }
