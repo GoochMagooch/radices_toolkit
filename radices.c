@@ -301,16 +301,16 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     if (invalid_digit == true) {
         // TODO: FUTURE CODE TO PERSIST LOOP
     } else if (extra_arr == true) {
-        // FIX: why is final_arr getting an extra 0?
-        //      DEBUG (HEX) 7A3 * 11
-        printf("extra_arr == true\n");
+        // FIX: DEBUG (HEX) 7A3 * 11:
+        //      - Print contents of num1 and num2 to see if it's present from the beginning
+        printf("iterator: %d\n", iterator);
         // fill empty in array with 2s complement
         // XXX: what is this doing?
-        for (int i = 0; i < iterator; i++) {
+        for (int i = 0; i < (iterator-1); i++) {
             ex_arr[i] = final_arr[i];
         }
         printf("final array in calc_add(): ");
-        for (int i = 0; i < iterator; i++) {
+        for (int i = 0; i < (iterator-1); i++) {
             printf("%d ", return_int(ex_arr[i]));
         }
         printf("\n");
@@ -905,6 +905,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         } else {
             // FIX: final_product_arr not printing correctly with 2 multiplier digits
+            //      iterator variable in calc_add() results in extra iteration during final array allocation
             printf("\nProduct carry == sum else: ");
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d", final_product_arr[i]);
