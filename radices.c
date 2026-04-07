@@ -911,16 +911,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("iterator - carry == 1: %d\n", index);
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             for (int i = 0; i < index; i++) {
-                printf("%d", final_product_arr_carry[i]);
+                printf("%d ", final_product_arr_carry[i]);
             }
             printf("\n");
         } else {
             // FIX: final_product_arr not printing correctly with 2 multiplier digits
-            //      something is going on with the way calc_add() populates final_product_arr or final_product_arr_carry above
+            //      final array in calc_add() correctly holds all digits, but final_product_arr incorrectly prints them
             printf("iterator - carry == 0: %d\n", index);
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             for (int i = 0; i < final_row_size; i++) {
-                printf("%d", final_product_arr[i]);
+                printf("%d ", final_product_arr[i]);
             }
             printf("\n");
         }
