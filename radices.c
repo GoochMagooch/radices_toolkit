@@ -325,9 +325,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         if (carry_over == true) {
             *carry = 1;
             printf("carry == 1\n");
-        } else {
-            printf("carry == 0\n");
-            *carry = 0;
         }
     } else {
         clear();
@@ -901,11 +898,22 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
-        int carry = 2; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
+        int carry = 0; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
         // NOTE: set the index depending on 
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
+        printf("final_product_arr before calc_add(): ");
+        for (int i = 0; i < index; i++) {
+            printf("%d ", final_product_arr[i]);
+        }
+        printf("\n");
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+        // FIX: final_product_arr is getting populated with SOMETHING, but it's not the right thing, and it's not happening again in the conditional below
+        printf("final_product_arr after calc_add(): ");
+        for (int i = 0; i < index; i++) {
+            printf("%d ", final_product_arr[i]);
+        }
+        printf("\n");
         if (carry == 1) {
             int final_product_arr_carry[index];
             printf("iterator - carry == 1: %d\n", index);
@@ -915,9 +923,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            // FIX: final_product_arr not printing correctly with 2 multiplier digits
-            //      final array in calc_add() correctly holds all digits, but final_product_arr incorrectly prints them
+            // FIX: arrays being passed calc_add() populated correctly within calc_add(), but the values aren't being passed to final_product_arr
             printf("iterator - carry == 0: %d\n", index);
+            printf("final_product_arr before allocation: ");
+            for (int i = 0; i < final_row_size; i++) {
+                printf("%d ", final_product_arr[i]);
+            }
+            printf("\n");
+            printf("final_product_arr after allocation: ");
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d ", final_product_arr[i]);
