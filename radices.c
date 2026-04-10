@@ -325,7 +325,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             printf("%d ", return_int(ex_arr[i]));
         }
         printf("\n");
-        // FIX: carry_over NOT BEING TRIGGERED FOR 255 * 99
         if (carry_over == true) {
             *carry = 1;
             printf("carry == 1\n");
