@@ -297,6 +297,8 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         }
     }
 
+    printf("\n");
+
     // output sum
     if (invalid_digit == true) {
         // TODO: FUTURE CODE TO PERSIST LOOP
@@ -317,11 +319,13 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         for (int i = 0; i < iterator; i++) {
             ex_arr[i] = final_arr[i];
         }
+        // NOTE: CORRECTLY ALLOCATING DIGITS, DIGITS NOT PRINTING CORRECTLY OUTSIDE OF FUNCTION
         printf("ex_arr: ");
         for (int i = 0; i < iterator; i++) {
             printf("%d ", return_int(ex_arr[i]));
         }
         printf("\n");
+        // FIX: carry_over NOT BEING TRIGGERED FOR 255 * 99
         if (carry_over == true) {
             *carry = 1;
             printf("carry == 1\n");
@@ -900,16 +904,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
 
         int carry = 0; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
-        int final_product_arr[index]; // array to be populated with sum digits from calc_add()
+        int final_product_arr[(index+leading_zero+trailing_zero)]; // array to be populated with sum digits from calc_add()
         printf("final_product_arr before calc_add(): ");
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
             printf("%d ", final_product_arr[i]);
         }
         printf("\n");
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         // FIX: final_product_arr is getting populated with SOMETHING, but it's not the right thing, and it's not happening again in the conditional below
-        //      still on this
         printf("final_product_arr after calc_add(): ");
         for (int i = 0; i < index; i++) {
             printf("%d ", final_product_arr[i]);
@@ -924,7 +927,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            // FIX: arrays being passed calc_add() populated correctly within calc_add(), but the values aren't being passed to final_product_arr
             printf("iterator - carry == 0: %d\n", index);
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d ", final_product_arr[i]);
