@@ -296,26 +296,12 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             }
         }
     }
-
     printf("\n");
 
     // output sum
     if (invalid_digit == true) {
         // TODO: FUTURE CODE TO PERSIST LOOP
     } else if (extra_arr == true) {
-        // FIX: iterator is sometimes 1 extra than it should be, adding an extra 0
-        printf("iterator: %d\n", iterator);
-        printf("num1: ");
-        for (int i = 0; i < iterator; i++) {
-            printf(" %d", num1[i]);
-        }
-        printf("\nnum2: ");
-        for (int i = 0; i < iterator; i++) {
-            printf(" %d", num2[i]);
-        }
-        printf("\n");
-        // fill empty in array with 2s complement
-        // XXX: what is this doing?
         // FIX: This needs to return the letter digits of every digit
         //      Using return_char returns the correct numbers, but not the correct letter digits
         //      Using return_char within the decimal_to_radix function returns the correct letter digits hmmmmmmmmmmmmmm......
@@ -782,10 +768,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_quotient = 0;
             }
 
-            printf("\ntemp_product before conversion: %d\n", temp_product);
             if (temp_product >= r) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
-                printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
@@ -795,12 +779,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10);
                 }
-                printf("temp_quotient: %d\n", temp_quotient);
-                printf("temp_product: %d\n", temp_product);
 
                 temp_product_arr[j] = temp_product;
             } else {
-                printf("temp_product !> r\n");
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
@@ -845,7 +826,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 }
             }
         } else {
-            printf("temp_quotient !> 0\n");
             master_product_array[array_index] = malloc(final_row_size * sizeof *master_product_array[array_index]);
 
             int temp_index = 0;
@@ -870,9 +850,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
     if (muls == 1) {
         if (temp_quotient > 0) {
-            printf("\ntemp_quotient: %d\n", temp_quotient);
-            printf("muls: %d", muls);
-            printf("\nProduct temp_quotient > 0: ");
+            printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
                     printf("%d ", master_product_array[i][j]);
@@ -880,7 +858,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         } else {
-            printf("\nProduct no temp_quotient: ");
+            printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
                    printf("%d ", master_product_array[i][j]);
@@ -907,11 +885,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         if (carry == 1) {
             int final_product_arr_carry[index];
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
+            printf("Product: ");
             for (int i = 0; i < index; i++) {
                 printf("%d ", return_int(final_product_arr_carry[i]));
             }
             printf("\n");
         } else {
+            printf("Product: ");
             for (int i = 0; i < final_row_size; i++) {
                 printf("%d ", return_int(final_product_arr[i]));
             }
