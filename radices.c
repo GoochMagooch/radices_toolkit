@@ -316,8 +316,11 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         printf("\n");
         // fill empty in array with 2s complement
         // XXX: what is this doing?
+        // FIX: This needs to return the letter digits of every digit
+        //      Using return_char returns the correct numbers, but not the correct letter digits
+        //      Using return_char within the decimal_to_radix function returns the correct letter digits hmmmmmmmmmmmmmm......
         for (int i = 0; i < iterator; i++) {
-            ex_arr[i] = return_int(final_arr[i]);
+            ex_arr[i] = final_arr[i];
         }
         // carry over digit will always be 1
         if (carry_over == true) {
@@ -905,12 +908,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             int final_product_arr_carry[index];
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             for (int i = 0; i < index; i++) {
-                printf("%d ", final_product_arr_carry[i]);
+                printf("%d ", return_int(final_product_arr_carry[i]));
             }
             printf("\n");
         } else {
             for (int i = 0; i < final_row_size; i++) {
-                printf("%d ", final_product_arr[i]);
+                printf("%d ", return_int(final_product_arr[i]));
             }
             printf("\n");
         }
