@@ -858,7 +858,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%d ", master_product_array[i][j]);
+                    printf("%c ", return_char(master_product_array[i][j]));
                 }
             }
             printf("\n");
@@ -866,7 +866,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
-                   printf("%d ", master_product_array[i][j]);
+                   printf("%c ", return_char(master_product_array[i][j]));
                 }
             }
             printf("\n");
