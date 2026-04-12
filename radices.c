@@ -297,6 +297,11 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         }
     }
     printf("\n");
+    printf("final_arr: ");
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", final_arr[i]);
+    }
+    printf("\n");
 
     // output sum
     if (invalid_digit == true) {
@@ -878,7 +883,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
-        int carry = 0; // arbitrary value to be changed to 0 or 1 inside of calc_sum()
+        int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
@@ -887,13 +892,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
             printf("Product: ");
             for (int i = 0; i < index; i++) {
-                printf("%d ", return_int(final_product_arr_carry[i]));
+                printf("%c ", final_product_arr_carry[i]);
             }
             printf("\n");
         } else {
             printf("Product: ");
             for (int i = 0; i < final_row_size; i++) {
-                printf("%d ", return_int(final_product_arr[i]));
+                printf("%c ", final_product_arr[i]);
             }
             printf("\n");
         }
