@@ -307,9 +307,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     if (invalid_digit == true) {
         // TODO: FUTURE CODE TO PERSIST LOOP
     } else if (extra_arr == true) {
-        // FIX: This needs to return the letter digits of every digit
-        //      Using return_char returns the correct numbers, but not the correct letter digits
-        //      Using return_char within the decimal_to_radix function returns the correct letter digits hmmmmmmmmmmmmmm......
         for (int i = 0; i < iterator; i++) {
             ex_arr[i] = final_arr[i];
         }
@@ -787,9 +784,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             temp_counter++;
         } // XXX: END OF INNER LOOP
 
-        // int product_array_index;
-        // NOTE: why is this condition separate if the conditions are the same as Ln 783?
-        //       possibly combine with logic that adds quotient to temp_product
+        // Kiiiind of forgot what this does
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
         } else {
