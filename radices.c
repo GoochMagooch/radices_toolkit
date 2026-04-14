@@ -648,11 +648,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     clear();
     menu_banner();
 
-    // NOTE: ALL DIGIT SYMBOLS NEED TO BE ADDED TO FINAL PRODUCT AS THEIR SYMBOL FORMS, NOT THEIR INTEGER FORM
-    //       This could be done by:
-    //       Converting the final array in calc_add() to a character array
-    //       Converting each character that is allocated to it, to its character form
-    //       Printing out the contents of that array
     bool invalid_digit = false;
     int invalid_condition;
     int invalid_integer;
