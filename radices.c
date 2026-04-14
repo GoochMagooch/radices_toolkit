@@ -15,7 +15,7 @@ void clear() {
     #endif
 }
 
-// DISPLAY MENU BANNER
+// MENU BANNER
 void menu_banner() {
     printf(".___         _ _            ._____.        _ _   _ _\n");
     printf("| _ \\__ _ __| (_)__ ___ ___ |_   _|__  ___| | |_(_) |_\n");
@@ -23,7 +23,7 @@ void menu_banner() {
     printf("|_|_\\__,_\\__,_|_\\__\\___/__/   |_|\\___/\\___/_|_\\_\\_|\\__|\n\n");
 }
 
-// DISPLAY MAIN MENU
+// MAIN MENU
 void display_menu() {
     printf("Welcome to your Radices Toolkit!\n\n");
 
@@ -42,7 +42,7 @@ int arr_len(char *arr) {
     return len;
 }
 
-// CONVERT CHARACTER TO INTEGER
+// CONVERT CHAR TO INT
 int return_int(char ch) {
     int n = 0;
     int counter = 10;
@@ -63,7 +63,7 @@ int return_int(char ch) {
     return -1;
 }
 
-// CONVERT INTEGER TO ASCII CHARACTER
+// CONVERT INT AND CHAR TO PROPER DIGIT SYMBOLS
 char return_char(int num) {
     char ch;
     int int_counter = 0;
@@ -88,7 +88,7 @@ char return_char(int num) {
     }
 }
 
-// PRINTS RADIX NAME IF APPLICABLE
+// PRINT RADIX NAME IF APPLICABLE
 void radices_name(int num) {
     if (num == 2) {
         printf("Your number in Binary: ");
@@ -103,16 +103,16 @@ void radices_name(int num) {
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 int decimal_to_radix(int decimal, int radix, bool int_return) {
     // TODO: Add functionality for numbers with fractionals
     // TODO: Return a digit when prompted, print final array when prompted
 
-    /*
-    printf("DECIMAL TO RADICES CONVERTER\n");
-    printf("Convert decimal numbers to radices (binary - hexadecimal)!\n\n");
-    */
+    clear();
+    menu_banner();
 
     bool persist = true;
     bool neg_num = false;
@@ -148,10 +148,9 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             }
         }
 
-        // calculates decimal to radix
         char ans[num_length];
-        // printf("num_length: %d\n", num_length);
 
+        // break down decimal number into radix - send each digit to ans
         int dividend = decimal;
         int index = 1;
         for (int i = 0; dividend > (radix-1); i++) {
@@ -166,6 +165,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             printf("-");
         }
 
+        // FIX: NO IDEA WHAT THIS IS DOING - FIGURE IT OUT AND ADD COMMENTS
         int returned_int;
         if (int_return == true) {
             if (return_int(ans[1]) > 9) {
@@ -176,6 +176,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             returned_int += return_int(ans[1]);
             return returned_int;
         } else {
+            radices_name(radix);
             for (int i = 0; i < num_length; i++) {
                 printf("%c", ans[i]);
             }
@@ -185,8 +186,10 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~ RADICES TO DECIMAL CONVERTER ~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RADICES TO DECIMAL CONVERTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 void radix_to_decimal() {
     // TODO: Add functionality for numbers with fractionals
     // TODO: Add functionality for negative numbers
@@ -215,7 +218,7 @@ void radix_to_decimal() {
         scanf("%255s", number);
         int length = arr_len(number);
 
-        // checks for invalid digit symbols, adds to array if valid
+        // check for invalid digit symbols, send to int_arr if valid
         int int_arr[length];
         for (int i = 0; number[i] != '\0'; i++) {
             if (return_int(number[i]) == -1 || return_int(number[i]) >= radix) {
@@ -227,13 +230,12 @@ void radix_to_decimal() {
             }
         }
 
-        // ends program if invalid digit symbol detected
+        // end program if invalid digit symbol detected
         if (persist == false) {
             break;
         }
 
-        // calculates decimal version of radix
-        // int final_arr[length];
+        // calculate decimal version of radix
         int position = length-1;
         int position_radix = radix;
         for (int i = 0; i < length; i++) {
@@ -251,14 +253,14 @@ void radix_to_decimal() {
             position -= 1;
         }
 
-        // printf("Your number in decimal: %d\n", ans);
         printf("Test");
         persist = false;
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RADICES CALCULATOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // CALCULATES SUM OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex_arr, int *carry) {
@@ -267,6 +269,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     char final_arr[256];
     bool invalid_digit = false;
 
+    // check for invalid digit symbols for chosen radix
     for (int i = (iterator-1); i >= 0; i--) {
         if (num1[i] >= r) {
             invalid_digit = true;
@@ -277,6 +280,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             printf("Digit %c invalid in base %d\n", return_char(num2[i]), r);
             break;
         }
+        // check if carry over digit present - separate carry over digit from second digit if true
         mini_sum = (num1[i] + num2[i]);
         printf("mini_sum: %d\n", mini_sum);
         if (carry_over == true) {
@@ -296,12 +300,6 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             }
         }
     }
-    printf("\n");
-    printf("final_arr: ");
-    for (int i = 0; i < iterator; i++) {
-        printf("%d ", final_arr[i]);
-    }
-    printf("\n");
 
     // output sum
     if (invalid_digit == true) {
@@ -498,7 +496,7 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
 
     // checks for the presence of a carry over digit
     if (carry_over == 1) {
-        // calculate subtraction - minuend > subtrahend
+        // calculate subtraction, minuend > subtrahend
         int pos_ans = 0;
         int pos_position = index-1;
         int pos_position_r = 2;
@@ -541,7 +539,7 @@ void calc_sub(int *num1, int *num2, int iterator, int r) {
         }
 
     } else {
-        // calculate subtraction - subtrahend > minuend
+        // calculate subtraction, subtrahend > minuend
         int bit_flip[index];
         for (int i = 0; i < index; i++) {
             if (min_plus_2comp[i] == 0) {
@@ -862,7 +860,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else if (muls == 2) {
-        // NOTE: why is there a check for carry?
         printf("\n");
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
@@ -1017,8 +1014,10 @@ void radices_calculator() {
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~~~~~~~~~~ MAIN MENU ~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MAIN MENU ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 int main() {
 
     // menu functionality
@@ -1041,13 +1040,17 @@ int main() {
         if (strcmp(choice, "1") == 0) {
             clear();
             menu_banner();
+            printf("DECIMAL TO RADICES CONVERTER\n");
+            printf("Convert decimal numbers to radices (binary - hexadecimal)!\n\n");
+
+            // FIX: TRANSFER LOGIC IN HERE TO INSIDE OF decimal_to_radix() - IT'S CLEANER
+
             int dec;
             printf("Enter your number: ");
             scanf("%d", &dec);
             int r;
             printf("Enter your radix: ");
             scanf("%d", &r);
-            radices_name(r);
             decimal_to_radix(dec, r, false);
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
