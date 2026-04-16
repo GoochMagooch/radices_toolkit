@@ -1043,8 +1043,6 @@ int main() {
             printf("DECIMAL TO RADICES CONVERTER\n");
             printf("Convert decimal numbers to radices (binary - hexadecimal)!\n\n");
 
-            // FIX: TRANSFER LOGIC IN HERE TO INSIDE OF decimal_to_radix() - IT'S CLEANER
-
             int dec;
             printf("Enter your number: ");
             scanf("%d", &dec);
