@@ -165,7 +165,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             printf("-");
         }
 
-        // FIX: NO IDEA WHAT THIS IS DOING - FIGURE IT OUT AND ADD COMMENTS
+        // convert temp_product in calc_mul() to radix digits or print the result of decimal_to_radix()
         int returned_int;
         if (int_return == true) {
             if (return_int(ans[1]) > 9) {
