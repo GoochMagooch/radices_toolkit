@@ -109,7 +109,6 @@ void radices_name(int num) {
 
 int decimal_to_radix(int decimal, int radix, bool int_return) {
     // TODO: Add functionality for numbers with fractionals
-    // TODO: Return a digit when prompted, print final array when prompted
 
     clear();
     menu_banner();
@@ -161,10 +160,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
 
         ans[num_length-index] = return_char(dividend);
 
-        if (neg_num == true) {
-            printf("-");
-        }
-
+ 
         // convert temp_product in calc_mul() to radix digits or print the result of decimal_to_radix()
         int returned_int;
         if (int_return == true) {
@@ -177,6 +173,9 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             return returned_int;
         } else {
             radices_name(radix);
+            if (neg_num == true) {
+                printf("-");
+            }
             for (int i = 0; i < num_length; i++) {
                 printf("%c", ans[i]);
             }
@@ -252,8 +251,6 @@ void radix_to_decimal() {
             }
             position -= 1;
         }
-
-        printf("Test");
         persist = false;
     }
 }
