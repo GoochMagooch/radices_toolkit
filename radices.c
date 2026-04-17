@@ -888,15 +888,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
-        // TODO: muls > 2
-        // PSEUDOCODE:
+        // NOTE: PSEUDOCODE:
         //            - Run calc_add() on first 2 pointers of master_product_array
         //            - Send those results to sep_arr
         //            - Run calc_add() on sep_arr and the next pointer of master_product_array
         //            - Replace sep_arr with those results
         //            - Repeat until all pointers of master_product_array have been included
         //            - sep_arr is the final output?
-        printf("muls > 2 coming soon...");
+        printf("muls > 2 coming soon...\n");
     }
 }
 
