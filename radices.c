@@ -895,6 +895,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //            - Replace sep_arr with those results
         //            - Repeat until all pointers of master_product_array have been included
         //            - sep_arr is the final output?
+        //
+        //            (muls - 1) loops?
+        //            Maybe only run this condition underneath the muls == 2 condition, in order to already have the new array that will contain 
+        //            the results of the first 2 pointers of master_product_array
+        //            Have a counter set to (muls - 1). If that counter is > 0 then run the next condition. Inside of that condition run the
+        //            pseudocode above, counter times. Or just create the logic to run the pseudocode above, counter times, and replace all 
+        //            other logic in the else statement with that logic, running counter times. If muls == 2 then it will only run once.
         printf("muls > 2 coming soon...\n");
     }
 }
