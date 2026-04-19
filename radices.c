@@ -873,11 +873,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
         if (carry == 1) {
-            int final_product_arr_carry[index];
-            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr_carry, &carry);
+            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             printf("Product: ");
             for (int i = 0; i < index; i++) {
-                printf("%c ", final_product_arr_carry[i]);
+                printf("%c ", final_product_arr[i]);
             }
             printf("\n");
         } else {
