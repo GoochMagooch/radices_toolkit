@@ -868,6 +868,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
+        // FIX: ALL OF THIS LOGIC NEEDS TO BE IN A LOOP?
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
