@@ -857,7 +857,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         }
-    } else if (muls == 2) {
+    } else {
         printf("\n");
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
@@ -868,27 +868,28 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
-        // FIX: ALL OF THIS LOGIC NEEDS TO BE IN A LOOP?
-        //      final_product_arr might need to be outside of the loop so it can catch all product digits to work with
+        int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
+        int counter = 2;
+        for (int i = 0; i < (muls - 1); i++) {
+            if (i == 0) {
+                calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+            } else {
+                calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+            }
 
-        // first calculation with > 2 multiplier digits
-        int final_product_arr[index]; // array to be populated with sum digits from calc_add()
-        calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
-
-        // TODO: AFTER INITIAL CACLUATION, ON EACH ITERATION:
-        //       loop runs (muls - 2) times
-        //       int counter = 2;
-        //       calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
-        //       counter++
-        //
-        //       something like that
-
-
-        // TODO: MAKE SURE BOTH ARRAYS BEING SENT TO calc_add() ARE THE SAME # OF DIGITS
-        //       THE SUM OF ONE CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF A PTR IN master_product_array
+            // TODO: MAKE SURE BOTH ARRAYS BEING SENT TO calc_add() ARE THE SAME # OF DIGITS
+            //       THE SUM OF ONE CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF A PTR IN master_product_array
+            if (carry == 1) {
+                if (i == 0) {
+                    calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
+                } else {
+                    calc_add(final_product_arr, master_product_array[counter], index, r, true, final_product_arr, &carry);
+                }
+           }
+            counter++;
+        }
         if (carry == 1) {
-            calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             printf("Product: ");
             for (int i = 0; i < index; i++) {
                 printf("%c ", final_product_arr[i]);
@@ -901,7 +902,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
             printf("\n");
         }
-    } else {
+    }
         // NOTE: PSEUDOCODE:
         //            - Run calc_add() on first 2 pointers of master_product_array
         //            - Send those results to sep_arr
@@ -916,8 +917,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //            Have a counter set to (muls - 1). If that counter is > 0 then run the next condition. Inside of that condition run the
         //            pseudocode above, counter times. Or just create the logic to run the pseudocode above, counter times, and replace all 
         //            other logic in the else statement with that logic, running counter times. If muls == 2 then it will only run once.
-        printf("muls > 2 coming soon...\n");
-    }
 }
 
 void calc_div(int *num1, int *num2) {
