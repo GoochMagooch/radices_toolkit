@@ -859,6 +859,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
     } else {
         printf("\n");
+        // NOTE: ALL 3 PTRS ARE CORRECT
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
             for (int j = 0; j < final_row_size; j++) {
@@ -868,6 +869,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
+        // FIX: DEBUG 255 * 255
         int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
