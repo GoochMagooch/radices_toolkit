@@ -885,11 +885,28 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             if (carry == 1) {
                 if (i == 0) {
                     calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
+                    printf("final_product_arr on iteration %d: ", i);
+                    for (int i = 0; i < index; i++) {
+                        printf("%c ", final_product_arr[i]);
+                    }
+                    printf("\n");
                 } else {
                     calc_add(final_product_arr, master_product_array[counter], index, r, true, final_product_arr, &carry);
+                    printf("final_product_arr on iteration %d: ", i);
+                    for (int i = 0; i < index; i++) {
+                        printf("%c ", final_product_arr[i]);
+                    }
+                    printf("\n");
                 }
+           } else {
+                printf("final_product_arr on iteration %d: ", i);
+                for (int i = 0; i < final_row_size; i++) {
+                    printf("%c ", final_product_arr[i]);
+                }
+                printf("\n");
+
            }
-            counter++;
+           counter++;
         }
         if (carry == 1) {
             printf("Product: ");
