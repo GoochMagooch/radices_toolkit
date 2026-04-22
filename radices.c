@@ -871,9 +871,22 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // FIX: ALL OF THIS LOGIC NEEDS TO BE IN A LOOP?
         //      final_product_arr might need to be outside of the loop so it can catch all product digits to work with
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
-        int final_product_arr[index]; // array to be populated with sum digits from calc_add()
 
+        // first calculation with > 2 multiplier digits
+        int final_product_arr[index]; // array to be populated with sum digits from calc_add()
         calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+
+        // TODO: AFTER INITIAL CACLUATION, ON EACH ITERATION:
+        //       loop runs (muls - 2) times
+        //       int counter = 2;
+        //       calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
+        //       counter++
+        //
+        //       something like that
+
+
+        // TODO: MAKE SURE BOTH ARRAYS BEING SENT TO calc_add() ARE THE SAME # OF DIGITS
+        //       THE SUM OF ONE CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF A PTR IN master_product_array
         if (carry == 1) {
             calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
             printf("Product: ");
@@ -897,7 +910,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //            - Repeat until all pointers of master_product_array have been included
         //            - sep_arr is the final output?
         //
-        //            (muls - 1) loops?
+        //            (muls - 2) loops
         //            Maybe only run this condition underneath the muls == 2 condition, in order to already have the new array that will contain 
         //            the results of the first 2 pointers of master_product_array
         //            Have a counter set to (muls - 1). If that counter is > 0 then run the next condition. Inside of that condition run the
