@@ -870,6 +870,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
 
         // FIX: DEBUG 255 * 255
+        //      First 2 sums being returned, but I don't think another iteration is triggering
         int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
