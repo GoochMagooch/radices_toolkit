@@ -881,7 +881,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             // TODO: MAKE SURE BOTH ARRAYS BEING SENT TO calc_add() ARE THE SAME # OF DIGITS
-            //       THE SUM OF ONE CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF A PTR IN master_product_array
+            //       THE SUM OF A CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF master_product_array[i]
             if (carry == 1) {
                 if (i == 0) {
                     calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
