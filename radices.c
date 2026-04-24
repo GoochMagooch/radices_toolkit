@@ -840,6 +840,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } // XXX: END OF OUTER LOOP
 
     if (muls == 1) {
+        printf("muls: %d\n", muls);
         if (temp_quotient > 0) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
@@ -858,6 +859,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
+        printf("muls: %d", muls);
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
         for (int i = 0; i < muls; i++) {
@@ -870,11 +872,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         printf("\n");
 
         // FIX: DEBUG 255 * 255
-        //      First 2 sums being returned, but I don't think another iteration is triggering
+        //      Sum of first 2 ptrs returned, but no others.
+        //      I'm not sure why. Maybe another iteration isn't triggering, or it is triggering but not being returned correctly
+        //      The loop should run only twice, but is running 47 times :tomato_angry: :sob:
         int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
         for (int i = 0; i < (muls - 1); i++) {
+            printf("TEST i: %d\n", i);
             if (i == 0) {
                 calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             } else {
