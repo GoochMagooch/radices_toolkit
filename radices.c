@@ -874,7 +874,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // FIX: DEBUG 255 * 255
         //      Sum of first 2 ptrs returned, but no others.
         //      I'm not sure why. Maybe another iteration isn't triggering, or it is triggering but not being returned correctly
-        //      The loop should run only twice, but is running 47 times :tomato_angry: :sob:
+        //      Program correctly outputs 2 digit multiplyer calculations, but runs 47 times when another digit is added :tomato_angry: :sob:
         int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
