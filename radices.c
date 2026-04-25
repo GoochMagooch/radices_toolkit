@@ -883,6 +883,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             if (i == 0) {
                 calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             } else {
+                // NOTE: final_product_arr is an array of characters, not an array of integers
                 calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             }
 
