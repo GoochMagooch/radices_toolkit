@@ -1,0 +1,21 @@
+CLAUDE OUTPUT SATURDAY APRIL 25, 2026 - LOOP RUNNING 47 TIMES ERROR
+
+is there a reason why temp_iterator being given the value of (muls - 1) works as an iterator for my loop, but when I directly use (muls - 1) as the stop value it runs 47 times? respond short    
+  and succinctly, and don't try to fix anything else. I just want to know why temp_iterator works and directly using (muls - 1) doesn't.                                                            
+                                                                                                                                                                                                    
+● Let me look at the relevant code first.                                                                                                                                                           
+
+  Read 1 file (ctrl+o to expand)                                                                                                                                                                    
+              
+● Let me check if muls is modified anywhere inside the loop or by calc_add.                                                                                                                         
+                                                      
+  Searched for 2 patterns, read 1 file (ctrl+o to expand)                                                                                                                                           
+                                                                                                                                                                                                    
+● Stack corruption. calc_add is called with iterator = (index+leading_zero+trailing_zero) but final_product_arr only has index elements. This causes calc_add's write loop (ex_arr[i] = final_arr[i]
+   for i < iterator) to overflow past final_product_arr on the stack, corrupting neighboring variables — including muls (a function parameter sitting further up the stack frame).                  
+                                                                                                                                                                                                    
+  - temp_iterator captures (muls - 1) before the overflow happens, so it holds the correct value throughout.                                                                                        
+  - (muls - 1) re-reads muls on every iteration, and after the first calc_add call corrupts it, muls becomes some garbage value (~48), making the condition i < (muls - 1) run 47 more times.       
+                                                                                                                                                                                                    
+  The real fix is ensuring final_product_arr is sized to match the iterator you're passing to calc_add, or passing index as the iterator consistently.
+
