@@ -874,8 +874,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         // pseudocode above, counter times. Or just create the logic to run the pseudocode above, counter times, and replace all 
         // other logic in the else statement with that logic, running counter times. If muls == 2 then it will only run once.
 
-
-        printf("muls: %d", muls);
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
         for (int i = 0; i < muls; i++) {
@@ -894,12 +892,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int final_product_arr[index];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
+        printf("muls: %d\n", muls);
+        int temp_iterator = (muls - 1); // NOTE: FIGURE OUT WHY THIS IS A VALID ITERATOR AND (muls - 1) IS NOT
         for (int i = 0; i < (muls - 1); i++) {
-            printf("TEST i: %d\n", i);
+            printf("TEST i one: %d\n", i);
             if (i == 0) {
                 calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             } else {
                 // NOTE: final_product_arr is an array of characters, not an array of integers
+                //       Effecting output of final_product_arr. I can fix by ensure final_arr in calc_add() is an array of ints, then converting to 
+                //       the character form of each element when I print array at the end of this loop
                 calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             }
 
@@ -921,15 +923,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     }
                     printf("\n");
                 }
-           } else {
+            } else {
                 printf("final_product_arr on iteration %d: ", i);
                 for (int i = 0; i < final_row_size; i++) {
                     printf("%c ", final_product_arr[i]);
                 }
                 printf("\n");
 
-           }
-           counter++;
+            }
+            counter++;
+            printf("TEST i two: %d\n\n", i);
         }
         if (carry == 1) {
             printf("Product: ");
