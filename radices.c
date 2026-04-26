@@ -889,11 +889,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //      Sum of first 2 ptrs returned, but no others.
         //      I'm not sure why. Maybe another iteration isn't triggering, or it is triggering but not being returned correctly
         //      Program correctly outputs 2 digit multiplyer calculations, but runs 47 times when another digit is added :tomato_angry: :sob:
-        int final_product_arr[index];
+        int final_product_arr[(index+leading_zero+trailing_zero)];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 2;
         printf("muls: %d\n", muls);
-        int temp_iterator = (muls - 1); // NOTE: FIGURE OUT WHY THIS IS A VALID ITERATOR AND (muls - 1) IS NOT
         for (int i = 0; i < (muls - 1); i++) {
             printf("TEST i one: %d\n", i);
             if (i == 0) {
