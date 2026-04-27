@@ -263,6 +263,7 @@ void radix_to_decimal() {
 void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex_arr, int *carry) {
     int mini_sum;
     bool carry_over = false;
+    // FIX: ALLOW FOR final_arr TO BECOME INT ARRAY
     char final_arr[256];
     bool invalid_digit = false;
 
