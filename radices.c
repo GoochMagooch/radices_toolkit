@@ -267,7 +267,9 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     //      why is final_arr a char array to begin with?
     //
     //      calc_mul() returning char array, therefore the same array is not able to be used in an extra calculation
-    //      setting a condition to make final_arr an int array or char array, depending on extra_arr == true/false?
+    //      Change final_arr to int array,
+    //      send mini_sum to final_arr as int
+    //      print either the ASCII character of those digits, if using calc_add(), or send them as ints to ex_arr and format printing inside of calc_mul()
     char final_arr[256];
     bool invalid_digit = false;
 
