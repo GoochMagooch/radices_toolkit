@@ -264,6 +264,10 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     int mini_sum;
     bool carry_over = false;
     // FIX: ALLOW FOR final_arr TO BECOME INT ARRAY
+    //      why is final_arr a char array to begin with?
+    //
+    //      calc_mul() returning char array, therefore the same array is not able to be used in an extra calculation
+    //      setting a condition to make final_arr an int array or char array, depending on extra_arr == true/false?
     char final_arr[256];
     bool invalid_digit = false;
 
@@ -892,16 +896,27 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         //      Program correctly outputs 2 digit multiplyer calculations, but runs 47 times when another digit is added :tomato_angry: :sob:
         int final_product_arr[(index+leading_zero+trailing_zero)];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
-        int counter = 2;
-        printf("muls: %d\n", muls);
+        int counter = 1;
+        printf("muls: %d\n\n", muls);
         for (int i = 0; i < (muls - 1); i++) {
-            printf("TEST i one: %d\n", i);
+            printf("ITERATION %d\n", (i+1));
             if (i == 0) {
                 calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             } else {
                 // NOTE: final_product_arr is an array of characters, not an array of integers
                 //       Effecting output of final_product_arr. I can fix by ensure final_arr in calc_add() is an array of ints, then converting to 
                 //       the character form of each element when I print array at the end of this loop
+                printf("master_product_array[%d]: ", counter);
+                for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
+                    printf("%d ", master_product_array[counter][i]);
+                }
+                printf("\n");
+
+                printf("final_product_arr: ");
+                for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
+                    printf("%d ", final_product_arr[i]);
+                }
+                printf("\n");
                 calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             }
 
@@ -917,7 +932,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("\n");
                 } else {
                     calc_add(final_product_arr, master_product_array[counter], index, r, true, final_product_arr, &carry);
-                    printf("final_product_arr on iteration %d: ", i);
+                printf("final_product_arr on iteration %d: ", i);
                     for (int i = 0; i < index; i++) {
                         printf("%c ", final_product_arr[i]);
                     }
@@ -932,7 +947,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
             }
             counter++;
-            printf("TEST i two: %d\n\n", i);
+            printf("\n");
         }
         if (carry == 1) {
             printf("Product: ");
