@@ -270,7 +270,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
     //      Change final_arr to int array,
     //      send mini_sum to final_arr as int
     //      print either the ASCII character of those digits, if using calc_add(), or send them as ints to ex_arr and format printing inside of calc_mul()
-    char final_arr[256];
+    int final_arr[256];
     bool invalid_digit = false;
 
     // check for invalid digit symbols for chosen radix
@@ -290,17 +290,17 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
         if (carry_over == true) {
             mini_sum += 1;
             if (mini_sum > (r-1)) {
-                final_arr[i] = return_char(mini_sum-r);
+                final_arr[i] = (mini_sum-r);
             } else {
-                final_arr[i] = return_char(mini_sum);
+                final_arr[i] = mini_sum;
                 carry_over = false;
             }
         } else {
             if (mini_sum > (r-1)) {
-                final_arr[i] = return_char(mini_sum-r);
+                final_arr[i] = (mini_sum-r);
                 carry_over = true;
             } else {
-                final_arr[i] = return_char(mini_sum);
+                final_arr[i] = mini_sum;
             }
         }
     }
@@ -332,7 +332,7 @@ void calc_add(int *num1, int *num2, int iterator, int r, bool extra_arr, int *ex
             printf("1");
         }
         for (int i = 0; i < iterator; i++) {
-            printf("%c", final_arr[i]);
+            printf("%c", return_char(final_arr[i]));
         }
         if (r == 2) {
             printf(" (Binary)\n");
@@ -929,21 +929,21 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
                     printf("final_product_arr on iteration %d: ", i);
                     for (int i = 0; i < index; i++) {
-                        printf("%c ", final_product_arr[i]);
+                        printf("%c ", return_char(final_product_arr[i]));
                     }
                     printf("\n");
                 } else {
                     calc_add(final_product_arr, master_product_array[counter], index, r, true, final_product_arr, &carry);
                 printf("final_product_arr on iteration %d: ", i);
                     for (int i = 0; i < index; i++) {
-                        printf("%c ", final_product_arr[i]);
+                        printf("%c ", return_char(final_product_arr[i]));
                     }
                     printf("\n");
                 }
             } else {
                 printf("final_product_arr on iteration %d: ", i);
                 for (int i = 0; i < final_row_size; i++) {
-                    printf("%c ", final_product_arr[i]);
+                    printf("%c ", return_char(final_product_arr[i]));
                 }
                 printf("\n");
 
@@ -954,13 +954,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         if (carry == 1) {
             printf("Product: ");
             for (int i = 0; i < index; i++) {
-                printf("%c ", final_product_arr[i]);
+                printf("%c ", return_char(final_product_arr[i]));
             }
             printf("\n");
         } else {
             printf("Product: ");
             for (int i = 0; i < final_row_size; i++) {
-                printf("%c ", final_product_arr[i]);
+                printf("%c ", return_char(final_product_arr[i]));
             }
             printf("\n");
         }
