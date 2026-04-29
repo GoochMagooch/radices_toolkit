@@ -866,20 +866,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
-        // NOTE: PSEUDOCODE:
-        // Run calc_add() on first 2 pointers of master_product_array
-        // Send those results to sep_arr
-        // Run calc_add() on sep_arr and the next pointer of master_product_array
-        // Replace sep_arr with those results
-        // Repeat until all pointers of master_product_array have been included
-        // sep_arr is the final output?
-        //
-        // (muls - 2) loops
-        // Maybe only run this condition underneath the muls == 2 condition, in order to already have the new array that will contain 
-        // the results of the first 2 pointers of master_product_array
-        // Have a counter set to (muls - 1). If that counter is > 0 then run the next condition. Inside of that condition run the
-        // pseudocode above, counter times. Or just create the logic to run the pseudocode above, counter times, and replace all 
-        // other logic in the else statement with that logic, running counter times. If muls == 2 then it will only run once.
+        // FIX: 255 * 255 AND 255 * FFF RETURN CORRECT ANSWER
+        //      ABB * FFF DOES NOT
 
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
@@ -892,10 +880,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("\n");
 
-        // FIX: DEBUG 255 * 255
-        //      Sum of first 2 ptrs returned, but no others.
-        //      I'm not sure why. Maybe another iteration isn't triggering, or it is triggering but not being returned correctly
-        //      Program correctly outputs 2 digit multiplyer calculations, but runs 47 times when another digit is added :tomato_angry: :sob:
         int final_product_arr[(index+leading_zero+trailing_zero)];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 1;
@@ -905,9 +889,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             if (i == 0) {
                 calc_add(master_product_array[0], master_product_array[1], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             } else {
-                // NOTE: final_product_arr is an array of characters, not an array of integers
-                //       Effecting output of final_product_arr. I can fix by ensure final_arr in calc_add() is an array of ints, then converting to 
-                //       the character form of each element when I print array at the end of this loop
                 printf("master_product_array[%d]: ", counter);
                 for (int i = 0; i < (index+leading_zero+trailing_zero); i++) {
                     printf("%d ", master_product_array[counter][i]);
@@ -922,8 +903,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 calc_add(final_product_arr, master_product_array[counter], (index+leading_zero+trailing_zero), r, true, final_product_arr, &carry);
             }
 
-            // TODO: MAKE SURE BOTH ARRAYS BEING SENT TO calc_add() ARE THE SAME # OF DIGITS
-            //       THE SUM OF A CALCULATION COULD BE DIFFERENT THAN THE LENGTH OF master_product_array[i]
             if (carry == 1) {
                 if (i == 0) {
                     calc_add(master_product_array[0], master_product_array[1], index, r, true, final_product_arr, &carry);
