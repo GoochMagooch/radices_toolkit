@@ -867,7 +867,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
     } else {
         // FIX: 255 * 255 AND 255 * FFF RETURN CORRECT ANSWER
-        //      ABB * FFF DOES NOT
+        //      ABB * FFF DOES NOT - SHOULD BE A B A 5 4 5, INSTEAD IS A 1 7 2 B 5
+        //      THE PTRS IN master_product_array ARE ALL INCORRECT
 
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
