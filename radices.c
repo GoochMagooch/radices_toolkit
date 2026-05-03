@@ -764,12 +764,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
             // Adds quotient to temp_product
             if (temp_quotient > 0) {
+                printf("temp_product before temp_quotient: %d\n", temp_product);
                 temp_product += temp_quotient;
+                printf("temp_product after temp_quotient: %d\n", temp_product);
                 temp_quotient = 0;
             }
 
+            // FIX: FOR ABB * F THERE SHOULD BE 2 TEMP CONVERSIONS, THERE IS ONLY 1
             if (temp_product >= r) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
+                printf("temp_conversion: %d\n", temp_conversion);
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
