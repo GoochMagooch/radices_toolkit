@@ -754,6 +754,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
+            // FIX: "TEST" NOT PRINTING, SHOULD BE PRINTING 3 TIMES
+            printf("TEST\n");
             int temp_counter = 0;
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // top number is the multiplicand
@@ -789,8 +791,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
+            printf("temp_product after inner loop: %d\n", temp_product);
         } // XXX: END OF INNER LOOP
-
+ 
         // Kiiiind of forgot what this does
         if (temp_quotient > 0) {
             leading_zero = final_row_size - (index + trailing_zero);
