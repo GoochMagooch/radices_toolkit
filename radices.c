@@ -110,8 +110,9 @@ void radices_name(int num) {
 int decimal_to_radix(int decimal, int radix, bool int_return) {
     // TODO: Add functionality for numbers with fractionals
 
-    clear();
-    menu_banner();
+    // XXX: REINSTATE AFTER TESTING IN calc_mul()
+    // clear();
+    // menu_banner();
 
     bool persist = true;
     bool neg_num = false;
@@ -645,6 +646,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // TODO: add functionality for negative numbers
 
+
     clear();
     menu_banner();
 
@@ -754,8 +756,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
         // XXX: START OF INNER LOOP
         for (int j = iterator-1; j >= 0; j--) {
-            // FIX: "TEST" NOT PRINTING, SHOULD BE PRINTING 3 TIMES
-            printf("TEST\n");
             int temp_counter = 0;
             // (multiplier digit * multiplicand digit)
             if (multiplicand == 1) { // top number is the multiplicand
@@ -791,7 +791,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
-            printf("temp_product after inner loop: %d\n", temp_product);
+            printf("temp_product after inner loop %d: %d\n", j, temp_product);
         } // XXX: END OF INNER LOOP
  
         // Kiiiind of forgot what this does
