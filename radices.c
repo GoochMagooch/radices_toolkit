@@ -772,11 +772,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_quotient = 0;
             }
 
-            // FIX: FOR ABB * F THERE SHOULD BE 2 TEMP CONVERSIONS, THERE IS ONLY 1
             if (temp_product >= r) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion: %d\n", temp_conversion);
 
+                // FIX: temp_conversion for ABB * F INCORRECT
+                //      I THINK 3 DIGIT PRODUCTS ARE GIVING IT TROUBLE
                 // Separates product from quotient
                 if (temp_conversion > 99) {
                     temp_quotient = temp_conversion / 100; // correct
