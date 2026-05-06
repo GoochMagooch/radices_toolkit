@@ -683,7 +683,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("%d ", num2[i]);
     }
-    printf("\n");
+    printf("\n\n");
 
     if (invalid_digit == true) {
         if (invalid_condition == 0) {
@@ -778,6 +778,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // FIX: temp_conversion for ABB * F INCORRECT
                 //      I THINK 3 DIGIT PRODUCTS ARE GIVING IT TROUBLE
+                //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
+                //      FFF * F (16) HOWEVER IS NOT WORKING
+
                 // Separates product from quotient
                 if (temp_conversion > 99) {
                     temp_quotient = temp_conversion / 100; // correct
@@ -792,7 +795,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
-            printf("temp_product after inner loop %d: %d\n", j, temp_product);
+
+            printf("temp_quotient after inner loop %d: %d\n", j, temp_quotient);
+            printf("temp_product after inner loop %d: %d\n\n", j, temp_product);
         } // XXX: END OF INNER LOOP
  
         // Kiiiind of forgot what this does
