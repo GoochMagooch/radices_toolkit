@@ -777,7 +777,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 printf("temp_conversion: %d\n", temp_conversion);
 
                 // FIX: temp_conversion for ABB * F INCORRECT
-                //      I THINK 3 DIGIT PRODUCTS ARE GIVING IT TROUBLE
                 //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
                 //      FFF * F (16) HOWEVER IS NOT WORKING
 
