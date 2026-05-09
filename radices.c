@@ -778,7 +778,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // FIX: temp_conversion for ABB * F INCORRECT
                 //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
-                //      FFF * F (16) HOWEVER IS NOT WORKING
+                //      FFF * F (16) HOWEVER IS NOT WORKING - RETURNS [1, 42, 42, 42] ???
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
@@ -864,7 +864,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%c ", return_char(master_product_array[i][j]));
+                    // XXX: REMOVED return_char
+                    printf("%d ", master_product_array[i][j]);
                 }
             }
             printf("\n");
