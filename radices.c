@@ -779,6 +779,30 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // FIX: temp_conversion for ABB * F INCORRECT
                 //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
                 //      FFF * F (16) HOWEVER IS NOT WORKING - RETURNS [1, 42, 42, 42] ???
+                //      NOTE: DATA FOR FFF * F
+                //      15 15 15
+                //       0  0 15
+
+                //      temp_conversion: 141
+                //      temp_quotient after inner loop 2: 1
+                //      temp_product after inner loop 2: 41
+
+                //      temp_product before temp_quotient: 225
+                //      temp_product after temp_quotient: 226
+                //      temp_conversion: 142
+                //      temp_quotient after inner loop 1: 1
+                //      temp_product after inner loop 1: 42
+
+                //      temp_product before temp_quotient: 225
+                //      temp_product after temp_quotient: 226
+                //      temp_conversion: 142
+                //      temp_quotient after inner loop 0: 1
+                //      temp_product after inner loop 0: 42
+
+                //      muls: 1
+
+                //      Product: 1 42 42 41 
+
 
                 // Separates product from quotient
                 if (temp_conversion > 99) {
