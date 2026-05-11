@@ -801,7 +801,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 //      muls: 1
 
-                //      Product: 1 42 42 41 
+                //      Product: 1 42 42 41 - when I use return_char I get symbols instead of numbers
 
 
                 // Separates product from quotient
