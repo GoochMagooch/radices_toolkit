@@ -889,7 +889,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
                     // XXX: REMOVED return_char
-                    printf("%d ", master_product_array[i][j]);
+                    printf("%c ", return_char(master_product_array[i][j])); // FIX: FIGURE OUT WHY SYMBOLS ARE BEING RETURNED
                 }
             }
             printf("\n");
