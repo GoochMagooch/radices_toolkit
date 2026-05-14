@@ -805,9 +805,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      Product characters: 1 * * )
                 //
                 //      The 42's are coming from 142 being separated, but they need to be separated as 14 and 2 not 1 and 42
-                
-                printf("Testing return_char: 1 %d %d %d\n", return_char(14), return_char(12), return_char(12));
-                // FIX: DO THE MATH TO MAKE SURE CONVERSIONS ARE CORRECT
+                //      Since return_char doesn't work with the numbers 41 or 42, symbols are being returned. Conversion needs fixing.
 
 
                 // Separates product from quotient
@@ -819,8 +817,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     temp_product = temp_conversion - (temp_quotient * 10);
                 }
 
+                printf("temp_product: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             } else {
+                printf("temp_product: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
@@ -894,11 +894,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct characters: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    // XXX: REMOVED return_char
                     printf("%c ", return_char(master_product_array[i][j])); // FIX: FIGURE OUT WHY SYMBOLS ARE BEING RETURNED
                 }
             }
             printf("\n");
+            // XXX: WILL BE REMOVED LATER
             printf("\nProduct integers: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
