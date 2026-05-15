@@ -806,7 +806,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //
                 //      The 42's are coming from 142 being separated into 1 and 42, instead of 14 and 2
                 //      Since return_char doesn't work with the numbers 41 or 42, the ASCII symbols are being returned
-                //      I need to to separate temp_product by the ones place and everything else?
+                //      I will try to separate the ones place of every converted integer from every other digit
 
 
                 // Separates product from quotient
