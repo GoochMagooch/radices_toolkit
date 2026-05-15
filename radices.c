@@ -806,6 +806,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //
                 //      The 42's are coming from 142 being separated, but they need to be separated as 14 and 2 not 1 and 42
                 //      Since return_char doesn't work with the numbers 41 or 42, symbols are being returned. Conversion needs fixing.
+                //
+                //      Maybe a condtion that checks length of temp_product?
 
 
                 // Separates product from quotient
