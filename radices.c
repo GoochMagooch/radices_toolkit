@@ -919,7 +919,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
-        // FIX: ABB * F == [9, 7, 6, 5] instead of [A, 0, F, 5] - DEBUG
+        // FIX: 255555 * 255 RETURNS CORRECT ANSWER, 46976 * 222 DOES NOT
 
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
