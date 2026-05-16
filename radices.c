@@ -804,10 +804,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      Product integers: 1 42 42 41
                 //      Product characters: 1 * * )
                 //
-                //      The 42's are coming from 142 being separated, but they need to be separated as 14 and 2 not 1 and 42
-                //      Since return_char doesn't work with the numbers 41 or 42, symbols are being returned. Conversion needs fixing.
-                //
-                //      Maybe a condtion that checks length of temp_product?
+                //      The 42's are coming from 142 being separated into 1 and 42, instead of 14 and 2
+                //      Since return_char doesn't work with the numbers 41 or 42, the ASCII symbols are being returned
+                //      I need to to separate temp_product by the ones place and everything else?
 
 
                 // Separates product from quotient
@@ -921,6 +920,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } else {
         // FIX: 255555 * 255 RETURNS CORRECT ANSWER, 46976 * 222 DOES NOT - DEBUG
         //      ALL 3 PTRS OF master_product_array ARE CORRECT, calc_add() PRODUCING INCORRECT ANSWER
+        //      COULD STILL BE AN ISSUE OF INTEGERS NOT BEING SENT TO ex_arr
 
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
