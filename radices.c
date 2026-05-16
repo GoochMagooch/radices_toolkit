@@ -919,7 +919,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
-        // FIX: 255555 * 255 RETURNS CORRECT ANSWER, 46976 * 222 DOES NOT
+        // FIX: 255555 * 255 RETURNS CORRECT ANSWER, 46976 * 222 DOES NOT - DEBUG
+        //      ALL 3 PTRS OF master_product_array ARE CORRECT, calc_add() PRODUCING INCORRECT ANSWER
 
         printf("\n");
         // NOTE: ALL 3 PTRS ARE CORRECT
