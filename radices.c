@@ -812,10 +812,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // Separates product from quotient
                 if (temp_conversion > 99) {
                     temp_quotient = temp_conversion / 100; // correct
-                    temp_product = temp_conversion - (temp_quotient * 100);
+                    temp_product = temp_conversion - (temp_quotient * 100); // FIX: THIS LINE NEEDS TO CHANGE
                 } else {
                     temp_quotient = temp_conversion / 10;
-                    temp_product = temp_conversion - (temp_quotient * 10);
+                    temp_product = temp_conversion - (temp_quotient * 10); // FIX: THIS LINE NEEDS TO CHANGE
                 }
 
                 printf("temp_product: %d\n", temp_product);
