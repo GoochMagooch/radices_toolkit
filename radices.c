@@ -817,9 +817,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_quotient within condition: %d\n", temp_quotient);
                     temp_product = (temp_conversion - temp_quotient) / 10; // NOTE: SUCCESSFULLY SEPARATES ONE'S PLACE AND EVERYTHING ELSE FROM temp_product
                     printf("temp_product after conversion: %d\n", temp_product);
-                    // 225 = 141 - (1 - 100) HOW IS THIS 240???????????????????
+                    // temp_product = 141 - (1 - 100) HOW IS THIS 240???????????????????
                     // temp_product will adopt temp_conversion, so how does temp_conversion - (1 - 100) == 240? FIGURE THIS OUT!!
-                    // double - symbol turns the equation to 141 + (99)?
+                    // double - symbol turns the equation to 141 + (99)? Yes, 141 - (-99) == 240
                 } else {
                     temp_quotient = temp_conversion / 10;
                     temp_product = temp_conversion - (temp_quotient * 10); // NOTE: THIS LINE MIGHT NOT NEED TO CHANGE
