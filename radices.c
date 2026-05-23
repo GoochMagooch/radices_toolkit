@@ -779,35 +779,34 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // FIX: temp_conversion for ABB * F INCORRECT
                 //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
                 //      FFF * F (16) HOWEVER IS NOT WORKING - RETURNS [1, 42, 42, 42] ???
-                //      NOTE: DATA FOR FFF * F
-                //      15 15 15
-                //       0  0 15
-
-                //      temp_conversion: 141
-                //      temp_quotient after inner loop 2: 1
-                //      temp_product after inner loop 2: 41
-
-                //      temp_product before temp_quotient: 225
-                //      temp_product after temp_quotient: 226
-                //      temp_conversion: 142
-                //      temp_quotient after inner loop 1: 1
-                //      temp_product after inner loop 1: 42
-
-                //      temp_product before temp_quotient: 225
-                //      temp_product after temp_quotient: 226
-                //      temp_conversion: 142
-                //      temp_quotient after inner loop 0: 1
-                //      temp_product after inner loop 0: 42
-
-                //      muls: 1
-
-                //      Product integers: 1 42 42 41
-                //      Product characters: 1 * * )
                 //
-                //      The 42's are coming from 142 being separated into 1 and 42, instead of 14 and 2
-                //      Since return_char doesn't work with the numbers 41 or 42, the ASCII symbols are being returned
-                //      I will try to separate the ones place of every converted integer from every other digit
-
+                //      15 15 15
+                //      0 0 15
+                //
+                //      temp_conversion: 141
+                //      temp_product: 225
+                //      temp_quotient after inner loop 2: 14
+                //      temp_product after inner loop 2: 225
+                //
+                //      temp_product before temp_quotient: 225
+                //      temp_product after temp_quotient: 239
+                //      temp_conversion: 1415
+                //      temp_product: 239
+                //      temp_quotient after inner loop 1: 141
+                //      temp_product after inner loop 1: 239
+                //
+                //      temp_product before temp_quotient: 225
+                //      temp_product after temp_quotient: 366
+                //      temp_conversion: 16
+                //      temp_product: 6
+                //      temp_quotient after inner loop 0: 1
+                //      typetemp_product after inner loop 0: 6
+                //
+                //      muls: 1
+                //
+                //      Product characters: 1 6 � � 
+                //
+                //      Product integers: 49 54 -17 -31 
 
                 // Separates product from quotient
                 // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, BUT END PRODUCT STILL INCORRECT
