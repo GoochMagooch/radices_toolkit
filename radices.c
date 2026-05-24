@@ -780,7 +780,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
                 //
                 //      15 15 15
-                //      0 0 15
+                //       0  0 15
                 //
                 //      temp_conversion: 141
                 //      temp_product: 225
@@ -818,6 +818,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      DEBUG FFF * F (16) FURTHER
                 //      NO LONGER GETTING SYMBOLS, STILL INCORRECT OUTPUT
                 //      1415 IS EF, BUT SEPARATING AS 141 5 BECAUSE ONE'S PLACE IS BEING ISOLATED
+                //      Maybe have conditions to check if temp_conversion > 100, > 1000, >10000, etc.?
                 if (temp_conversion > 99) {
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
