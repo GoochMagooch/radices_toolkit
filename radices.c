@@ -819,7 +819,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      NO LONGER GETTING SYMBOLS, STILL INCORRECT OUTPUT
                 //      1415 IS EF, BUT SEPARATING AS 141 5 BECAUSE ONE'S PLACE IS BEING ISOLATED
                 //      Maybe have conditions to check if temp_conversion > 100, > 1000, >10000, etc.?
-                if (temp_conversion > 99) {
+                //
+                if (temp_conversion > 199) {
+                    // FIX: NOT SURE IF THIS WILL WORK - DEBUG
+                    printf("temp_product: %d\n", temp_product);
+                    printf("temp_conversion: %d\n", temp_conversion);
+                    temp_quotient = (temp_conversion - temp_quotient) / 10;
+                    printf("temp_quotient: %d\n", temp_quotient);
+                    temp_product = (temp_conversion - (temp_quotient * 100));
+                    printf("temp_product after quotient: %d\n", temp_product);
+                } else if (temp_conversion > 99) {
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 10;
