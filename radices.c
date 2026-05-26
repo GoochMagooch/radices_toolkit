@@ -795,8 +795,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      temp_product: 239
                 //      temp_conversion: 1415
                 //      temp_quotient: 141
-                //      temp_product after quotient: 239
-                //      temp_product: 5
+                //      temp_product after quotient: -12685
+                //      temp_product: -12685
                 //
                 //      temp_product before temp_quotient: 225
                 //      temp_product after temp_quotient: 366
@@ -809,9 +809,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //
                 //      muls: 1
                 //
-                //      Product characters: 1 6 5 1
+                //      Product characters: 1 6 s 1
                 //
-                //      Product integers: 49 54 53 49
+                //      Product integers: 49 54 115 49
 
                 // Separates product from quotient
                 // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, BUT END PRODUCT STILL INCORRECT
@@ -821,7 +821,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      Maybe have conditions to check if temp_conversion > 100, > 1000, >10000, etc.?
                 //
                 if (temp_conversion > 199) {
-                    // FIX: NOT SURE IF THIS WILL WORK - DEBUG
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 10;
