@@ -814,12 +814,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      Product integers: 49 54 115 49
 
                 // Separates product from quotient
-                // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, BUT END PRODUCT STILL INCORRECT
-                //      DEBUG FFF * F (16) FURTHER
-                //      NO LONGER GETTING SYMBOLS, STILL INCORRECT OUTPUT
+                // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, IF TMP PRODUCT IS 3 DIGITS
                 //      1415 IS EF, BUT SEPARATING AS 141 5 BECAUSE ONE'S PLACE IS BEING ISOLATED
                 //      Maybe have conditions to check if temp_conversion > 100, > 1000, >10000, etc.?
-                //
+                //      DEBUG FFF * F (16) FURTHER TO FIND REASON FOR ABOVE OUTPUT
+
                 if (temp_conversion > 199) {
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
