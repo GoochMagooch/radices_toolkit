@@ -776,43 +776,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
                 printf("temp_conversion: %d\n", temp_conversion);
 
-                // FIX: temp_conversion for ABB * F INCORRECT
-                //      AAA * A (16) returns the correct answer, 3 digit temp_product is correctly separated into product and quotient
-                //
-                //      15 15 15
-                //       0  0 15
-                //
-                //      temp_conversion: 141
-                //      temp_product: 225
-                //      temp_conversion: 141
-                //      temp_quotient: 14
-                //      temp_product after quotient: 1
-                //      temp_product: 1
-                //
-                //      temp_product before temp_quotient: 225
-                //      temp_product after temp_quotient: 239
-                //      temp_conversion: 1415
-                //      temp_product: 239
-                //      temp_conversion: 1415
-                //      temp_quotient: 141
-                //      temp_product after quotient: -12685
-                //      temp_product: -12685
-                //
-                //      temp_product before temp_quotient: 225
-                //      temp_product after temp_quotient: 366
-                //      temp_conversion: 16
-                //      temp_product: 366
-                //      temp_conversion: 16
-                //      temp_quotient: 1
-                //      temp_product after quotient: 6
-                //      temp_product: 6
-                //
-                //      muls: 1
-                //
-                //      Product characters: 1 6 s 1
-                //
-                //      Product integers: 49 54 115 49
-
                 // Separates product from quotient
                 // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, IF TMP PRODUCT IS 3 DIGITS
                 //      1415 IS EF, BUT SEPARATING AS 141 5 BECAUSE ONE'S PLACE IS BEING ISOLATED
@@ -820,32 +783,30 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 //      DEBUG FFF * F (16) FURTHER TO FIND REASON FOR ABOVE OUTPUT
 
                 if (temp_conversion > 199) {
-                    printf("temp_product: %d\n", temp_product);
-                    printf("temp_conversion: %d\n", temp_conversion);
+                    printf("temp_product within condition two: %d\n", temp_product);
+                    printf("temp_conversion within condition two: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 10;
-                    printf("temp_quotient: %d\n", temp_quotient);
+                    printf("temp_quotient within condition two: %d\n", temp_quotient);
                     temp_product = (temp_conversion - (temp_quotient * 100));
-                    printf("temp_product after quotient: %d\n", temp_product);
+                    printf("temp_product after quotient within condition two: %d\n", temp_product);
                 } else if (temp_conversion > 99) {
-                    printf("temp_product: %d\n", temp_product);
-                    printf("temp_conversion: %d\n", temp_conversion);
+                    printf("temp_product within condition two: %d\n", temp_product);
+                    printf("temp_conversion within condition two: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 10;
-                    printf("temp_quotient: %d\n", temp_quotient);
+                    printf("temp_quotient within condition two: %d\n", temp_quotient);
                     temp_product = (temp_conversion - (temp_quotient * 10));
-                    printf("temp_product after quotient: %d\n", temp_product);
+                    printf("temp_product after quotient within condition two: %d\n", temp_product);
                 } else {
-                    printf("temp_product: %d\n", temp_product);
-                    printf("temp_conversion: %d\n", temp_conversion);
+                    printf("temp_product within condition two: %d\n", temp_product);
+                    printf("temp_conversion within condition two: %d\n", temp_conversion);
                     temp_quotient = temp_conversion / 10;
-                    printf("temp_quotient: %d\n", temp_quotient);
+                    printf("temp_quotient within condition two: %d\n", temp_quotient);
                     temp_product = temp_conversion - (temp_quotient * 10);
-                    printf("temp_product after quotient: %d\n", temp_product);
+                    printf("temp_product after quotient within condition two: %d\n", temp_product);
                 }
 
-                printf("temp_product: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             } else {
-                printf("temp_product: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
