@@ -778,9 +778,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // Separates product from quotient
                 // FIX: CORRECTLY SEPARATING QUOTIENT AND TMP PRODUCT, IF TMP PRODUCT IS 3 DIGITS
-                //      1415 IS EF, BUT SEPARATING AS 141 5 BECAUSE ONE'S PLACE IS BEING ISOLATED
+                //      1415 IS EF, BUT SEPARATING AS [141, 5], instead of [14, 15] BECAUSE ONE'S PLACE IS BEING ISOLATED
                 //      Maybe have conditions to check if temp_conversion > 100, > 1000, >10000, etc.?
                 //      DEBUG FFF * F (16) FURTHER TO FIND REASON FOR ABOVE OUTPUT
+                //      Shouldn't decimal_to_radix separate the digits somehow? Maybe take that input and do something with it.
 
                 if (temp_conversion > 199) {
                     printf("temp_product within condition two: %d\n", temp_product);
