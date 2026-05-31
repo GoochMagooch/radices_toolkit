@@ -774,9 +774,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
 
                 // Separates product from quotient
-                // FIX: DEBUG ABB * FFF OR APPARENTLY ANY FUCKING THING ELSE OTHER THAN FFF * ANOTHER F >:[]
-
                 if (temp_conversion > 999) {
+                    // FIX: DEBUG ABB * FFF OR APPARENTLY ANY FUCKING THING ELSE OTHER THAN FFF * ANOTHER F >:[
+                    // NOTE: BASE 10 NUMBERS CONFIRMED TO MULTIPLY SUCCESSFULLY - THE PROBLEM MAY STILL BE IN THIS CONDITION
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
