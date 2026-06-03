@@ -776,8 +776,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // Separates product from quotient
                 if (temp_conversion > 999) {
                     // FIX: DEBUG ABB * FFF OR APPARENTLY ANY FUCKING THING ELSE OTHER THAN FFF * ANOTHER F >:[
-                    // NOTE: BASE 10 NUMBERS CONFIRMED TO MULTIPLY SUCCESSFULLY - THE PROBLEM MAY STILL BE IN THIS CONDITION
-                    //       Actually it can't be that it only works with temp_conversion <= 999 because FFF * F results in a temp_conversion of 1415
+                    //      ABB * F and ABB * FF BOTH CORRECT, ABB * FFF STILL WRONG. DEBUG ABB * FFF
+                    //      PERHAPS ALSO LOOK AT BOTH ABB * F AND ABB* FF TO SEE HOW THEY WORK
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
