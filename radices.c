@@ -776,10 +776,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 // Separates product from quotient
                 if (temp_conversion > 999) {
                     // FIX: DEBUG ABB * FFF OR APPARENTLY ANY FUCKING THING ELSE OTHER THAN FFF * ANOTHER F >:[
-                    //      ABB * F and ABB * FF BOTH CORRECT, ABB * FFF STILL WRONG. DEBUG ABB * FFF
+                    //      ABB * F and ABB * FF BOTH CORRECT, ABB * FFF STILL WRONG, DEBUG
                     //      PERHAPS ALSO LOOK AT BOTH ABB * F AND ABB* FF TO SEE HOW THEY WORK
-                    //
                     //      Also try ABB * A, ABB * AA, and ABB * AAA
+
+                    //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
+                    //      Every temp_product and temp_conversion is incorrect
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
@@ -807,8 +809,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_product after quotient: %d\n", temp_product);
                 }
 
+                printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             } else {
+                printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
@@ -880,7 +884,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct characters: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%c ", return_char(master_product_array[i][j])); // FIX: FIGURE OUT WHY SYMBOLS ARE BEING RETURNED
+                    printf("%c ", return_char(master_product_array[i][j]));
                 }
             }
             printf("\n");
