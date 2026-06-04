@@ -778,6 +778,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     // FIX: DEBUG ABB * FFF OR APPARENTLY ANY FUCKING THING ELSE OTHER THAN FFF * ANOTHER F >:[
                     //      ABB * F and ABB * FF BOTH CORRECT, ABB * FFF STILL WRONG. DEBUG ABB * FFF
                     //      PERHAPS ALSO LOOK AT BOTH ABB * F AND ABB* FF TO SEE HOW THEY WORK
+                    //
+                    //      git commit
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
