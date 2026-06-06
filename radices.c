@@ -782,6 +782,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      Every temp_product and temp_conversion is incorrect
+                    //      Some calculations work, and some don't, so I'm not sure it's this condition. Maybe something in calc_add() with certain numbers?
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
