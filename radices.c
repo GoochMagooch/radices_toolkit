@@ -785,6 +785,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      Some calculations work, and some don't, so I'm not sure it's this condition. Maybe something in calc_add() with certain numbers?
                     //      Now I need to figure out a way to test this
                     //      Do the math on paper first, and see what doesn't align
+                    //      This project is becoming a real nuisance - That is all
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
