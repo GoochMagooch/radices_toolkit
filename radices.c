@@ -781,11 +781,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      Also try ABB * A, ABB * AA, and ABB * AAA
 
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
-                    //      Every temp_product and temp_conversion is incorrect
-                    //      Some calculations work, and some don't, so I'm not sure it's this condition. Maybe something in calc_add() with certain numbers?
-                    //      Now I need to figure out a way to test this
-                    //      Do the math on paper first, and see what doesn't align
-                    //      This project is becoming a real nuisance - That is all
+                    //      first temp_product is correct 110, which converts to 6E, which is returned as 614
+                    //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
