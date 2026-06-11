@@ -785,6 +785,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      first temp_product is correct 110, which converts to 6E, which is returned as 614
                     //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place :tomato_thonk:
+                    //      I might need something that detects 10s and 1s places, regardless of the radix...actually that is the solution.
                     //
                     //      10 11 11
                     //       0  0 10
