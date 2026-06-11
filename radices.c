@@ -165,13 +165,14 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
         // convert temp_product in calc_mul() to radix digits or print the result of decimal_to_radix()
         int returned_int;
         if (int_return == true) {
-            // NOTE: POSSIBLY SET THIS CONDITION TO RETURN DIGITS SEPARATELY THEN USE THEM WITHIN calc_mul()
+            // NOTE: returned_int is returned as a whole number, so any separation will still need to be within calc_mul()
             if (return_int(ans[1]) > 9) {
                 returned_int = return_int(ans[0]) * 100;
             } else {
                 returned_int = return_int(ans[0]) * 10;
             }
             returned_int += return_int(ans[1]);
+            printf("returned_int: %d\n", returned_int);
             return returned_int;
         } else {
             radices_name(radix);
@@ -783,9 +784,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     // NOTE:OUTPUT FOR ABB * A (16)
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      first temp_product is correct 110, which converts to 6E, which is returned as 614
-                    //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place
-                    //      The bug may be within decimal_to_radix, where a solution may be to separate the 2 digits and return them separately
-                    //      Add an argument that's present if decimal_to_radix is being used within calc_mul()
+                    //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place :tomato_thonk:
                     //
                     //      10 11 11
                     //       0  0 10
