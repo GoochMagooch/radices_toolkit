@@ -784,10 +784,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      first temp_product is correct 110, which converts to 6E, which is returned as 614
                     //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place
-                    //      The solution may need to include analyzing the radix somehow. 
+                    //      The solution may need to include analyzing the radix somehow. Maybe within decimal_to_radix separate the 2 digits and return them separately?
+                    //      Add an argument that's present if decimal_to_radix is being used within calc_mul()
+                    //
                     //      10 11 11
                     //       0  0 10
-
+                    //
                     //      CONDITION TWO:
                     //      temp_product: 110
                     //      temp_conversion: 614
