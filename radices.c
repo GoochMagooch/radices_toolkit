@@ -780,9 +780,41 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      PERHAPS ALSO LOOK AT BOTH ABB * F AND ABB* FF TO SEE HOW THEY WORK
                     //      Also try ABB * A, ABB * AA, and ABB * AAA
 
+                    //      OUTPUT FOR ABB * A (16)
                     //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      first temp_product is correct 110, which converts to 6E, which is returned as 614
                     //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place
+                    //      The solution may need to include analyzing the radix somehow. 
+                    //      10 11 11
+                    //       0  0 10
+
+                    //      CONDITION TWO:
+                    //      temp_product: 110
+                    //      temp_conversion: 614
+                    //      temp_quotient: 61
+                    //      temp_product after quotient: 4
+                    //      temp_product, end of inner loop: 4
+                    //
+                    //      CONDITION ONE:
+                    //      temp_product: 171
+                    //      temp_conversion: 1011
+                    //      temp_quotient: 10
+                    //      temp_product after quotient: 11
+                    //      temp_product, end of inner loop: 11
+                    //
+                    //      CONDITION TWO:
+                    //      temp_product: 110
+                    //      temp_conversion: 614
+                    //      temp_quotient: 61
+                    //      temp_product after quotient: 4
+                    //      temp_product, end of inner loop: 4
+                    //
+                    //      muls: 1
+                    //
+                    //      Product characters: = 4 B 4
+                    //
+                    //      Product integers: 61 52 66 52
+
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
