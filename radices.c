@@ -782,11 +782,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      Also try ABB * A, ABB * AA, and ABB * AAA
 
                     // NOTE:OUTPUT FOR ABB * A (16)
-                    //      temp_product and temp_conversion separating correctly, however [=, 4, B, 4] is returned. Should be [6, B, 4, E]
                     //      first temp_product is correct 110, which converts to 6E, which is returned as 614
                     //      Should be separated as [6, 14], but is separating as [61, 4] because 3 digit numbers are separated at the 1s place :tomato_thonk:
-                    //      I might need something that detects 10s and 1s places, regardless of the radix...actually that is the solution.
-                    //      Separate 614 into [6, 14] and then see if index 1 is > radix, if true keep that orientation, if not switch to [61, 4]?
+                    //      Within decimal_to_radix() there is an array that recieves all digits, and is either returned as digits, or characters.
+                    //      But there is an array, so I check ans[1] because no temp_product is ever going to be above 2 digits, the quotient and the other digit.
+                    //      If ans[1] > 9 then I know to separate the first digit from the last 2 digits. Otherwise separate the first 2 digits from the last digit.
                     //
                     //      10 11 11
                     //       0  0 10
