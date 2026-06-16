@@ -160,7 +160,6 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
         }
 
         ans[num_length-index] = return_char(dividend);
-
  
         // convert temp_product in calc_mul() to radix digits or print the result of decimal_to_radix()
         int returned_int;
@@ -787,8 +786,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      Within decimal_to_radix() there is an array that recieves all digits, and is either returned as digits, or characters.
                     //      But there is an array, so I check ans[1] because no temp_product is ever going to be above 2 digits, the quotient and the other digit.
                     //      If ans[1] > 9 then I know to separate the first digit from the last 2 digits. Otherwise separate the first 2 digits from the last digit.
-                    //
-                    //      First, change the output of decimal_to_radix() to separate the returned digits.
+                    // XXX: Won't work, because decimal_to_radix() turns argument into a single digit. I have to separate the digits another way. With math somehow.
                     //
                     //      10 11 11
                     //       0  0 10
