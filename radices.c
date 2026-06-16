@@ -847,13 +847,17 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 } else {
-                    printf("CONDITION THREE: \n");
-                    printf("temp_product: %d\n", temp_product);
-                    printf("temp_conversion: %d\n", temp_conversion);
-                    temp_quotient = temp_conversion / 10;
-                    printf("temp_quotient: %d\n", temp_quotient);
-                    temp_product = temp_conversion - (temp_quotient * 10);
-                    printf("temp_product after quotient: %d\n", temp_product);
+                    if (radix > 9) {
+                        // NOTE: FOR DIGITS < 100 && > RADIX
+                    } else {
+                        printf("CONDITION THREE: \n");
+                        printf("temp_product: %d\n", temp_product);
+                        printf("temp_conversion: %d\n", temp_conversion);
+                        temp_quotient = temp_conversion / 10; // XXX: THIS WOULD SEPARATE 1B (16) INTO 11
+                        printf("temp_quotient: %d\n", temp_quotient);
+                        temp_product = temp_conversion - (temp_quotient * 10); // XXX: THIS WOULD SEPARATE 1B (16) INTO 0
+                        printf("temp_product after quotient: %d\n", temp_product);
+                    }
                 }
 
                 printf("temp_product, end of inner loop: %d\n", temp_product);
