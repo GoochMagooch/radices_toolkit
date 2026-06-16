@@ -171,7 +171,6 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
                 returned_int = return_int(ans[0]) * 10;
             }
             returned_int += return_int(ans[1]);
-            printf("returned_int: %d\n", returned_int);
             return returned_int;
         } else {
             radices_name(radix);
@@ -775,7 +774,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 temp_conversion = decimal_to_radix(temp_product, r, true);
 
                 // Separates product from quotient
-                if (temp_conversion > 999) {
+
                     // FIX: ABB * F and ABB * FF BOTH CORRECT, ABB * FFF STILL WRONG, DEBUG
                     //      PERHAPS ALSO LOOK AT BOTH ABB * F AND ABB* FF TO SEE HOW THEY WORK
                     //      Also try ABB * A, ABB * AA, and ABB * AAA
@@ -818,6 +817,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //
                     //      Product integers: 61 52 66 52
 
+                if (temp_conversion > 999) {
                     printf("CONDITION ONE: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
@@ -827,6 +827,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
+                    // FIX: THIS CONDITION NEEDS NESTED CONDITION TO CHECK IF ONES PLACE IS 1 OR 2 DIGITS
                     printf("CONDITION TWO: \n");
                     printf("temp_product: %d\n", temp_product);
                     printf("temp_conversion: %d\n", temp_conversion);
