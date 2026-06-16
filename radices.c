@@ -827,9 +827,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
-                    // FIX: THIS CONDITION NEEDS NESTED CONDITION TO CHECK IF ONES PLACE IS 1 OR 2 DIGITS
-                    //      ANY RESULT OF decimal_to_radix() THAT REACHES THIS CONDITION WILL ALWAYS ONLY HAVE A 1s AND 10s PLACE
-                    //      ANY 3 DIGIT RESULT IS GOING TO BE [10, 1, 1]
                     if (radix > 9) {
                         // NOTE: FOR 3 DIGIT RESULTS WITH A RADIX > 9
                         printf("CONDITION TWO RADIX > 9: \n");
