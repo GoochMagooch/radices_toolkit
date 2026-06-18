@@ -848,7 +848,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     }
                 } else {
                     if (radix > 9) {
-                        // NOTE: FOR DIGITS < 100 && > RADIX
+                        // NOTE: FOR DIGITS < 100 && RADIX > 9
                     } else {
                         printf("CONDITION THREE: \n");
                         printf("temp_product: %d\n", temp_product);
