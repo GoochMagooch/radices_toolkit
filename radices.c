@@ -842,6 +842,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = (temp_conversion - temp_quotient) / 100; // FIX: ACCURATELY RETURNS RESULT OF ABB * A (16), BUT NOT ABB * F (16)
+                                                                                 //      I PROBABLY JUST NEED TO WORK ON LN 866 AND 868 NOW
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
                         printf("temp_product after quotient: %d\n", temp_product);
