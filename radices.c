@@ -847,24 +847,24 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 } else {
-                    if (radix > 9) {
+                    if (radix < 10) {
+                        printf("CONDITION THREE: \n");
+                        printf("temp_product: %d\n", temp_product);
+                        printf("temp_conversion: %d\n", temp_conversion);
+                        temp_quotient = temp_conversion / 10;
+                        printf("temp_quotient: %d\n", temp_quotient);
+                        temp_product = temp_conversion - (temp_quotient * 10);
+                        printf("temp_product after quotient: %d\n", temp_product);
+
+                    } else {
                         // NOTE: FOR DIGITS < 100 && RADIX > 9
                         // FIX: CHANGE CODE TO REFLECT CONDITION
                         printf("CONDITION THREE: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
-                        temp_quotient = temp_conversion / 10; // XXX: THIS WOULD SEPARATE 1B (16) INTO 11
+                        temp_quotient = temp_conversion / 10; // XXX: THIS WILL SEPARATE 1B (16) INTO 11
                         printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = temp_conversion - (temp_quotient * 10); // XXX: THIS WOULD SEPARATE 1B (16) INTO 0
-                        printf("temp_product after quotient: %d\n", temp_product);
-
-                    } else {
-                        printf("CONDITION THREE: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
-                        temp_quotient = temp_conversion / 10; //
-                        printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = temp_conversion - (temp_quotient * 10);
+                        temp_product = temp_conversion - (temp_quotient * 10); // XXX: THIS WILL SEPARATE 1B (16) INTO 0
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 }
