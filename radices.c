@@ -827,23 +827,23 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
-                    if (radix > 9) {
-                        // NOTE: FOR 3 DIGIT RESULTS WITH A RADIX > 9
-                        printf("CONDITION TWO RADIX > 9: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
-                        temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: NEEDS MODIFYING
-                        printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = (temp_conversion - (temp_quotient * 10)); // FIX: NEEDS MODIFYING
-                        printf("temp_product after quotient: %d\n", temp_product);
-                    } else {
+                    if (radix < 10) {
                         // NOTE: DIGITS THAT REACH THIS CONDITION WILL ALWAYS BE 2 DIGITS LONG
-                        printf("CONDITION TWO RADIX <= 9: \n");
+                        printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = (temp_conversion - temp_quotient) / 10;
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 10));
+                        printf("temp_product after quotient: %d\n", temp_product);
+                    } else {
+                        // NOTE: ANY 3 DIGIT RESULT, WITH A RADIX > 9 WILL MEAN THE ONES PLACE IS 2 DIGITS
+                        printf("CONDITION TWO RADIX <= 9: \n");
+                        printf("temp_product: %d\n", temp_product);
+                        printf("temp_conversion: %d\n", temp_conversion);
+                        temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: NEEDS MODIFYING
+                        printf("temp_quotient: %d\n", temp_quotient);
+                        temp_product = (temp_conversion - (temp_quotient * 10)); // FIX: NEEDS MODIFYING
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 } else {
