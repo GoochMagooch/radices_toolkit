@@ -827,7 +827,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
-                    if (radix < 10) {
+                    if (r < 10) {
                         // NOTE: DIGITS THAT REACH THIS CONDITION WILL ALWAYS BE 2 DIGITS LONG
                         printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
@@ -841,13 +841,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("CONDITION TWO RADIX <= 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
-                        temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: NEEDS MODIFYING
+                        temp_quotient = (temp_conversion - temp_quotient) / 100; // FIX: ACCURATELY RETURNS RESULT OF ABB * A (16), BUT NOT ABB * F (16)
                         printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = (temp_conversion - (temp_quotient * 10)); // FIX: NEEDS MODIFYING
+                        temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 } else {
-                    if (radix < 10) {
+                    if (r < 10) {
                         printf("CONDITION THREE: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
