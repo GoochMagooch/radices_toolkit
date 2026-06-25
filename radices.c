@@ -844,8 +844,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         // FIX: ACCURATELY RETURNS RESULT OF ABB * A (16), BUT NOT ABB * F (16)
                         //      DO THE MATH FOR ABB * F AND ANALYZE OUTPUT OF PROGRAM
                         //      FIRST temp_product is 165, 105 (16), SEPARATES INTO 1 AND 5 INSTEAD 10 AND 5
-                        //      106 / 100 == 1 not 10
-                        //      :NOOOOOOOOOO:
+                        //      It now separates the 10 from the 6 but the 6 is now -895 :tom_angry:
                         temp_quotient = (temp_conversion - temp_quotient) / 10;
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
