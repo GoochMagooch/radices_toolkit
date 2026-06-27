@@ -846,6 +846,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      FIRST temp_product is 165, 105 (16), SEPARATES INTO 1 AND 5 INSTEAD 10 AND 5
                         //      106 / 100 == 1 not 10
                         //      :NOOOOOOOOOO:
+                        //      temp_conversion from ABB * F (16) needs to be separated into 10 and 5
+                        //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
+                        //      :NOOOOOOOOOO:
                         temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: temp_quotient hasn't been created yet!
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
