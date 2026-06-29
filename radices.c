@@ -850,6 +850,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
                         //      Clearly, I need a way to determine if the ones place is 1 or 2 digits. 3 digits won't always mean 1 thing.
                         //      The only guarantee is that any result that reaches this condition will be 3 digits.
+                        //      Taking the next day or so to think about, write some stuff down, and then try it.
+                        //      Calculations with temp_product may be necessary. Dividing by the radix or something
+                        //      There's a difference between 110 and 165. What is it thought?
                         temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: temp_quotient hasn't been created yet!
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
