@@ -853,6 +853,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      Taking the next day or so to think about, write some stuff down, and then try it.
                         //      Calculations with temp_product may be necessary. Dividing by the radix or something
                         //      There's a difference between 110 and 165. What is it thought?
+                        //      What signal would determine that the ones place is double digits or a single digit?
                         temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: temp_quotient hasn't been created yet!
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
