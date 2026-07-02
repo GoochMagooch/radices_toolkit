@@ -786,36 +786,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     //      But there is an array, so I check ans[1] because no temp_product is ever going to be above 2 digits, the quotient and the other digit.
                     //      If ans[1] > 9 then I know to separate the first digit from the last 2 digits. Otherwise separate the first 2 digits from the last digit.
                     // XXX: Won't work, because decimal_to_radix() turns argument into a single digit. I have to separate the digits another way. With math somehow.
-                    //
-                    //      10 11 11
-                    //       0  0 10
-                    //
-                    //      CONDITION TWO:
-                    //      temp_product: 110
-                    //      temp_conversion: 614
-                    //      temp_quotient: 61
-                    //      temp_product after quotient: 4
-                    //      temp_product, end of inner loop: 4
-                    //
-                    //      CONDITION ONE:
-                    //      temp_product: 171
-                    //      temp_conversion: 1011
-                    //      temp_quotient: 10
-                    //      temp_product after quotient: 11
-                    //      temp_product, end of inner loop: 11
-                    //
-                    //      CONDITION TWO:
-                    //      temp_product: 110
-                    //      temp_conversion: 614
-                    //      temp_quotient: 61
-                    //      temp_product after quotient: 4
-                    //      temp_product, end of inner loop: 4
-                    //
-                    //      muls: 1
-                    //
-                    //      Product characters: = 4 B 4
-                    //
-                    //      Product integers: 61 52 66 52
 
                 if (temp_conversion > 999) {
                     printf("CONDITION ONE: \n");
@@ -837,7 +807,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         temp_product = (temp_conversion - (temp_quotient * 10));
                         printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        // NOTE: ANY 3 DIGIT RESULT, WITH A RADIX > 9 WILL MEAN THE ONES PLACE IS 2 DIGITS
+                        // NOTE: ANY 3 DIGIT RESULT, WITH A RADIX > 9 WILL MEAN THE ONES PLACE IS 2 DIGITS - FALSE
                         printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
@@ -852,11 +822,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      The only guarantee is that any result that reaches this condition will be 3 digits.
                         //      Taking the next day or so to think about, write some stuff down, and then try it.
                         //      Calculations with temp_product may be necessary. Dividing by the radix or something
-                        //      There's a difference between 110 and 165. What is it thought?
+                        //      There's a difference between 105 (single) and 614 (double). What is it thought?
                         //      What signal would determine that the ones place is double digits or a single digit?
-                        temp_quotient = (temp_conversion - temp_quotient) / 10; // FIX: temp_quotient hasn't been created yet!
+                        //
+                        //      This currently works for ABB * F (16), now I need to figure out the above
+                        temp_quotient = temp_conversion / 10;
                         printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = (temp_conversion - (temp_quotient * 100)); // FIX: NEEDS MODIFYING
+                        temp_product = (temp_conversion - (temp_quotient * 10));
                         printf("temp_product after quotient: %d\n", temp_product);
                     }
                 } else {
