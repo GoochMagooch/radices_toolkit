@@ -826,10 +826,19 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         //      What signal would determine that the ones place is double digits or a single digit?
                         //
                         //      This currently works for ABB * F (16), now I need to figure out the above
-                        temp_quotient = temp_conversion / 10;
-                        printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = (temp_conversion - (temp_quotient * 10));
-                        printf("temp_product after quotient: %d\n", temp_product);
+                        if (ones place is double digit) {
+                            // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
+                            temp_quotient = temp_conversion / 10;
+                            printf("temp_quotient: %d\n", temp_quotient);
+                            temp_product = (temp_conversion - (temp_quotient * 10));
+                            printf("temp_product after quotient: %d\n", temp_product);
+                        } else {
+                            // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
+                            temp_quotient = temp_conversion / 10;
+                            printf("temp_quotient: %d\n", temp_quotient);
+                            temp_product = (temp_conversion - (temp_quotient * 10));
+                            printf("temp_product after quotient: %d\n", temp_product);
+                        }
                     }
                 } else {
                     if (r < 10) {
