@@ -812,15 +812,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
                         // FIX: ACCURATELY RETURNS RESULT OF ABB * A (16), BUT NOT ABB * F (16)
-                        //      DO THE MATH FOR ABB * F AND ANALYZE OUTPUT OF PROGRAM
-                        //      FIRST temp_product is 165, 105 (16), SEPARATES INTO 1 AND 5 INSTEAD 10 AND 5
-                        //      106 / 100 == 1 not 10
-                        //      :NOOOOOOOOOO:
                         //      temp_conversion from ABB * F (16) needs to be separated into 10 and 5
                         //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
-                        //      Clearly, I need a way to determine if the ones place is 1 or 2 digits. 3 digits won't always mean 1 thing.
                         //      The only guarantee is that any result that reaches this condition will be 3 digits.
-                        //      Taking the next day or so to think about, write some stuff down, and then try it.
                         //      Calculations with temp_product may be necessary. Dividing by the radix or something
                         //      There's a difference between 105 (single) and 614 (double). What is it thought?
                         //      What signal would determine that the ones place is double digits or a single digit?
