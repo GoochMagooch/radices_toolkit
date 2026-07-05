@@ -817,8 +817,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         if (r == 16){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
                             // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
                             //      Calculations with temp_product may be necessary. (temp_product / r) or something
-                            //      There's a difference between 105 (single) and 614 (double). What is it thought?
+                            //      There's a difference between 105 (single) and 614 (double). What is it though?
                             //      What signal would determine that the ones place is double digits or a single digit?
+                            //      The RADIX place will never be larger than r, and if it is then that's a double digit ones place?
+                            //      STEP ONE: separate temp_product into single digit r place and double digit ones place
+                            //      STEP TWO: if num1 is larger than r then trigger this condition
+                            //      Won't work. What if temp_conversion is 114 -> 1E? This condition won't trigger when it should
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
