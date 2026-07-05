@@ -165,6 +165,9 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
         int returned_int;
         if (int_return == true) {
             // NOTE: returned_int is returned as a whole number, so any separation will still need to be within calc_mul()
+            //       It looks like any other time I use decimal_to_radix() within calc_mul() I need to separate each digit.
+            //       Why don't I just stop returning a whole value and return integers to work with?
+            //       Basically, return integers instead of characters, send them to an array and do what I need to do to them within calc_mul()
             if (return_int(ans[1]) > 9) {
                 returned_int = return_int(ans[0]) * 100;
             } else {
@@ -785,7 +788,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 } else if (temp_conversion > 99) {
                     if (r < 10) {
-                        // NOTE: DIGITS THAT REACH THIS CONDITION WILL ALWAYS BE 2 DIGITS LONG
+                        // NOTE: DIGITS THAT REACH THIS CONDITION WILL ALWAYS BE 3 DIGITS LONG
                         printf("CONDITION TWO RADIX <= 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
@@ -794,13 +797,15 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         temp_product = (temp_conversion - (temp_quotient * 10));
                         printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        // NOTE: ANY 3 DIGIT RESULT, WITH A RADIX > 9 WILL MEAN THE ONES PLACE IS 2 DIGITS - FALSE
                         printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
                         // FIX: temp_conversion from ABB * F (16) needs to be separated into 10 and 5
                         //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
                         //      any result that reaches this condition will be 3 digits
+                        
+                        // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
+                        //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
                         if (r == 16){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
                             // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
                             //      Calculations with temp_product may be necessary. (temp_product / r) or something
@@ -810,6 +815,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      STEP ONE: separate temp_product into single digit r place and double digit ones place
                             //      STEP TWO: if num1 is larger than r then trigger this condition
                             //      Won't work. What if temp_conversion is 114 -> 1E? This condition won't trigger when it should
+                            //      So a temp_conversion that triggers this condition could be 114 -> B4 or it could be 114 -> 1E
+                            //                  This could be mediated if temp_product is always checked. If temp_product is < ()
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
