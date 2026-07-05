@@ -811,20 +811,17 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
-                        // FIX: ACCURATELY RETURNS RESULT OF ABB * A (16), BUT NOT ABB * F (16)
-                        //      temp_conversion from ABB * F (16) needs to be separated into 10 and 5
+                        // FIX: temp_conversion from ABB * F (16) needs to be separated into 10 and 5
                         //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
-                        //      The only guarantee is that any result that reaches this condition will be 3 digits.
-                        //      Calculations with temp_product may be necessary. Dividing by the radix or something
-                        //      There's a difference between 105 (single) and 614 (double). What is it thought?
-                        //      What signal would determine that the ones place is double digits or a single digit?
-                        //
-                        //      This currently works for ABB * F (16), now I need to figure out the above
-                        if (ones place is double digit) {
+                        //      any result that reaches this condition will be 3 digits
+                        if (r == 16){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
                             // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
-                            temp_quotient = temp_conversion / 10;
+                            //      Calculations with temp_product may be necessary. (temp_product / r) or something
+                            //      There's a difference between 105 (single) and 614 (double). What is it thought?
+                            //      What signal would determine that the ones place is double digits or a single digit?
+                            temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
-                            temp_product = (temp_conversion - (temp_quotient * 10));
+                            temp_product = (temp_conversion - (temp_quotient * 100));
                             printf("temp_product after quotient: %d\n", temp_product);
                         } else {
                             // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
