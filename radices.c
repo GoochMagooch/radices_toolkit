@@ -169,6 +169,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             //       Why don't I just stop returning a whole value and return integers to work with?
             //       Basically, return integers instead of characters, send them to an array and do what I need to do to them within calc_mul()
             //       Just abou certain this is the solution
+            //       So I basically just copy what's in the else clause and return integers instead
             if (return_int(ans[1]) > 9) {
                 returned_int = return_int(ans[0]) * 100;
             } else {
