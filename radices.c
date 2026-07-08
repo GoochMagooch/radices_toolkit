@@ -166,10 +166,8 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
         if (int_return == true) {
             // NOTE: returned_int is returned as a whole number, so any separation will still need to be within calc_mul()
             //       It looks like any other time I use decimal_to_radix() within calc_mul() I need to separate each digit.
-            //       Why don't I just stop returning a whole value and return integers to work with?
-            //       Basically, return integers instead of characters, send them to an array and do what I need to do to them within calc_mul()
-            //       Just abou certain this is the solution
-            //       So I basically just copy what's in the else clause and return integers instead
+            //       Return integers instead of characters, send them to an array and do what I need to do to them within calc_mul()
+            //       Copy what's in the else clause and return integers instead
             if (return_int(ans[1]) > 9) {
                 returned_int = return_int(ans[0]) * 100;
             } else {
