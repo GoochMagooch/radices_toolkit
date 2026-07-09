@@ -817,6 +817,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      Won't work. What if temp_conversion is 114 -> 1E? This condition won't trigger when it should
                             //      So a temp_conversion that triggers this condition could be 114 -> B4 or it could be 114 -> 1E
                             //                  This could be mediated if temp_product is always checked. If temp_product is < ()
+                            //
+                            //      I've decided to convert the return values of decimal_to_radix() to an array of integers
+                            //      How would that work in this part of the code?
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
