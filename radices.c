@@ -825,6 +825,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
                             //      I could replace it with temp_product_arr[j] = result_arr[0]
+                            //
+                            //      Next step: begin applying changes within decimal_to_radix()
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
