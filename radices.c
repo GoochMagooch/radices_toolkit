@@ -821,7 +821,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      I've decided to convert the return values of decimal_to_radix() to an array of integers
                             //      How would that work in this part of the code?
                             //      Send result_arr[0] to temp_product and result_arr[1] to temp_quotient?
-                            //      Does this interfere with anything else?
+                            //
+                            //      If I have an array, instead of a value, will other parts of this code break?
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
