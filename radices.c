@@ -107,7 +107,7 @@ void radices_name(int num) {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int decimal_to_radix(int decimal, int radix, bool int_return) {
+int decimal_to_radix(int decimal, int radix, bool int_return, bool arr_return, int *return_arr) {
     // TODO: Add functionality for numbers with fractionals
 
     // XXX: REINSTATE AFTER TESTING IN calc_mul()
@@ -169,6 +169,7 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             //       Return integers instead of characters, send them to an array and do what I need to do to them within calc_mul()
             //       Copy what's in the else clause and return integers instead
             //       Rather than copying what's in the else clause I will need to send the input to an external array
+
             if (return_int(ans[1]) > 9) {
                 returned_int = return_int(ans[0]) * 100;
             } else {
@@ -176,6 +177,10 @@ int decimal_to_radix(int decimal, int radix, bool int_return) {
             }
             returned_int += return_int(ans[1]);
             return returned_int;
+        } else if (arr_return == true) {
+            for (int i = 0; i < num_length; i++) {
+                return_arr[i] = return_int(ans[i]);
+            }
         } else {
             radices_name(radix);
             if (neg_num == true) {
@@ -623,7 +628,10 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
             temp_quotient = 0;
         }
         if (temp_product >= r) {
-            temp_conversion = decimal_to_radix(temp_product, r, true);
+            int filler_arr[0];
+            decimal_to_radix(temp_product, r, false, true, filler_arr);
+            // FIX: THERE MAY A CONFLICT IN TRYING TO ADD SOMETHING TO AN ARRAY AND RETURN A VALUE TO temp_conversion
+            temp_conversion = decimal_to_radix(temp_product, r, true, false, filler_arr);
 
             // Separates product from quotient
             if (temp_conversion > 99) {
@@ -775,7 +783,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             }
 
             if (temp_product >= r) {
-                temp_conversion = decimal_to_radix(temp_product, r, true);
+
+                // array with 2 elements - r place, ones place
+                int test_return_arr[2];
+                temp_conversion = decimal_to_radix(temp_product, r, false, true, test_return_arr);
 
                 // Separates product from quotient
                 if (temp_conversion > 999) {
@@ -828,6 +839,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      I could replace it with temp_product_arr[j] = result_arr[0]
                             //
                             //      Next step: begin applying changes within decimal_to_radix()
+
+                            for (int i = 0; i < 2; i++) {
+                                printf("%d ", test_return_arr[i]);
+                            }
+                            printf("\n");
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
@@ -1196,7 +1212,8 @@ int main() {
             int r;
             printf("Enter your radix: ");
             scanf("%d", &r);
-            decimal_to_radix(dec, r, false);
+            int another_filler_arr[0];
+            decimal_to_radix(dec, r, false, false, another_filler_arr);
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
             radix_to_decimal();
