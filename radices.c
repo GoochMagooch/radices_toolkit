@@ -658,7 +658,6 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // TODO: add functionality for negative numbers
 
-
     clear();
     menu_banner();
 
