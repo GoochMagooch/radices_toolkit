@@ -107,7 +107,7 @@ void radices_name(int num) {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DECIMAL TO RADICES CONVERTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int decimal_to_radix(int decimal, int radix, bool int_return, bool arr_return, int *return_arr) {
+int decimal_to_radix(int decimal, int radix, bool int_return) {
     // TODO: Add functionality for numbers with fractionals
 
     // XXX: REINSTATE AFTER TESTING IN calc_mul()
@@ -177,10 +177,6 @@ int decimal_to_radix(int decimal, int radix, bool int_return, bool arr_return, i
             }
             returned_int += return_int(ans[1]);
             return returned_int;
-        } else if (arr_return == true) {
-            for (int i = 0; i < num_length; i++) {
-                return_arr[i] = return_int(ans[i]);
-            }
         } else {
             radices_name(radix);
             if (neg_num == true) {
@@ -628,10 +624,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
             temp_quotient = 0;
         }
         if (temp_product >= r) {
-            int filler_arr[0];
-            decimal_to_radix(temp_product, r, false, true, filler_arr);
-            // FIX: THERE MAY A CONFLICT IN TRYING TO ADD SOMETHING TO AN ARRAY AND RETURN A VALUE TO temp_conversion
-            temp_conversion = decimal_to_radix(temp_product, r, true, false, filler_arr);
+            temp_conversion = decimal_to_radix(temp_product, r, true);
 
             // Separates product from quotient
             if (temp_conversion > 99) {
@@ -657,6 +650,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // TODO: add functionality for negative numbers
+
 
     clear();
     menu_banner();
@@ -785,7 +779,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // array with 2 elements - r place, ones place
                 int test_return_arr[2];
-                temp_conversion = decimal_to_radix(temp_product, r, false, true, test_return_arr);
+                temp_conversion = decimal_to_radix(temp_product, r, true, test_return_arr);
 
                 // Separates product from quotient
                 if (temp_conversion > 999) {
@@ -836,13 +830,10 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
                             //      I could replace it with temp_product_arr[j] = result_arr[0]
-                            //
-                            //      Next step: begin applying changes within decimal_to_radix()
+                            //      There will be parts that require an integer to be returned, and parts that require an array to
+                            //      be populated, in order to pull from that array.
+                            //      I'M GOING TO NEED TO BUILD A SEPARATE FUNCTION THAT POPULATES AN ARRAY, THEN I CAN SEPARATE THE R AND ONES PLACE
 
-                            for (int i = 0; i < 2; i++) {
-                                printf("%d ", test_return_arr[i]);
-                            }
-                            printf("\n");
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
@@ -1211,8 +1202,7 @@ int main() {
             int r;
             printf("Enter your radix: ");
             scanf("%d", &r);
-            int another_filler_arr[0];
-            decimal_to_radix(dec, r, false, false, another_filler_arr);
+            decimal_to_radix(dec, r, false);
             menu_persist = false;
         } else if (strcmp(choice, "2") == 0) {
             radix_to_decimal();
