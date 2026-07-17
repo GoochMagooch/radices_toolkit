@@ -812,6 +812,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
                         if (r == 16){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
+                            //                I HAVE THE MATH TO SEPARATE THE R AND ONES PLACE INDEPENDENTLY.
+                            //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
+                            //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
+                            //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
+                            //
                             // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
                             //      Calculations with temp_product may be necessary. (temp_product / r) or something
                             //      There's a difference between 105 (single) and 614 (double). What is it though?
@@ -855,7 +860,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = temp_conversion - (temp_quotient * 10);
                         printf("temp_product after quotient: %d\n", temp_product);
-
                     } else {
                         // NOTE: FOR DIGITS < 100 && RADIX > 9
                         // FIX: CHANGE CODE TO REFLECT CONDITION
