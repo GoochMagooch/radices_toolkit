@@ -816,21 +816,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
                             //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
                             //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
-                            //
-                            // FIX: NEEDS TO SEPARATE SINGLE DIGIT R PLACE FROM DOUBLE DIGIT 1s PLACE
-                            //      Calculations with temp_product may be necessary. (temp_product / r) or something
-                            //      There's a difference between 105 (single) and 614 (double). What is it though?
-                            //      What signal would determine that the ones place is double digits or a single digit?
-                            //      The RADIX place will never be larger than r, and if it is then that's a double digit ones place?
-                            //      STEP ONE: separate temp_product into single digit r place and double digit ones place
-                            //      STEP TWO: if num1 is larger than r then trigger this condition
-                            //      Won't work. What if temp_conversion is 114 -> 1E? This condition won't trigger when it should
-                            //      So a temp_conversion that triggers this condition could be 114 -> B4 or it could be 114 -> 1E
-                            //                  This could be mediated if temp_product is always checked. If temp_product is < ()
-                            //
-                            //      I've decided to convert the return values of decimal_to_radix() to an array of integers
-                            //      How would that work in this part of the code?
-                            //      Send result_arr[0] to temp_product and result_arr[1] to temp_quotient?
+                            //                What signal would determine that the ones place is double digits or a single digit?
                             //
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
