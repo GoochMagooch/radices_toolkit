@@ -818,7 +818,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
                             //                114 (16) could be 1E or it could be B4
                             //                What signal would determine that the ones place is double digits or a single digit?
-                            //                I'm gonna spend some time away from the computer to think about it :prayge:
                             //
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
