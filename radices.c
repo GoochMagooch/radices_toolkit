@@ -816,6 +816,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
                             //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
                             //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
+                            //                114 (16) could be 1E or it could be B4
                             //                What signal would determine that the ones place is double digits or a single digit?
                             //                I'm gonna spend some time away from the computer to think about it :prayge:
                             //
