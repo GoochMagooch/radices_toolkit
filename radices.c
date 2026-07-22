@@ -816,10 +816,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
                             //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
                             //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
-                            //                114 (16) could be 1E or it could be B4
+                            //                114 (16) could be 1E (20 - Base 10) or it could be B4 (181 - Base 10)
                             //                What signal would determine that the ones place is double digits or a single digit?
                             //                Perhaps some type of comparison between temp_product and temp_conversion
                             //                Maybe if temp_product is lower than a particular number then it's a 2 digit ones place?
+                            //                
                             //
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
