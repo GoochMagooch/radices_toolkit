@@ -807,17 +807,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_conversion: %d\n", temp_conversion);
                         // FIX: temp_conversion from ABB * F (16) needs to be separated into 10 and 5
                         //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
-                        //      any result that reaches this condition will be 3 digits
                         
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
-                        if (temp_product >= 160){ // FIX: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
-                            //                114 (16) could be 1E (20 - Base 10) or it could be B4 (181 - Base 10)
-                            //                What signal would determine that the ones place is double digits or a single digit?
-                            //                Perhaps some type of comparison between temp_product and temp_conversion
-                            //                Maybe if temp_product is lower than a particular number then it's a 2 digit ones place?
-                            //                Because once the Base 10 digit hits a certain number, the R place flips to 2 digits, right?
-                            //                I guess that number is 160?
+                        if (temp_product >= 160){ // NOTE: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
+                            //                             (if temp_product / 10 >= R)?
+                            //                             THE PROBLEM WITH THIS IS IF THERE'S ANY REMAINDER IT WILL STILL RETURN TRUE
                             printf("R PLACE IS 2 DIGITS\n");
                             temp_quotient = temp_conversion / 10;
                             printf("temp_quotient: %d\n", temp_quotient);
