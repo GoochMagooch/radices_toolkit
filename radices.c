@@ -831,6 +831,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                     } else {
                         // NOTE: FOR DIGITS < 100 && RADIX > 9
                         // FIX: CHANGE CODE TO REFLECT CONDITION
+                        //      FIGURE OUT WHAT THIS DID AND WHY THERE'S COMMENTS
                         printf("CONDITION THREE: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
