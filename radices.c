@@ -793,7 +793,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 } else if (temp_conversion > 99) {
                     if (r < 10) {
-                        // NOTE: DIGITS THAT REACH THIS CONDITION WILL ALWAYS BE 3 DIGITS LONG
                         printf("CONDITION TWO RADIX <= 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
@@ -805,13 +804,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("CONDITION TWO RADIX > 9: \n");
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
-                        // FIX: temp_conversion from ABB * F (16) needs to be separated into 10 and 5
-                        //      temp_conversion from ABB * A (16) needs to be separated into 6 and 14
-                        
-                        // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
-                        //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
-                        if (temp_product / 10 >= r){ // NOTE: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
-                            //                             (if temp_product / 10 >= R)?
+
+                        if (temp_product / 10 >= r) {
                             printf("R PLACE IS 2 DIGITS\n");
                             temp_quotient = temp_conversion / 10;
                             printf("temp_quotient: %d\n", temp_quotient);
