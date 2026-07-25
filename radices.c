@@ -811,7 +811,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
-                        if (r == 16){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
+                        if (temp_product => 160){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
                             //                I HAVE THE MATH TO SEPARATE THE R AND ONES PLACE INDEPENDENTLY.
                             //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
                             //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
