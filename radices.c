@@ -812,25 +812,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
                         if (temp_product >= 160){ // FIX: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
-                            //                I HAVE THE MATH TO SEPARATE THE R AND ONES PLACE INDEPENDENTLY.
-                            //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
-                            //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
-                            //                ORDER TO TRIGGER EITHER MATHEMATICAL OPERATION
                             //                114 (16) could be 1E (20 - Base 10) or it could be B4 (181 - Base 10)
                             //                What signal would determine that the ones place is double digits or a single digit?
                             //                Perhaps some type of comparison between temp_product and temp_conversion
                             //                Maybe if temp_product is lower than a particular number then it's a 2 digit ones place?
                             //                Because once the Base 10 digit hits a certain number, the R place flips to 2 digits, right?
                             //                I guess that number is 160?
-                            //
-                            //
-                            //      If I have an array, instead of a value, will other parts of this code break?
-                            //      I have a line of code below: temp_product_arr[j] = temp_product;
-                            //      I could replace it with temp_product_arr[j] = result_arr[0]
-                            //      There will be parts that require an integer to be returned, and parts that require an array to
-                            //      be populated, in order to pull from that array.
-                            //      I'M GOING TO NEED TO BUILD A SEPARATE FUNCTION THAT POPULATES AN ARRAY, THEN I CAN SEPARATE THE R AND ONES PLACE
-                            
                             printf("R PLACE IS 2 DIGITS\n");
                             temp_quotient = temp_conversion / 10;
                             printf("temp_quotient: %d\n", temp_quotient);
