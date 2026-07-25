@@ -779,7 +779,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // array with 2 elements - r place, ones place
                 int test_return_arr[2];
-                temp_conversion = decimal_to_radix(temp_product, r, true, test_return_arr);
+                temp_conversion = decimal_to_radix(temp_product, r, true);
 
                 // Separates product from quotient
                 if (temp_conversion > 999) {
@@ -811,7 +811,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
-                        if (temp_product => 160){ // FIX: WHAT SETS THIS CONDITION INTO MOTION?
+                        if (temp_product >= 160){ // FIX: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
                             //                I HAVE THE MATH TO SEPARATE THE R AND ONES PLACE INDEPENDENTLY.
                             //                IT'S A MATTER OF DETERMINING WHEN TO DO EITHER ONE!
                             //                BEFORE I CREATE A SEPARATE FUNCTION I'M GOING TO THINK ABOUT THE CONDITION THAT NEEDS TO BE PRESENT IN 
@@ -823,22 +823,25 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                Because once the Base 10 digit hits a certain number, the R place flips to 2 digits, right?
                             //                I guess that number is 160?
                             //
+                            //
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
                             //      I could replace it with temp_product_arr[j] = result_arr[0]
                             //      There will be parts that require an integer to be returned, and parts that require an array to
                             //      be populated, in order to pull from that array.
                             //      I'M GOING TO NEED TO BUILD A SEPARATE FUNCTION THAT POPULATES AN ARRAY, THEN I CAN SEPARATE THE R AND ONES PLACE
-
-                            temp_quotient = temp_conversion / 100;
-                            printf("temp_quotient: %d\n", temp_quotient);
-                            temp_product = (temp_conversion - (temp_quotient * 100));
-                            printf("temp_product after quotient: %d\n", temp_product);
-                        } else {
-                            // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
+                            
+                            printf("R PLACE IS 2 DIGITS\n");
                             temp_quotient = temp_conversion / 10;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 10));
+                            printf("temp_product after quotient: %d\n", temp_product);
+                        } else {
+                            printf("R PLACE IS 1 DIGIT\n");
+                            // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
+                            temp_quotient = temp_conversion / 100;
+                            printf("temp_quotient: %d\n", temp_quotient);
+                            temp_product = (temp_conversion - (temp_quotient * 100));
                             printf("temp_product after quotient: %d\n", temp_product);
                         }
                     }
