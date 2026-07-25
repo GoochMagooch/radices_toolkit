@@ -810,15 +810,16 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         
                         // NOTE: I NEED TO SET AN INTEGER, BASED OFF SOME MATHEMATICAL OPERATION WITH temp_product
                         //       IF THE RESULT IS THIS THEN THE IF CONDITION IS TRIGGERED, IF THE RESULT IS THAT THEN THE ELSE CONDITION IS TRIGGERED
-                        if (temp_product >= 160){ // NOTE: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
+                        if (temp_product / 10 >= r){ // NOTE: THIS CONDITION WORKS FOR BASE 16, NOW IT HAS TO WORK FOR EVERY RADIX
                             //                             (if temp_product / 10 >= R)?
-                            //                             THE PROBLEM WITH THIS IS IF THERE'S ANY REMAINDER IT WILL STILL RETURN TRUE
+                            printf("R PLACE IS 2 DIGITS\n");
                             temp_quotient = temp_conversion / 10;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 10));
                             printf("temp_product after quotient: %d\n", temp_product);
                         } else {
                             // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
+                            printf("R PLACE IS 1 DIGIT\n");
                             temp_quotient = temp_conversion / 100;
                             printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
