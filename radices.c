@@ -821,6 +821,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                             //                Perhaps some type of comparison between temp_product and temp_conversion
                             //                Maybe if temp_product is lower than a particular number then it's a 2 digit ones place?
                             //                Because once the Base 10 digit hits a certain number, the R place flips to 2 digits, right?
+                            //                I guess that number is 160?
                             //
                             //      If I have an array, instead of a value, will other parts of this code break?
                             //      I have a line of code below: temp_product_arr[j] = temp_product;
