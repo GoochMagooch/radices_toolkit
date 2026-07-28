@@ -836,6 +836,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         printf("temp_product: %d\n", temp_product);
                         printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = temp_conversion / 10; // XXX: THIS WILL SEPARATE 1B (16) INTO 11 - how can I test this?
+                        // Wait...1B will never be something that reaches this condition because the base isn't < 10
                         printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = temp_conversion - (temp_quotient * 10); // XXX: THIS WILL SEPARATE 1B (16) INTO 0
                         printf("temp_product after quotient: %d\n", temp_product);
