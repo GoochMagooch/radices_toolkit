@@ -783,70 +783,70 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // Separates product from quotient
                 if (temp_conversion > 999) {
-                    printf("CONDITION ONE: \n");
-                    printf("temp_product: %d\n", temp_product);
-                    printf("temp_conversion: %d\n", temp_conversion);
+                    // printf("CONDITION ONE: \n");
+                    // printf("temp_product: %d\n", temp_product);
+                    // printf("temp_conversion: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 100;
-                    printf("temp_quotient: %d\n", temp_quotient);
+                    // printf("temp_quotient: %d\n", temp_quotient);
                     temp_product = (temp_conversion - (temp_quotient * 100));
-                    printf("temp_product after quotient: %d\n", temp_product);
+                    // printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
                     if (r < 10) {
-                        printf("CONDITION TWO RADIX <= 9: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
+                        // printf("CONDITION TWO RADIX <= 9: \n");
+                        // printf("temp_product: %d\n", temp_product);
+                        // printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = (temp_conversion - temp_quotient) / 10;
-                        printf("temp_quotient: %d\n", temp_quotient);
+                        // printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 10));
-                        printf("temp_product after quotient: %d\n", temp_product);
+                        // printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        printf("CONDITION TWO RADIX > 9: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
+                        // printf("CONDITION TWO RADIX > 9: \n");
+                        // printf("temp_product: %d\n", temp_product);
+                        // printf("temp_conversion: %d\n", temp_conversion);
 
                         if (temp_product / 10 >= r) {
                             temp_quotient = temp_conversion / 10;
-                            printf("temp_quotient: %d\n", temp_quotient);
+                            // printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 10));
-                            printf("temp_product after quotient: %d\n", temp_product);
+                            // printf("temp_product after quotient: %d\n", temp_product);
                         } else {
                             // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
                             temp_quotient = temp_conversion / 100;
-                            printf("temp_quotient: %d\n", temp_quotient);
+                            // printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
-                            printf("temp_product after quotient: %d\n", temp_product);
+                            // printf("temp_product after quotient: %d\n", temp_product);
                         }
                     }
 
                 } else {
                     if (r < 10) {
-                        printf("CONDITION THREE: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
+                        // printf("CONDITION THREE: \n");
+                        // printf("temp_product: %d\n", temp_product);
+                        // printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = temp_conversion / 10;
-                        printf("temp_quotient: %d\n", temp_quotient);
+                        // printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = temp_conversion - (temp_quotient * 10);
-                        printf("temp_product after quotient: %d\n", temp_product);
+                        // printf("temp_product after quotient: %d\n", temp_product);
                     } else {
                         // NOTE: FOR DIGITS < 100 && RADIX > 9
                         // FIX: CHANGE CODE TO REFLECT CONDITION
                         //      FIGURE OUT WHAT THIS DID AND WHY THERE'S COMMENTS
-                        printf("CONDITION THREE: \n");
-                        printf("temp_product: %d\n", temp_product);
-                        printf("temp_conversion: %d\n", temp_conversion);
-                        temp_quotient = temp_conversion / 10; // XXX: THIS WILL SEPARATE 1B (16) INTO 11 - how can I test this?
-                        // Wait...1B will never be something that reaches this condition because the base isn't < 10
-                        printf("temp_quotient: %d\n", temp_quotient);
-                        temp_product = temp_conversion - (temp_quotient * 10); // XXX: THIS WILL SEPARATE 1B (16) INTO 0
-                        printf("temp_product after quotient: %d\n", temp_product);
+                        // printf("CONDITION THREE: \n");
+                        // printf("temp_product: %d\n", temp_product);
+                        // printf("temp_conversion: %d\n", temp_conversion);
+                        temp_quotient = temp_conversion / 10;
+                        // I guess the best way to test this is to give it many calculations
+                        // printf("temp_quotient: %d\n", temp_quotient);
+                        temp_product = temp_conversion - (temp_quotient * 10);
+                        // printf("temp_product after quotient: %d\n", temp_product);
                     }
                 }
 
-                printf("temp_product, end of inner loop: %d\n", temp_product);
+                // printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             } else {
-                printf("temp_product, end of inner loop: %d\n", temp_product);
+                // printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
