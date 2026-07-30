@@ -829,9 +829,6 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                         temp_product = temp_conversion - (temp_quotient * 10);
                         // printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        // NOTE: FOR DIGITS < 100 && RADIX > 9
-                        // FIX: CHANGE CODE TO REFLECT CONDITION
-                        //      FIGURE OUT WHAT THIS DID AND WHY THERE'S COMMENTS
                         // printf("CONDITION THREE: \n");
                         // printf("temp_product: %d\n", temp_product);
                         // printf("temp_conversion: %d\n", temp_conversion);
@@ -941,12 +938,8 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\n");
         }
     } else {
-        // FIX: 255555 * 255 RETURNS CORRECT ANSWER, 46976 * 222 DOES NOT - DEBUG
-        //      ALL 3 PTRS OF master_product_array ARE CORRECT, calc_add() PRODUCING INCORRECT ANSWER
-        //      COULD STILL BE AN ISSUE OF INTEGERS NOT BEING SENT TO ex_arr
 
         printf("\n");
-        // NOTE: ALL 3 PTRS ARE CORRECT
         for (int i = 0; i < muls; i++) {
             printf("master_product_array[%d]: ", i);
             for (int j = 0; j < final_row_size; j++) {
@@ -959,6 +952,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         int final_product_arr[(index+leading_zero+trailing_zero)];
         int carry = 0; // value to be changed to 1 inside of calc_sum() or remain the same
         int counter = 1;
+        printf("counter: %d\n", counter);
         printf("muls: %d\n\n", muls);
         for (int i = 0; i < (muls - 1); i++) {
             printf("ITERATION %d\n", (i+1));
