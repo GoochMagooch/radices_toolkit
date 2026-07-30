@@ -650,9 +650,7 @@ int calc_single_multiplicand(int x, int *y, int iterator, int multipliers, int r
 // CALCULATES PRODUCT OF 2 INTEGERS FROM BINARY TO BASE36
 void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // TODO: add functionality for negative numbers
-
-    // FIX: ABLE TO USE @ AS A DIGIT WHEN CHOOSING BASE 10
-
+ 
     clear();
     menu_banner();
 
@@ -661,6 +659,19 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int invalid_integer;
     char invalid_character;
 
+    // FIX: ALL DIGIT SYMBOLS FOR BASE 11 TO BASE36 RETURN AS INVALID DIGIT - CORRECT
+    //      HOWEVER, ONCE A SYMBOL (@, %, &, etc.) IS USED THEN -1 IS USED FOR EACH SYMBOL - BUG
+    // NOTE: WHEN invalid_digit IS FLIPPED TO TRUE, THE LOGIC AT LN 695 TRIGGERS
+    //       THIS LOOP CYCLES THROUGH BOTH ARRAYS. THE MOMENT AN INVALID DIGIT IS DETECTED, THE LOOP ENDS AND
+    //       - invalid_digit is set to true
+    //       - invalid_condition is set to 0 or 1
+    //          - if invalid_digit is set to 0 that means a character will be returned (Digit A is invalid...)
+    //          - if invalid_digit is set to 1 that means a digit will be retured (Digit 1 is invalid...)
+    //       I THINK THE PROBLEM IS THAT IT ONLY CHECKS FOR INTEGERS RATHER THAN THE CORRECT SYMBOLS
+    //       IT CHECKS FOR THE ASCII CODE FOR 'A' INSTEAD OF JUST 'A'. SO WHEN '@' IS USED THAT'S STILL AN INTEGER; VALID
+    //       AND SINCE EACH SYMBOL THAT ISN'T A DIGIT SYMBOL FOR BASE 2 THROUGH BASE 36 RETURNS AS -1 THERE IS NO CHECK FOR THIS DIGIT
+    //
+    //       SOLUTION: SET A CHECK FOR -1
     printf("\n");
     for (int i = 0; i < iterator; i++) {
         if (num1[i] >= r) {
