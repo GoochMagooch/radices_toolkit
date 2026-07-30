@@ -689,7 +689,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
         }
         printf("%d ", num2[i]);
     }
-    printf("\n\n");
+    printf("\n");
 
     if (invalid_digit == true) {
         if (invalid_condition == 0) {
@@ -784,67 +784,36 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
                 // Separates product from quotient
                 if (temp_conversion > 999) {
-                    // printf("CONDITION ONE: \n");
-                    // printf("temp_product: %d\n", temp_product);
-                    // printf("temp_conversion: %d\n", temp_conversion);
                     temp_quotient = (temp_conversion - temp_quotient) / 100;
-                    // printf("temp_quotient: %d\n", temp_quotient);
                     temp_product = (temp_conversion - (temp_quotient * 100));
-                    // printf("temp_product after quotient: %d\n", temp_product);
 
                 } else if (temp_conversion > 99) {
                     if (r < 10) {
-                        // printf("CONDITION TWO RADIX <= 9: \n");
-                        // printf("temp_product: %d\n", temp_product);
-                        // printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = (temp_conversion - temp_quotient) / 10;
-                        // printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = (temp_conversion - (temp_quotient * 10));
-                        // printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        // printf("CONDITION TWO RADIX > 9: \n");
-                        // printf("temp_product: %d\n", temp_product);
-                        // printf("temp_conversion: %d\n", temp_conversion);
 
                         if (temp_product / 10 >= r) {
                             temp_quotient = temp_conversion / 10;
-                            // printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 10));
-                            // printf("temp_product after quotient: %d\n", temp_product);
                         } else {
                             // SEPARATES DOUBLE DIGIT R PLACE FROM SINGLE DIGIT 1s PLACE
                             temp_quotient = temp_conversion / 100;
-                            // printf("temp_quotient: %d\n", temp_quotient);
                             temp_product = (temp_conversion - (temp_quotient * 100));
-                            // printf("temp_product after quotient: %d\n", temp_product);
                         }
                     }
 
                 } else {
                     if (r < 10) {
-                        // printf("CONDITION THREE: \n");
-                        // printf("temp_product: %d\n", temp_product);
-                        // printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = temp_conversion / 10;
-                        // printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = temp_conversion - (temp_quotient * 10);
-                        // printf("temp_product after quotient: %d\n", temp_product);
                     } else {
-                        // printf("CONDITION THREE: \n");
-                        // printf("temp_product: %d\n", temp_product);
-                        // printf("temp_conversion: %d\n", temp_conversion);
                         temp_quotient = temp_conversion / 10;
-                        // I guess the best way to test this is to give it many calculations
-                        // printf("temp_quotient: %d\n", temp_quotient);
                         temp_product = temp_conversion - (temp_quotient * 10);
-                        // printf("temp_product after quotient: %d\n", temp_product);
                     }
                 }
-
-                // printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             } else {
-                // printf("temp_product, end of inner loop: %d\n", temp_product);
                 temp_product_arr[j] = temp_product;
             }
             temp_counter++;
@@ -911,20 +880,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     } // XXX: END OF OUTER LOOP
 
     if (muls == 1) {
-        printf("muls: %d\n", muls);
         if (temp_quotient > 0) {
-            printf("\nProduct characters: ");
+            printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < index; j++) {
-                    printf("%c ", return_char(master_product_array[i][j]));
-                }
-            }
-            printf("\n");
-            // XXX: WILL BE REMOVED LATER
-            printf("\nProduct integers: ");
-            for (int i = 0; i < muls; i++) {
-                for (int j = 0; j < index; j++) {
-                    printf("%d ", return_char(master_product_array[i][j]));
+                    printf("%c", return_char(master_product_array[i][j]));
                 }
             }
             printf("\n");
@@ -933,7 +893,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
             printf("\nProduct: ");
             for (int i = 0; i < muls; i++) {
                 for (int j = 0; j < iterator; j++) {
-                   printf("%c ", return_char(master_product_array[i][j]));
+                   printf("%c", return_char(master_product_array[i][j]));
                 }
             }
             printf("\n");
