@@ -669,7 +669,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //      I think somewhere in the code I am saying if (value not 0-9 or Az-Zz) -> return -1
     //      I need to find this code block and change to if (value no 0-1 or Az-Zz) -> return ASCII code
     //      If this isn't the case, and it's returning -1 by default then I'm not sure what to do.
-    //      
+    //
+    //      Study the code block that assigns values to num1 and num2
+    //
     for (int i = 0; i < iterator; i++) {
         if (num1[i] == -1) {
             printf("TEST\n");
