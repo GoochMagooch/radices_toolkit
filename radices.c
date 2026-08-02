@@ -684,7 +684,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 invalid_character = return_char(num1[i]);
             } else {
                 invalid_condition = 1;
-                invalid_integer = num1[i];
+                invalid_integer = num1[i]; // NOTE: NO NEED FOR INTEGER AND CHARACTER RETURN
             }
         }
         printf("%d ", num1[i]);
