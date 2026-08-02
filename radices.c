@@ -662,13 +662,13 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     // FIX: CLEAN UP OUTPUT, DOES NOT SHOW PROPER CHARACTER WHEN INVALID CHARACTER OUTSIDE OF BASE DIGITS ARE ENTERED
     //      I would like to write a condition that checks for characters that aren't 0-9 or Az-Zz
     //      The issue is that if any character, not within these bounds, is entered then it's returned as -1
-    //      So the condition will always be given -1 as the value, which won't be appropriately checked, nor can will I 
+    //      So the condition will always be given -1 as the value, which won't be appropriately checked, nor will I 
     //      be able to assign the ASCII character code, in order to return the character as output. The ASCII value that will 
-    //      be assigned will always be -1 which is some random character.
+    //      always be -1 which is some random character.
     //      
     //      I think somewhere in the code I am saying if (value not 0-9 or Az-Zz) -> return -1
-    //      I need to find this code block and change to if (value no 0-1 or Az-Zz) -> return ASCII code
-    //      If this isn't the case, and it's returning -1 by default then I'm not sure what to do.
+    //      I need to find this code block and change to if (value not 0-1 or Az-Zz) -> return ASCII code
+    //      If this isn't the case, and it's returning -1 by default then I should set the above condition
     //      
     //      Study the code block that assigns values to num1 and num2
     //
