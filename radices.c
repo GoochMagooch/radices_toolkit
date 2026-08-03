@@ -672,7 +672,9 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     //      
     //      Study the code block that assigns values to num1 and num2
     //
-    for (int i = 0; i < iterator; i++) {
+    for (int i = 0; i < iterator; i++) { // NOTE: MIGHT NEED BOTH LOOPS, BUT CAN CLEAN UP CODE
+        // NOTE: THIS ISN'T THE BEST CONDITION BECAUSE WHAT IF I ENTER -1 AS AN ACTUAL DIGIT?
+        // RAAAAAAAAHHHHHHHHHHHHH!!!!!
         if (num1[i] == -1) {
             invalid_digit = true;
             invalid_condition = 0;
@@ -684,7 +686,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 invalid_character = return_char(num1[i]);
             } else {
                 invalid_condition = 1;
-                invalid_integer = num1[i]; // NOTE: NO NEED FOR INTEGER AND CHARACTER RETURN
+                invalid_integer = num1[i]; // NOTE: I DON'T THERE'S A NEED FOR INTEGER AND CHARACTER RETURN
             }
         }
         printf("%d ", num1[i]);
