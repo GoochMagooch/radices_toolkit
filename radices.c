@@ -659,23 +659,11 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     int invalid_integer;
     char invalid_character;
 
-    // FIX: CLEAN UP OUTPUT, DOES NOT SHOW PROPER CHARACTER WHEN INVALID CHARACTER OUTSIDE OF BASE DIGITS ARE ENTERED
-    //      I would like to write a condition that checks for characters that aren't 0-9 or Az-Zz
-    //      The issue is that if any character, not within these bounds, is entered then it's returned as -1
-    //      So the condition will always be given -1 as the value, which won't be appropriately checked, nor will I 
-    //      be able to assign the ASCII character code, in order to return the character as output. The ASCII value that will 
-    //      always be -1 which is some random character.
-    //      
-    //      I think somewhere in the code I am saying if (value not 0-9 or Az-Zz) -> return -1
-    //      I need to find this code block and change to if (value not 0-1 or Az-Zz) -> return ASCII code
-    //      If this isn't the case, and it's returning -1 by default then I should set the above condition
-    //      
-    //      Study the code block that assigns values to num1 and num2
-    //
     for (int i = 0; i < iterator; i++) { // NOTE: MIGHT NEED BOTH LOOPS, BUT CAN CLEAN UP CODE
         // FIX: THIS ISN'T THE BEST CONDITION BECAUSE WHAT IF I ENTER -1 AS AN ACTUAL DIGIT?
         //      AN ENTIRE OVERHAUL, ALLOWING NEGATIVE NUMBERS WILL NEED TO BE THE FIRST STEP
         //      A CONDITION WILL THEN BE NEEDED TO DETECT CHARACTERS OUTSIDE OF 0-9 and Aa-Zz, INSTEAD OF -1
+        //      THIS WILL SOLVE THE PROBLEM OF -1 BEING ASSIGNED TO num1 AND num2 WHEN AN INVALID DIGIT IS ENTERED
         if (num1[i] == -1) {
             invalid_digit = true;
             invalid_condition = 0;
@@ -687,7 +675,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
                 invalid_character = return_char(num1[i]);
             } else {
                 invalid_condition = 1;
-                invalid_integer = num1[i]; // NOTE: I DON'T THERE'S A NEED FOR INTEGER AND CHARACTER RETURN
+                invalid_integer = num1[i]; // NOTE: I DON'T THINK THERE'S A NEED FOR INTEGER AND CHARACTER RETURN
             }
         }
         printf("%d ", num1[i]);
@@ -999,6 +987,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 }
 
 void calc_div(int *num1, int *num2) {
+    // NOTE: STEP ONE: STUDY DIGITAL LOGIC BOOK TO LEARN HOW TO DIVIDE RADICES
     clear();
     menu_banner();
     printf("Division coming soon...\n");
