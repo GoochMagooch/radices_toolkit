@@ -675,6 +675,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     for (int i = 0; i < iterator; i++) { // NOTE: MIGHT NEED BOTH LOOPS, BUT CAN CLEAN UP CODE
         // FIX: THIS ISN'T THE BEST CONDITION BECAUSE WHAT IF I ENTER -1 AS AN ACTUAL DIGIT?
         //      AN ENTIRE OVERHAUL, ALLOWING NEGATIVE NUMBERS WILL NEED TO BE THE FIRST STEP
+        //      A CONDITION WILL THEN BE NEEDED TO DETECT CHARACTERS OUTSIDE OF 0-9 and Aa-Zz, INSTEAD OF -1
         if (num1[i] == -1) {
             invalid_digit = true;
             invalid_condition = 0;
