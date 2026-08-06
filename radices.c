@@ -987,7 +987,14 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 }
 
 void calc_div(int *num1, int *num2) {
-    // NOTE: STEP ONE: STUDY DIGITAL LOGIC BOOK TO LEARN HOW TO DIVIDE RADICES
+    // NOTE: NEXT STEP: USE AI TO BREAK DOWN DIVISION OF RADICES
+    //
+    // FIRST DIVISION PROBLEM WILL BE 110111 / 1100 IN BINARY
+    // Multiplication in base 10 follows the same rules as multiplication in any other radices.
+    // How does this transfer to division?
+    // I could convert each radices to decimal then divide then convert back, but that's low skill level
+    // 101 (2) / 10 (2) = 010 remainder 1 (?)
+    // It seems as though the rules don't transfer the same as multiplication. I'm not able to divide a binary number the way I would divide a decimal number
     clear();
     menu_banner();
     printf("Division coming soon...\n");
