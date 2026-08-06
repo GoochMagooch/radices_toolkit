@@ -994,9 +994,11 @@ void calc_div(int *num1, int *num2) {
     // How does this transfer to division?
     // I could convert each radices to decimal then divide then convert back, but that's low skill level
     // 101 (2) / 10 (2) = 010 remainder 1 (?)
-    // It seems as though the rules don't transfer the same as multiplication. I'm not able to divide a binary number the way I would divide a decimal number
-    // How do the rules of dividing in base 10 transfer to all other radices?
-    // 
+    //
+    // DIVIDEND WILL LIKELY NEED TO BE SEPARATED INTO INDIVIDUAL DIGITS.
+    // EACH TIME A DIVISOR DOESN'T GO INTO A DIVIDEND, ADD THE NEXT DIVISOR DIGIT TO MAIN DIVISOR?
+    // DIVISION WILL BE MORE EFFECTIVE USING DECIMALS
+    // BASE FIRST DRAFT OF CODE ON 101(2) / 10(2)
     clear();
     menu_banner();
     printf("Division coming soon...\n");
