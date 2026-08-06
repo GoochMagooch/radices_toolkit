@@ -995,6 +995,8 @@ void calc_div(int *num1, int *num2) {
     // I could convert each radices to decimal then divide then convert back, but that's low skill level
     // 101 (2) / 10 (2) = 010 remainder 1 (?)
     // It seems as though the rules don't transfer the same as multiplication. I'm not able to divide a binary number the way I would divide a decimal number
+    // How do the rules of dividing in base 10 transfer to all other radices?
+    // 
     clear();
     menu_banner();
     printf("Division coming soon...\n");
