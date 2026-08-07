@@ -986,8 +986,12 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
 }
 
-void calc_div(int *num1, int *num2) {
+void calc_div(int *num1, int *num2, int iterator) {
     // NOTE: NEXT STEP: USE AI TO BREAK DOWN DIVISION OF RADICES
+    //
+    // I'm likely going to need an iterator
+    // I could just divide normally then convert the quotient to the radices, but that's a shortcut.
+    // I want to understand the rules of division
     //
     // FIRST DIVISION PROBLEM WILL BE 110111 / 1100 IN BINARY
     // Multiplication in base 10 follows the same rules as multiplication in any other radices.
@@ -1001,7 +1005,14 @@ void calc_div(int *num1, int *num2) {
     // BASE FIRST DRAFT OF CODE ON 101(2) / 10(2)
     clear();
     menu_banner();
-    printf("Division coming soon...\n");
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", num1[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", num2[i]);
+    }
+    printf("\n");
 }
 
 void radices_calculator() {
@@ -1109,7 +1120,7 @@ void radices_calculator() {
             int multipliers = (num1_integers_len - len_diff);
             calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
         } else if (op == '/') {
-            calc_div(num1_integers, num2_integers);
+            calc_div(num1_integers, num2_integers, num1_integers_len);
         } else {
             printf("\nPlease choose a valid operator...\n");
         }
