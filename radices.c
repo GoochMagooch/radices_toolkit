@@ -990,14 +990,8 @@ void calc_div(int *num1, int *num2, int iterator) {
     // NOTE: NEXT STEP: USE AI TO BREAK DOWN DIVISION OF RADICES
     //
     // I'm likely going to need an iterator
-    // I could just divide normally then convert the quotient to the radices, but that's a shortcut.
-    // I want to understand the rules of division
     //
     // FIRST DIVISION PROBLEM WILL BE 110111 / 1100 IN BINARY
-    // Multiplication in base 10 follows the same rules as multiplication in any other radices.
-    // How does this transfer to division?
-    // I could convert each radices to decimal then divide then convert back, but that's low skill level
-    // 101 (2) / 10 (2) = 010 remainder 1 (?)
     //
     // DIVIDEND WILL LIKELY NEED TO BE SEPARATED INTO INDIVIDUAL DIGITS.
     // EACH TIME A DIVISOR DOESN'T GO INTO A DIVIDEND, ADD THE NEXT DIVISOR DIGIT TO MAIN DIVISOR?
