@@ -986,10 +986,24 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
 }
 
-void calc_div(int *num1, int *num2, int iterator) {
+void calc_div(int *num1, int *num2, int iterator, int r) {
     // NOTE: NEXT STEP: USE AI TO BREAK DOWN DIVISION OF RADICES
     //
-    // I'm likely going to need an iterator
+    // The mechanics of long division are identical across every positional number system (radix). 
+    //     The only thing that changes is the base b, which dictates your counting digits (0 to b-1) 
+    //     and the value of each place column.
+    // Regardless of the base, long division always satisfies this exact formula: Dividend = (Quotient * Divisor) + Remainder
+    //     where 0 <= Remainder < Divisor 
+    //
+    // A fraction terminates if and only if the prime factors of the divisor in lowest terms divide 
+    //     the base b. Because 2 only has the prime factor 2, binary fractions only terminate when 
+    //     the denominator is a power of 2 (2, 4, 8, 16...). Any other denominator creates an 
+    //     infinite repeating binary sequence.
+    //
+    // new working value = (current remainder * base) + next digit
+    int current_remainder = 0;
+    int next_digit = 0;
+    int new_working_value = (current_remainder * r) + next_digit;
     //
     // FIRST DIVISION PROBLEM WILL BE 110111 / 1100 IN BINARY
     //
@@ -1114,7 +1128,7 @@ void radices_calculator() {
             int multipliers = (num1_integers_len - len_diff);
             calc_mul(num1_integers, num2_integers, num1_integers_len, radix, multipliers);
         } else if (op == '/') {
-            calc_div(num1_integers, num2_integers, num1_integers_len);
+            calc_div(num1_integers, num2_integers, num1_integers_len, radix);
         } else {
             printf("\nPlease choose a valid operator...\n");
         }
