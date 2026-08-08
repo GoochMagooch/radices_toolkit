@@ -987,26 +987,34 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 }
 
 void calc_div(int *num1, int *num2, int iterator, int r) {
-    // NOTE: NEXT STEP: USE AI TO BREAK DOWN DIVISION OF RADICES
-    //
-    // The mechanics of long division are identical across every positional number system (radix). 
-    //     The only thing that changes is the base b, which dictates your counting digits (0 to b-1) 
+
+    // The mechanics of long division are identical across every positional number system (radix).
+    //     The only thing that changes is the base b, which dictates your counting digits (0 to b-1)
     //     and the value of each place column.
+    for (int i = 0; i < r; i++) {
+        // not sure what will go here, following the formula above
+    }
+
     // Regardless of the base, long division always satisfies this exact formula: Dividend = (Quotient * Divisor) + Remainder
-    //     where 0 <= Remainder < Divisor 
-    //
-    // A fraction terminates if and only if the prime factors of the divisor in lowest terms divide 
-    //     the base b. Because 2 only has the prime factor 2, binary fractions only terminate when 
-    //     the denominator is a power of 2 (2, 4, 8, 16...). Any other denominator creates an 
+    //     where 0 <= Remainder < Divisor
+    int quotient = 0;
+    int divisor = 0; // the digits in num2
+    int remainder = 0;
+    int dividend = (quotient * divisor) + remainder;
+
+    // A fraction terminates if and only if the prime factors of the divisor in lowest terms divide
+    //     the base b. Because 2 only has the prime factor 2, binary fractions only terminate when
+    //     the denominator is a power of 2 (2, 4, 8, 16...). Any other denominator creates an
     //     infinite repeating binary sequence.
-    //
+    // if (divisor / r) ?
+
     // new working value = (current remainder * base) + next digit
     int current_remainder = 0;
     int next_digit = 0;
     int new_working_value = (current_remainder * r) + next_digit;
-    //
+
     // FIRST DIVISION PROBLEM WILL BE 110111 / 1100 IN BINARY
-    //
+
     // DIVIDEND WILL LIKELY NEED TO BE SEPARATED INTO INDIVIDUAL DIGITS.
     // EACH TIME A DIVISOR DOESN'T GO INTO A DIVIDEND, ADD THE NEXT DIVISOR DIGIT TO MAIN DIVISOR?
     // DIVISION WILL BE MORE EFFECTIVE USING DECIMALS
