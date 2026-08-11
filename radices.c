@@ -1006,7 +1006,6 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //     the base b. Because 2 only has the prime factor 2, binary fractions only terminate when
     //     the denominator is a power of 2 (2, 4, 8, 16...). Any other denominator creates an
     //     infinite repeating binary sequence.
-    // if (divisor / r) ?
 
     // new working value = (current remainder * base) + next digit
     int current_remainder = 0;
