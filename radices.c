@@ -986,6 +986,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
 }
 
+// XXX: START OF DIVISION FUNCTION
 void calc_div(int *num1, int *num2, int iterator, int r) {
 
     // The mechanics of long division are identical across every positional number system (radix).
@@ -1029,6 +1030,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     }
     printf("\n");
 }
+// XXX: END OF DIVISION FUNCTION
 
 void radices_calculator() {
     clear();
