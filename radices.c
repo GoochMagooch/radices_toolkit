@@ -996,12 +996,12 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
         // not sure what will go here, following the formula above
     }
 
-    // Regardless of the base, long division always satisfies this exact formula: Dividend = (Quotient * Divisor) + Remainder
-    //     where 0 <= Remainder < Divisor
+    // Regardless of the base, long division always satisfies this exact formula:
+    //   Dividend = (Quotient * Divisor) + Remainder, where 0 <= Remainder < Divisor
     int quotient = 0;
     int divisor = 0; // the digits in num2
     int remainder = 0;
-    int dividend = (quotient * divisor) + remainder;
+    int dividend = quotient * divisor + remainder;
 
     // A fraction terminates if and only if the prime factors of the divisor in lowest terms divide
     //     the base b. Because 2 only has the prime factor 2, binary fractions only terminate when
@@ -1029,6 +1029,19 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
         printf("%d ", num2[i]);
     }
     printf("\n");
+
+    // FIX: TEST DIVISION FORMULA
+    // NOTE: DIVIDEND WILL NEED TO BUILD AS THE DIVISION TAKES PLACE
+    //       STARTING FROM THE FURTHEST LEFT NUMBER, APPLYING A MODULUS, CONTINUING RIGHT?
+    //       THE R PLACE IN THE DIVIDEND WILL NEED TO BE LOGGED
+    //       NEXT STEP: FORMULA FOR BREAKING DOWN DIVIDEND BY R PLACE
+    //       divisor % 100000 -> 
+    //       divisor % 110000 ->
+    //       divisor % 110000 ->
+    //       divisor % 110100 ->
+    //       divisor % 110110 ->
+    //       divisor % 110111
+    //       
 }
 // XXX: END OF DIVISION FUNCTION
 
