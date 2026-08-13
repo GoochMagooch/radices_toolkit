@@ -988,6 +988,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
 
 // XXX: START OF DIVISION FUNCTION
 void calc_div(int *num1, int *num2, int iterator, int r) {
+    // THERE WILL BE A CHECK TO SEE IF num2 IS LARGER THAN num1
 
     // The mechanics of long division are identical across every positional number system (radix).
     //     The only thing that changes is the base b, which dictates your counting digits (0 to b-1)
@@ -1035,13 +1036,23 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       STARTING FROM THE FURTHEST LEFT NUMBER, APPLYING A MODULUS, CONTINUING RIGHT?
     //       THE R PLACE IN THE DIVIDEND WILL NEED TO BE LOGGED
     //       NEXT STEP: FORMULA FOR BREAKING DOWN DIVIDEND BY R PLACE
-    //       divisor % 100000 -> 
+    //       divisor % 100000 ->
     //       divisor % 110000 ->
     //       divisor % 110000 ->
     //       divisor % 110100 ->
     //       divisor % 110110 ->
     //       divisor % 110111
-    //       
+    // FIRST SEPARATE DIVISOR USING iterator AS THE ITERATION LIMIT AND PLACE IN NEW ARRAY TO WORK WITH
+    printf("iterator: %d\n", iterator);
+    int divisor_separated[iterator+1];
+    for (int i = 0; i < iterator; i++) {
+        divisor_separated[i] = num2[i];
+    }
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", divisor_separated[i]);
+    }
+    printf("\n");
+
 }
 // XXX: END OF DIVISION FUNCTION
 
