@@ -1049,9 +1049,8 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
         divisor_separated[i] = num2[i];
     }
     for (int i = 0; i < iterator; i++) {
-        printf("%d ", divisor_separated[i]);
+        printf("divisor_separated[%d]: %d\n", i, divisor_separated[i]);
     }
-    printf("\n");
 
 }
 // XXX: END OF DIVISION FUNCTION
