@@ -1042,15 +1042,8 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       divisor % 110100 ->
     //       divisor % 110110 ->
     //       divisor % 110111
-    // FIRST SEPARATE DIVISOR USING iterator AS THE ITERATION LIMIT AND PLACE IN NEW ARRAY TO WORK WITH
-    printf("iterator: %d\n", iterator);
-    int divisor_separated[iterator+1];
-    for (int i = 0; i < iterator; i++) {
-        divisor_separated[i] = num2[i];
-    }
-    for (int i = 0; i < iterator; i++) {
-        printf("divisor_separated[%d]: %d\n", i, divisor_separated[i]);
-    }
+    // DIVISOR DOESN'T NEED TO BE SEPARATED INTO INDIVIDUAL DIGIT, THE DIVIDEND NEEDS TO BE DIVIDED BY THE DIVISOR,
+    // INCREMENTALLY MOVING TO THE RIGHT OF THE DIVIDEND.
 
 }
 // XXX: END OF DIVISION FUNCTION
