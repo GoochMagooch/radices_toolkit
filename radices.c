@@ -1042,8 +1042,14 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       divisor % 110100 ->
     //       divisor % 110110 ->
     //       divisor % 110111
-    // DIVISOR DOESN'T NEED TO BE SEPARATED INTO INDIVIDUAL DIGIT, THE DIVIDEND NEEDS TO BE DIVIDED BY THE DIVISOR,
-    // INCREMENTALLY MOVING TO THE RIGHT OF THE DIVIDEND.
+    // DIVISOR DOESN'T NEED TO BE SEPARATED INTO INDIVIDUAL DIGITS. THE DIVIDEND NEEDS TO BE DIVIDED BY THE DIVISOR,
+    // INCREMENTALLY MOVING TO THE RIGHT OF THE DIVIDEND
+    printf("DIVISOR: ");
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", num1[i]);
+    }
+    printf("\n");
+
 
 }
 // XXX: END OF DIVISION FUNCTION
