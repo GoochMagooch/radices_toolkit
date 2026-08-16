@@ -1059,6 +1059,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       I will have to convert each step of the division
     //       Should I just use conversion for the entire process, or understand division more to find another way?
     //       At this point, I think conversion is the only way, but there's always another way. This is just the way I see.
+    //       Ask this question to AI
 
 }
 // XXX: END OF DIVISION FUNCTION
