@@ -1061,6 +1061,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       At this point, I think conversion is the only way, but there's always another way. This is just the way I see.
     //       Instead of asking AI this question, I'll continue studying the foundations of division to find my own answer
     //       Continue researching the fundamentals of division
+    //       Division algorithm > simple conversion has been settled upon
 
 }
 // XXX: END OF DIVISION FUNCTION
