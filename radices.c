@@ -1065,7 +1065,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       I guess with binary there is only 2 options with division, either a divisor fits into a 
     //          dividend digit, or it doesn't. Binary, yes or no. 1 or 0
     //          So then, with base 3, it's now either 0, 1 or 2 that can fit into a dividend? (basically)
-    //          Review 12210 / 112 (3) again
+    //       Begin working out a way to divide both binary and base 3
 
 }
 // XXX: END OF DIVISION FUNCTION
