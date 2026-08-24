@@ -1059,6 +1059,8 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
         printf("%d ", num2[i]);
     }
     printf("\n");
+    // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
+
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
     //       I will have to convert each step of the division
@@ -1070,8 +1072,6 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       I guess with binary there is only 2 options with division, either a divisor fits into a 
     //          dividend digit, or it doesn't. Binary, yes or no. 1 or 0
     //          So then, with base 3, it's now either 0, 1 or 2 that can fit into a dividend? (basically)
-    //       Begin working out a way to divide both binary and base 3
-
 
 }
 // XXX: END OF DIVISION FUNCTION
