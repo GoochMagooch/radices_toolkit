@@ -1061,7 +1061,9 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     printf("\n");
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
     //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
-    //      However, in Base 3, divisors can fit once or twice. Does that not require conversion?
+    //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
+    //      21 (7) can fit into 210 (21) 3 times, but that's only because 7 fits into 21 3 times. Converted.
+    //      Is there a way of calculating that 21 (3) fits into 210 (3) 3 times without converting?
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
@@ -1071,8 +1073,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //       Instead of asking AI this question, I'll continue studying the foundations of division to find my own answer
     //       Continue researching the fundamentals of division
     //       Division algorithm > simple conversion has been settled upon
-    //       I guess with binary there is only 2 options with division, either a divisor fits into a 
-    //          dividend digit, or it doesn't. Binary, yes or no. 1 or 0
+    //       I guess with binary either a divisor fits into a dividend digit, or it doesn't. Binary, yes or no. 1 or 0
     //          So then, with base 3, it's now either 0, 1 or 2 that can fit into a dividend? (basically)
 
 }
