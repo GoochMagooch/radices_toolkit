@@ -1060,6 +1060,8 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     }
     printf("\n");
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
+    //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
+    //      However, in Base 3, divisors can fit once or twice. Does that not require conversion?
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
