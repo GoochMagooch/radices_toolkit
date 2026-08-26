@@ -1064,6 +1064,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
     //      21 (7) can fit into 210 (21) 3 times, but that's only because 7 fits into 21 3 times. Converted.
     //      Is there a way of calculating that 21 (3) fits into 210 (3) 3 times without converting?
+    //      If you look at the way binary is calculated, how do you just add one more option of a divisor fitting into a dividend?
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
