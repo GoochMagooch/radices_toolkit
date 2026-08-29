@@ -1067,6 +1067,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //      If you look at the way binary is calculated, how do you just add one more option of a divisor fitting into a dividend?
     //      It's basic division, and I can do it on paper no problem, however when it comes to telling a computer what to do, there
     //          may be a need to perform some conversion in order to perform calculations.
+    //          probably going to need conversion
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
