@@ -1071,6 +1071,8 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //          Yes, I agree...or do I? Could I use an already existing function to help, and if so which one? :tom_thonk:
     //          I could...I'm not sure, it all comes back to how the computer calcuates in base 10.
     //          I think I'm going to have to convert.
+    //          It couldn't just be as simple as using base 10 to see how many times 21 (3) goes into 210 (3), because that would be 10,
+    //          which...is 3 in base 3
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
