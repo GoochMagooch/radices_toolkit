@@ -1077,6 +1077,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //          It's a coincidence. What if it was 210 (4) / 21 (4)? Now 10 would be 4 instead of 3
     //          ...but also 210 (4) / 21 (4) would be 36 (10) / 9 (10) instead of 21 / 7. So 210 (10) / 21 (10) still works
     //          because 36 (10) / 9 (10) is 4(10) or in other words 210 (4) / 21 (4) is 10 (4)
+    //          Does this mean I can just divide in base 10 and it'll end up as the correct radices conversion?
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
