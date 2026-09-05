@@ -1059,6 +1059,13 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
         printf("%d ", num2[i]);
     }
     printf("\n");
+
+    int **dividend_digits;
+    dividend_digits = malloc(iterator * sizeof *dividend_digits); // iterator may not be the number of dividend digits
+    int temp_dividend = dividend_digits[0];
+    if (calc_mul(divisor, 1) > temp_dividend) { // FIX: CAN'T USE UNLESS num1 AND num2 ARE ARRAYS
+        // calculation to combine next element in dividend_digits
+    }
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
     //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
     //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
@@ -1078,6 +1085,7 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     //          ...but also 210 (4) / 21 (4) would be 36 (10) / 9 (10) instead of 21 / 7. So 210 (10) / 21 (10) still works
     //          because 36 (10) / 9 (10) is 4(10) or in other words 210 (4) / 21 (4) is 10 (4)
     //          Does this mean I can just divide in base 10 and it'll end up as the correct radices conversion?
+    //      I might need to use calc_mul() to determine how many times a divisor fits into a divident
 
     // NOTE: if the dividend is 10010 and the first operation is to check if the divisor fits into 1 and it doesn't,
     //       the next step is to check if the divisor fits into 10, but the computer will see that as 10 (base 10)
