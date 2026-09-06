@@ -1060,10 +1060,11 @@ void calc_div(int *num1, int *num2, int iterator, int r) {
     }
     printf("\n");
 
+    // XXX: PSEUDOCODE
     int **dividend_digits;
     dividend_digits = malloc(iterator * sizeof *dividend_digits); // iterator may not be the number of dividend digits
     int temp_dividend = dividend_digits[0];
-    if (calc_mul(divisor, 1) > temp_dividend) { // FIX: CAN'T USE UNLESS num1 AND num2 ARE ARRAYS
+    if (calc_mul(divisor, 1) > temp_dividend) { // NOTE: IN RADIX
         // calculation to combine next element in dividend_digits
     }
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
