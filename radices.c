@@ -986,7 +986,7 @@ void calc_mul(int *num1, int *num2, int iterator, int r, int muls) {
     }
 }
 
-// XXX: START OF DIVISION FUNCTION
+// XXX: START OF DIVISION FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // THERE WILL BE A CHECK TO SEE IF num2 IS LARGER THAN num1
 
@@ -1094,7 +1094,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //          So then, with base 3, it's now either 0, 1 or 2 that can fit into a dividend? (basically)
 
 }
-// XXX: END OF DIVISION FUNCTION
+// XXX: END OF DIVISION FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void radices_calculator() {
     clear();
