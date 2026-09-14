@@ -1054,7 +1054,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // XXX: PSEUDOCODE
     // int divisor_integer = calculation to turn divisor array into a single whole integer
     // int temp_dividend = dividend[0];
-    // for (int i = 0; i < ?; i++) { // figure it out
+    // for (int i = 0; i < ?; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
     //        calculation to combine next element in dividend_digits
     //    } else {
