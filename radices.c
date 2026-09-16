@@ -1057,6 +1057,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
     //        calculation to combine next element in dividend_digits
+    //        FIX: WORK ON THIS NEXT
     //    } else {
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        it would need to be looped right?
