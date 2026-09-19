@@ -1059,7 +1059,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        calculation to combine next element in dividend_digits
     //        FIX: WORK ON THIS NEXT
     //             set a variable and add each element to that variable?
-    //             dividend[i] + dividend_digit_holder (?)
+    //             temp_dividend = dividend[i+1] + temp_dividend;
     //    } else {
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        it would need to be looped right?
