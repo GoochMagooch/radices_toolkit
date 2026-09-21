@@ -1060,9 +1060,6 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //    } else {
     //        FIX: WORK ON THIS NEXT
     //        calculation to find how many times the divisor goes into temp_dividend?
-    //        it would need to be looped right?
-    //        how many times would it loop? the amount of digits in the dividend I think...
-    //        yes, because the dividend will be run against every individual dividend digit, starting at the first, and continuing with each subsequent digit
     //    }
     // }
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
