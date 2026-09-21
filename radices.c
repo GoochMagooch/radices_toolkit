@@ -1056,11 +1056,9 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // int temp_dividend = dividend[0];
     // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
-    //        calculation to combine next element in dividend_digits
-    //        FIX: WORK ON THIS NEXT
-    //             set a variable and add each element to that variable?
-    //             temp_dividend = dividend[i+1] + temp_dividend;
+    //             temp_dividend = dividend[i+1] + temp_dividend; I think this is the best way to do this
     //    } else {
+    //        FIX: WORK ON THIS NEXT
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        it would need to be looped right?
     //        how many times would it loop? the amount of digits in the dividend I think...
