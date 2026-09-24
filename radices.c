@@ -1062,6 +1062,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        this is the point where basic division and conversion takes place?
     //        maybe explore more division algorithm
+    //        This part of the condition will also need to add temp_dividend / divisor to the final quotient
     //    }
     // }
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
