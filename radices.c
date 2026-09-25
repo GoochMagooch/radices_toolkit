@@ -1056,13 +1056,15 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // int temp_dividend = dividend[0];
     // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
-    //             temp_dividend = dividend[i+1] + temp_dividend; I think this is the best way to do this
+    //             increments temp_dividend by the next digit in dividend
+    //             temp_dividend = dividend[i+1] + temp_dividend;
     //    } else {
     //        FIX: WORK ON THIS NEXT
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        this is the point where basic division and conversion takes place?
     //        maybe explore more division algorithm
     //        This part of the condition will also need to add temp_dividend / divisor to the final quotient
+    //        I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
     //    }
     // }
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
