@@ -1066,7 +1066,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        maybe explore more division algorithm
     //        This part of the condition will also need to add temp_dividend / divisor to the final quotient
     //        I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
-    //        final_quotient += divisor / temp_dividend; ???
+    //        final_quotient = divisor / temp_dividend; ??? final_quotient needs to be an array? final_quotient probably needs to be an array
     //        ^ no, a digit needs to be added, the variable won't be incremented. same with the calculation in the if clause
     //    }
     // }
