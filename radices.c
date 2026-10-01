@@ -1022,7 +1022,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // BASE FIRST DRAFT OF CODE ON 101(2) / 10(2)
     clear();
     menu_banner();
-    printf("DIVIDEND: ")
+    printf("DIVIDEND: ");
     for (int i = 0; i < iterator; i++) {
         printf("%d ", dividend[i]);
     }
