@@ -1054,6 +1054,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // XXX: PSEUDOCODE
     // int divisor_integer = calculation to turn divisor array into a single whole integer
     // int final_quotient[len_of_dividend?];
+    //      first I need to figure out the length of final_quotient
+    //      then I need to figure out how to find the appropriate iteration limit to print the elements
     // int temp_dividend = dividend[0]; FIX: THIS WILL NEED TO BE A DYNAMIC ARRAY
     // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
