@@ -1020,6 +1020,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // EACH TIME A DIVISOR DOESN'T GO INTO A DIVIDEND, ADD THE NEXT DIVISOR DIGIT TO MAIN DIVISOR?
     // DIVISION WILL BE MORE EFFECTIVE USING DECIMALS
     // BASE FIRST DRAFT OF CODE ON 101(2) / 10(2)
+
     clear();
     menu_banner();
     printf("DIVIDEND: ");
@@ -1053,8 +1054,9 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
 
     // XXX: PSEUDOCODE
     // int divisor_integer = calculation to turn divisor array into a single whole integer
-    // int final_quotient[len_of_dividend?];
-    //      first I need to figure out the length of final_quotient
+    // int *final_quotient = malloc(iterator * sizeof(int));
+    // int final_quotient_cap = 1;
+    //      First I need to figure out the length of final_quotient. 
     //      then I need to figure out how to find the appropriate iteration limit to print the elements
     // int temp_dividend = dividend[0]; FIX: THIS WILL NEED TO BE A DYNAMIC ARRAY
     // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
@@ -1069,8 +1071,11 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
     //        final_quotient = divisor / temp_dividend; ??? final_quotient needs to be an array? final_quotient probably needs to be an array
     //        ^ no, a digit needs to be added, the variable won't be incremented.
+    //        final_quotient = (temp_dividend / divisor_integer); Assigns final_quotient the quotient of the current temp_dividend and the divisor
+    //        final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); Reallocates final_quotient with one more space
     //    }
     // }
+
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
     //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
     //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
