@@ -1073,6 +1073,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        ^ no, a digit needs to be added, the variable won't be incremented.
     //        final_quotient = (temp_dividend / divisor_integer); Assigns final_quotient the quotient of the current temp_dividend and the divisor
     //        final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); Reallocates final_quotient with one more space
+    //        final_quotient_cap++;
     //    }
     // }
 
