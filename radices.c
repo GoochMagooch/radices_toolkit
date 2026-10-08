@@ -1059,7 +1059,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //      First I need to figure out the length of final_quotient. 
     //      then I need to figure out how to find the appropriate iteration limit to print the elements
     // int temp_dividend = dividend[0]; FIX: THIS WILL NEED TO BE A DYNAMIC ARRAY
-    // for (int i = 0; i < iterator; i++) { // figure it out. I guess it could be the length of either array? (dividend or divisor)
+    // int len_of_dividend = calculation to find length of dividend for iteration limit below
+    // for (int i = 0; i < iterator; i++) {
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
     //             increments temp_dividend by the next digit in dividend
     //             temp_dividend += dividend[i+1] + temp_dividend; test commit
