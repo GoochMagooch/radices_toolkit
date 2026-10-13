@@ -1053,13 +1053,16 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     int multiplier = 1;
 
     // XXX: PSEUDOCODE
-    // int divisor_integer = calculation to turn divisor array into a single whole integer
+    // int divisor_integer = 0;
+    // for (int i = 0; i < iterator; i++) { sets divisor_integer
+    //     divisor_integer += divisor[i];
+    // }
     // int *final_quotient = malloc(iterator * sizeof(int));
     // int final_quotient_cap = 1;
     //      First I need to figure out the length of final_quotient. 
     //      then I need to figure out how to find the appropriate iteration limit to print the elements
     // int temp_dividend = dividend[0];
-    // int len_of_dividend = iterator (right? yes, iterator should be the length of the dividend)
+    // int len_of_dividend = iterator;
     // for (int i = 0; i < iterator; i++) {
     //    if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
     //             increments temp_dividend by the next digit in dividend
