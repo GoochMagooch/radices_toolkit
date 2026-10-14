@@ -1052,7 +1052,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // set a counter to count the number of times the divisor is attempting to fit within the dividend (dividend_digits - 1)
     int multiplier = 1;
 
-    // XXX: PSEUDOCODE
+    // XXX: PSEUDOCODE FIX: BEGIN TESTING EACH PART FOR DESIRED OUTPUT
     // int divisor_integer = 0;
     // for (int i = 0; i < iterator; i++) { sets divisor_integer
     //     divisor_integer += divisor[i];
