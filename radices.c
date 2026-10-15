@@ -993,9 +993,9 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // The mechanics of long division are identical across every positional number system (radix).
     //     The only thing that changes is the base b, which dictates your counting digits (0 to b-1)
     //     and the value of each place column.
-    for (int i = 0; i < r; i++) {
+    // for (int i = 0; i < r; i++) {
         // not sure what will go here, following the formula above
-    }
+    // }
 
     // Regardless of the base, long division always satisfies this exact formula:
     //   Dividend = (Quotient * Divisor) + Remainder, where 0 <= Remainder < Divisor
@@ -1023,6 +1023,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
 
     clear();
     menu_banner();
+    // NOTE: DIVIDEND AND DIVISOR BOTH PRINT CORRECTLY
     printf("DIVIDEND: ");
     for (int i = 0; i < iterator; i++) {
         printf("%d ", dividend[i]);
