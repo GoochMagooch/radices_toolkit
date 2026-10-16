@@ -1035,7 +1035,6 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     }
     printf("\n");
 
-    // FIX: TEST DIVISION FORMULA
     // NOTE: DIVIDEND WILL NEED TO BUILD AS THE DIVISION TAKES PLACE
     //       STARTING FROM THE FURTHEST LEFT NUMBER, APPLYING A MODULUS, CONTINUING RIGHT?
     //       THE R PLACE IN THE DIVIDEND WILL NEED TO BE LOGGED
@@ -1053,11 +1052,13 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     // set a counter to count the number of times the divisor is attempting to fit within the dividend (dividend_digits - 1)
     int multiplier = 1;
 
-    // XXX: PSEUDOCODE FIX: BEGIN TESTING EACH PART FOR DESIRED OUTPUT
-    // int divisor_integer = 0;
-    // for (int i = 0; i < iterator; i++) { sets divisor_integer
-    //     divisor_integer += divisor[i];
-    // }
+    // XXX: PSEUDOCODE
+    int divisor_integer = 0;
+    // divisor of 255 will set divisor_integer as 12. is that what I want?
+    for (int i = 0; i < iterator; i++) {
+        divisor_integer += divisor[i];
+    }
+    printf("%d\n", divisor_integer);
     // int *final_quotient = malloc(iterator * sizeof(int));
     // int final_quotient_cap = 1;
     //      First I need to figure out the length of final_quotient. 
