@@ -1059,6 +1059,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
         divisor_integer += divisor[i];
     }
     printf("%d\n", divisor_integer);
+    
     int *final_quotient = malloc(iterator * sizeof(int));
     int final_quotient_cap = 1;
     //      First I need to figure out the length of final_quotient. 
@@ -1068,7 +1069,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     for (int i = 0; i < iterator; i++) {
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
             // increments temp_dividend by the next digit in dividend
-            temp_dividend += dividend[i+1] + temp_dividend; test commit
+            temp_dividend += dividend[i+1] + temp_dividend;
         } else {
     //        calculation to find how many times the divisor goes into temp_dividend?
     //        this is the point where basic division and conversion takes place?
@@ -1077,8 +1078,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //        I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
     //        final_quotient = divisor / temp_dividend; ??? final_quotient needs to be an array? final_quotient probably needs to be an array
     //        ^ no, a digit needs to be added, the variable won't be incremented.
-            final_quotient = (temp_dividend / divisor_integer); Assigns final_quotient the quotient of the current temp_dividend and the divisor
-            final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); Reallocates final_quotient with one more space
+            final_quotient = (temp_dividend / divisor_integer); // Assigns final_quotient the quotient of the current temp_dividend and the divisor
+            final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); // Reallocates final_quotient with one more space
             final_quotient_cap++;
         }
     }
