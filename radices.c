@@ -1047,7 +1047,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //       divisor % 110111
     // DIVISOR DOESN'T NEED TO BE SEPARATED INTO INDIVIDUAL DIGITS. THE DIVIDEND NEEDS TO BE DIVIDED BY THE DIVISOR,
     // INCREMENTALLY MOVING TO THE RIGHT OF THE DIVIDEND
-    // 
+    //
     // count the number of dividend digits
     // set a counter to count the number of times the divisor is attempting to fit within the dividend (dividend_digits - 1)
     int multiplier = 1;
@@ -1059,7 +1059,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
         divisor_integer += divisor[i];
     }
     printf("%d\n", divisor_integer);
-    
+
     int *final_quotient = malloc(iterator * sizeof(int));
     int final_quotient_cap = 1;
     //      First I need to figure out the length of final_quotient. 
@@ -1085,6 +1085,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     }
 
     // FIX: 100 / 10 returns 1 1 1
+    // I guess start debugging :AAAHHHHH:
     printf("final_quotient test printing: ");
     for (int i = 0; i < iterator; i++) {
         printf("%d ", final_quotient[i]);
