@@ -1098,6 +1098,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     }
     printf("\n");
 
+    // NOTE: NEXT STEP: WRITE OUT WHAT 20 / 5 SHOULD LOOK LIKE WITH THE CURRENT CODE THEN COMPARE WITH WHAT IS RETURNED
+
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
     //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
     //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
