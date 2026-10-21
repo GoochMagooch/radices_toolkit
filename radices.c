@@ -1058,7 +1058,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     for (int i = 0; i < iterator; i++) {
         divisor_integer += divisor[i];
     }
-    printf("%d\n", divisor_integer);
+    printf("divisor_integer: %d\n", divisor_integer);
 
     int *final_quotient = malloc(iterator * sizeof(int));
     int final_quotient_cap = 1;
@@ -1067,19 +1067,25 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     int temp_dividend = dividend[0];
     int len_of_dividend = iterator;
     for (int i = 0; i < iterator; i++) {
+        printf("IF STATEMENT: \n");
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
             // increments temp_dividend by the next digit in dividend
+            printf("temp_dividend before increment: %d\n", temp_dividend);
             temp_dividend += dividend[i+1] + temp_dividend;
+            printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
-    //        calculation to find how many times the divisor goes into temp_dividend?
-    //        this is the point where basic division and conversion takes place?
-    //        maybe explore more division algorithm
-    //        This part of the condition will also need to add temp_dividend / divisor to the final quotient
-    //        I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
-    //        final_quotient = divisor / temp_dividend; ??? final_quotient needs to be an array? final_quotient probably needs to be an array
-    //        ^ no, a digit needs to be added, the variable won't be incremented.
+            printf("ELSE STATEMENT: \n");
+    //      calculation to find how many times the divisor goes into temp_dividend?
+    //      this is the point where basic division and conversion takes place?
+    //      maybe explore more division algorithm
+    //      This part of the condition will also need to add temp_dividend / divisor to the final quotient
+    //      I almost think that just doing division in base 10 will work. 1001 (2) will go into 1010 (2) whether that's in binary or decimal...hmmmm
+    //      final_quotient = divisor / temp_dividend; ??? final_quotient needs to be an array? final_quotient probably needs to be an array
+    //      ^ no, a digit needs to be added, the variable won't be incremented.
+            printf("final_quotient[%d] before assingment: %d\n", i, final_quotient[i]);
             final_quotient[i] = (temp_dividend / divisor_integer); // Assigns final_quotient the quotient of the current temp_dividend and the divisor
             final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); // Reallocates final_quotient with one more space
+            printf("final_quotient[%d] after assingment: %d\n", i, final_quotient[i]);
             final_quotient_cap++;
         }
     }
