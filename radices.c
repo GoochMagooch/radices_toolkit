@@ -1074,6 +1074,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             // FIX: FIRST BUG. 20 / 5 SETS 2 AS THE FIRST temp_dividend (correct)
             //      THEN IT INCREMENTS BY temp_dividend WHICH RESULTS IN 4 (incorrect)
             //      IT SHOULD CHANGE FROM 2 TO 20
+            //      temp_dividend * (temp_dividend * R)?
             temp_dividend += dividend[i+1] + temp_dividend;
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
