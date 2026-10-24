@@ -1075,6 +1075,9 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //      THEN IT INCREMENTS BY temp_dividend WHICH RESULTS IN 4 (incorrect)
             //      IT SHOULD CHANGE FROM 2 TO 20
             //      temp_dividend * (temp_dividend * R)?
+            //      keep a counter to know the number of dividend digits that need to be added to temp_dividend
+            //      start at 0, the next digit (2 for example) is multiplied by the counter on the next iteration (1) and then 
+            //          multiplied by the first digit (2) which results in 20, then add the current digit (0) which is still 20
             temp_dividend += dividend[i+1] + temp_dividend;
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
@@ -1095,7 +1098,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     }
 
     // FIX: 100 / 10 returns 1 1 1
-    // I guess start debugging :AAAHHHHH:
+    //      20 / 5 returns 0 0
     printf("final_quotient test printing: ");
     for (int i = 0; i < iterator; i++) {
         printf("%d ", final_quotient[i]);
@@ -1106,7 +1109,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
 
     // XXX: QUESTION: how to check if a divisor fits into a dividend without conversion?
     //      For binary it's simple to see if a divisor fits into a dividend. It either does or it doesn't.
-    //      However, in Base 3, divisors can fit once or twice. Does that not require conversion? 
+    //      However, in Base 3, divisors can fit once or twice. Does that not require conversion?
     //      21 (7) can fit into 210 (21) 3 times, but that's only because 7 fits into 21 3 times. Converted.
     //      Is there a way of calculating that 21 (3) fits into 210 (3) 3 times without converting?
     //      If you look at the way binary is calculated, how do you just add one more option of a divisor fitting into a dividend?
