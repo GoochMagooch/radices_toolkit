@@ -1066,6 +1066,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //      then I need to figure out how to find the appropriate iteration limit to print the elements
     int temp_dividend = dividend[0];
     int len_of_dividend = iterator;
+    int dividend_digit_counter = 0;
     for (int i = 0; i < iterator; i++) {
         printf("IF STATEMENT: \n");
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
@@ -1079,7 +1080,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //      start at 0, the next digit (2 for example) is multiplied by the counter on the next iteration (1) and then 
             //          multiplied by the first digit (2) which results in 20, then add the current digit (0) which is still 20
             //          would this work for every base?
-            temp_dividend += dividend[i+1] + temp_dividend;
+            temp_dividend += dividend[i+1] + temp_dividend; // FIX: FORMULA THAT NEEDS TO CHANGE
+            dividend_digit_counter++;
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
             printf("ELSE STATEMENT: \n");
