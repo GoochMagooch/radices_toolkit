@@ -1081,6 +1081,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          would this work for every base?
             temp_dividend = temp_dividend * (r * i); // FIX: I don't think a formula even needs to be here, but what needs to be here?
             // A conditional wouldn't work because no matter what, temp_dividend needs to be converted into something else at the end of this clause
+            // At the end of the clause, multiply temp_dividend by r * (i + 0)?
             dividend_digit_counter++;
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
