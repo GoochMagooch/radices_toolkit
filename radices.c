@@ -1080,8 +1080,6 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          multiplied by the first digit (2) which results in 20, then add the current digit (0) which is still 20
             //          would this work for every base?
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
-            // A conditional wouldn't work because no matter what, temp_dividend needs to be converted into something else at the end of this clause
-            // At the end of the clause, multiply temp_dividend by r * (i + 0)?
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
             printf("ELSE STATEMENT: \n");
