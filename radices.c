@@ -1071,9 +1071,10 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
             // increments temp_dividend by the next digit in dividend
             printf("temp_dividend before increment: %d\n", temp_dividend);
-            // FIX: FIRST BUG. 20 / 5 SETS 2 AS THE FIRST temp_dividend (correct)
-            //      THEN IT INCREMENTS BY temp_dividend WHICH RESULTS IN 4 (incorrect)
-            //      IT SHOULD CHANGE FROM 2 TO 20
+            // FIX: FIRST BUG. 20 / 5 CORRECTLY SETS THE FIRST temp_dividend TO 2 AND THEN 20
+            //      THEN THE final_quotient ARRAY RETURNS [0, 4] WHICH IS TECHNICALLY CORRECT? I THINK
+            //      NEXT STEP IS TO SEE IF THERE'S A BETTER WAY TO RETURN THE QUOTIENT
+            //          THE DIVISION I KNOW IS STILL OFF BUT I WANT A BETTER WAY TO RETURN ANSWERS BEFORE I START WORKING ON RETURNING CORRECT ANSWERS
             //      temp_dividend * (temp_dividend * R)?
             //      keep a counter to know the number of dividend digits that need to be added to temp_dividend
             //      start at 0, the next digit (2 for example) is multiplied by the counter on the next iteration (1) and then 
