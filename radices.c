@@ -1076,7 +1076,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //      NEXT STEP IS TO SEE IF THERE'S A BETTER WAY TO RETURN THE QUOTIENT
             //          THE DIVISION I KNOW IS STILL OFF BUT I WANT A BETTER WAY TO RETURN ANSWERS BEFORE I START WORKING ON RETURNING CORRECT ANSWERS
             //          would this work for every base?
-            //      CLEARLY THE NEXT THING TO DO IS ADD CALCULATIONS TO final_quotient OR FIND A BETTER WAY TO STORE CALCULATIONS AND ADD TO THAT
+            //      NO CALCULATIONS NECESSARY HERE BECAUSE THE NEXT THING TO DO IS INCREMENT temp_dividend TO BE SENT BACK THROUGH THE LOOP
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
