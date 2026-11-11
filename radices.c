@@ -1094,6 +1094,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             final_quotient = realloc(final_quotient, final_quotient_cap * sizeof(int)); // Reallocates final_quotient with one more space
             printf("final_quotient[%d] after assingment: %d\n", i, final_quotient[i]);
             final_quotient_cap++;
+            temp_dividend = temp_dividend * r + dividend[i+1]; // NOTE: NEWLY ADDED
         }
     }
 
