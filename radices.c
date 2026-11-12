@@ -1082,6 +1082,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          would this work for every base?
             //          I could perform the same calculation that increments temp_dividend?
             //          Also, wouldn't I need to perform the below calculation within the else clause as well, so temp_dividend changes accordingly?
+            //      FIND A BETTER WAY TO RETURN OUTPUT
+            //          STEP 1: FIGURE OUT WHY THESE OUTPUTS TAKE PLACE
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
