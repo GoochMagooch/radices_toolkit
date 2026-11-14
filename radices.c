@@ -1066,6 +1066,14 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     //      then I need to figure out how to find the appropriate iteration limit to print the elements
     int temp_dividend = dividend[0];
     int len_of_dividend = iterator;
+
+    // temp_dividend before calculations
+    printf("final_quotient before calculations: ");
+    for (int i = 0; i < iterator; i++) {
+        printf("%d ", final_quotient[i]);
+    }
+    printf("\n");
+
     for (int i = 0; i < iterator; i++) {
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
             printf("IF STATEMENT: \n");
@@ -1085,6 +1093,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //      FIND A BETTER WAY TO RETURN OUTPUT
             //          STEP 1: FIGURE OUT WHY THESE OUTPUTS TAKE PLACE
             //          I think final_quotient holds a 0 originally, therefore calculations are being added to the array alongside the 0
+            //          Actually, it starts out with as many 0s as iterator (I think)
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
