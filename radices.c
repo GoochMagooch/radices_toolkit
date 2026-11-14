@@ -1067,8 +1067,8 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
     int temp_dividend = dividend[0];
     int len_of_dividend = iterator;
     for (int i = 0; i < iterator; i++) {
-        printf("IF STATEMENT: \n");
         if (divisor_integer > temp_dividend) { // NOTE: IN RADIX
+            printf("IF STATEMENT: \n");
             // increments temp_dividend by the next digit in dividend
             printf("temp_dividend before increment: %d\n", temp_dividend);
             // FIX: 20 / 5 returns [0, 4]
@@ -1084,6 +1084,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          Also, wouldn't I need to perform the below calculation within the else clause as well, so temp_dividend changes accordingly?
             //      FIND A BETTER WAY TO RETURN OUTPUT
             //          STEP 1: FIGURE OUT WHY THESE OUTPUTS TAKE PLACE
+            //          I think final_quotient holds a 0 originally, therefore calculations are being added to the array alongside the 0
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
