@@ -1095,6 +1095,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          I think final_quotient holds a 0 originally, therefore calculations are being added to the array alongside the 0
             //          Actually, it starts out with as many 0s as iterator (I think)
             //          I think I'll just set a variable that's incremented the same way as below
+            //          List reasons why it might not work
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
