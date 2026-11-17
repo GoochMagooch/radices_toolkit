@@ -1096,6 +1096,9 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             //          Actually, it starts out with as many 0s as iterator (I think)
             //          I think I'll just set a variable that's incremented the same way as below
             //          List reasons why it might not work
+            //          I don't think this is the same as multiplication, addition, or subtraction in that it requires multiple calculations for 
+            //              every digit of both numbers. Division works with a single number that is then being used to divide another number that 
+            //              will need to be broken down, but it's only that number. I think an output of a single digit would work.
             temp_dividend = temp_dividend * r + dividend[i+1]; // FIX: this should be the only necessary formula to increment temp_dividend
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
