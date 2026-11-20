@@ -1105,6 +1105,7 @@ void calc_div(int *dividend, int *divisor, int iterator, int r) {
             printf("temp_dividend after increment: %d\n", temp_dividend);
         } else {
             printf("ELSE STATEMENT: \n");
+            temp_dividend = temp_dividend * r + dividend[i+1]; // FIGURE OUT HOW TO INTEGRATE THIS CODE
     //      calculation to find how many times the divisor goes into temp_dividend?
     //      this is the point where basic division and conversion takes place?
     //      maybe explore more division algorithm
